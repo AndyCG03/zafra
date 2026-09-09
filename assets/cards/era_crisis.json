@@ -1,5 +1,26 @@
 [
  {
+  "id": "era3_guardaeaspalda_trampa",
+  "character": "el_guardaeaspalda",
+  "era": "crisis",
+  "text": "El guardaespaldas recomienda abrir las puertas del palacio como gesto de transparencia.",
+  "left": {
+   "text": "Abre las puertas",
+   "effects": {
+    "pueblo": 10,
+    "economia": -2
+   }
+  },
+  "right": {
+   "text": "Mantén las puertas cerradas",
+   "effects": {
+    "aparatoDelEstado": 4
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
   "id": "era3_001",
   "character": "la_economista",
   "era": "crisis",
@@ -596,6 +617,91 @@
    "effects": {
     "economia": 2,
     "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+
+ {
+  "id": "era3_disparador_golpe",
+  "character": "el_general",
+  "era": "crisis",
+  "text": "Un grupo de oficiales descontentos se reúne en secreto durante la crisis.",
+  "left": {
+    "text": "Depura a los sospechosos",
+    "effects": { "aparatoDelEstado": 4, "pueblo": -3 },
+    "startsEvent": "golpe_de_estado"
+  },
+  "right": {
+    "text": "Cierra los ojos por ahora",
+    "effects": { "aparatoDelEstado": -4, "pueblo": 2 },
+    "startsEvent": "golpe_de_estado"
+  },
+  "weight": 2
+},
+
+ {
+  "id": "era3_riesgo_001",
+  "character": "el_diplomatico",
+  "era": "crisis",
+  "text": "Un vecino ofrece ayuda humanitaria, pero exige que declaremos su régimen como aliado oficial.",
+  "left": {
+   "text": "Acepta la ayuda",
+   "effects": {
+    "pueblo": 10,
+    "relacionesExteriores": -10,
+    "economia": 2
+   }
+  },
+  "right": {
+   "text": "Rechaza la ayuda",
+   "effects": {
+    "relacionesExteriores": 4,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_riesgo_003",
+  "character": "el_general",
+  "era": "crisis",
+  "text": "Los vecinos ofrecen combustible a bajo precio, pero exigen acceso a nuestras aguas territoriales.",
+  "left": {
+   "text": "Acepta el combustible",
+   "effects": {
+    "economia": 8,
+    "relacionesExteriores": -8,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Niega el acceso",
+   "effects": {
+    "relacionesExteriores": 4,
+    "economia": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_riesgo_004",
+  "character": "la_lider_vecinal",
+  "era": "crisis",
+  "text": "El pueblo exige expulsar a una ONG extranjera que acusan de intromisión política.",
+  "left": {
+   "text": "Expulsa la ONG",
+   "effects": {
+    "pueblo": 10,
+    "relacionesExteriores": -9,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Permite la ONG",
+   "effects": {
+    "relacionesExteriores": 5,
+    "pueblo": -5
    }
   },
   "weight": 2

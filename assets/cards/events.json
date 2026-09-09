@@ -1036,5 +1036,171 @@
         }
       }
     ]
-  }
+  },
+  {
+  "id": "golpe_de_estado",
+  "title": "GOLPE DE ESTADO",
+  "image": "assets/images/characters/eventos/golpe_de_estado.png",
+  "bio": "Un sector del ejército se subleva contra el gobierno. Las calles se llenan de rumores de un inminente cambio de poder mientras el mandatario intenta mantener el control del aparato del estado.",
+  "prompts": [
+    {
+      "text": "Tanques rodean el palacio de gobierno.",
+      "left": { "text": "NEGOCIAR CON LOS GENERALES", "effects": { "aparatoDelEstado": -4, "pueblo": 3 } },
+      "right": { "text": "ORDENAR RESISTIR", "effects": { "aparatoDelEstado": 5, "pueblo": -5, "relacionesExteriores": -3 } }
+    },
+    {
+      "text": "Un grupo de oficiales leales pide instrucciones.",
+      "left": { "text": "ARMAR A LA GUARDIA PRESIDENCIAL", "effects": { "aparatoDelEstado": 4, "economia": -4 } },
+      "right": { "text": "PEDIR ASILO PREVENTIVO", "effects": { "relacionesExteriores": 3, "aparatoDelEstado": -5, "pueblo": -3 } }
+    },
+    {
+      "text": "La radio nacional es tomada por los golpistas.",
+      "left": { "text": "RECUPERAR LA SEÑAL", "effects": { "aparatoDelEstado": 4, "economia": -3 } },
+      "right": { "text": "TRANSMITIR DESDE UN BUNKER", "effects": { "aparatoDelEstado": 2, "pueblo": -3 } }
+    },
+    {
+      "text": "El pueblo sale a las calles a favor del gobierno.",
+      "left": { "text": "ARMAR A LOS CIVILES", "effects": { "pueblo": 4, "aparatoDelEstado": -3, "economia": -3 } },
+      "right": { "text": "PEDIRLES QUE VUELVAN A CASA", "effects": { "pueblo": -4, "aparatoDelEstado": 2 } }
+    },
+    {
+      "text": "Un comandante clave duda de su lealtad.",
+      "left": { "text": "OFRECERLE UN ASCENSO", "effects": { "aparatoDelEstado": 3, "economia": -3 } },
+      "right": { "text": "DESTITUIRLO DE INMEDIATO", "effects": { "aparatoDelEstado": -3, "pueblo": 2 } }
+    },
+    {
+      "text": "Embajadas extranjeras piden garantías.",
+      "left": { "text": "GARANTIZAR SEGURIDAD DIPLOMATICA", "effects": { "relacionesExteriores": 4, "aparatoDelEstado": -3 } },
+      "right": { "text": "IGNORAR LAS PRESIONES EXTERNAS", "effects": { "relacionesExteriores": -5, "aparatoDelEstado": 2 } }
+    },
+    {
+      "text": "Los golpistas ofrecen una salida negociada.",
+      "left": { "text": "ACEPTAR LA TRANSICION PACTADA", "effects": { "aparatoDelEstado": -5, "pueblo": 4, "relacionesExteriores": 2 } },
+      "right": { "text": "RECHAZAR CUALQUIER PACTO", "effects": { "aparatoDelEstado": 4, "pueblo": -4, "relacionesExteriores": -3 } }
+    },
+    {
+      "text": "Los bancos cierran ante la incertidumbre.",
+      "left": { "text": "GARANTIZAR LOS DEPOSITOS", "effects": { "economia": -5, "pueblo": 3 } },
+      "right": { "text": "CONGELAR LAS CUENTAS", "effects": { "economia": 2, "pueblo": -5 } }
+    },
+    {
+      "text": "Un batallón se declara neutral.",
+      "left": { "text": "PRESIONARLO PARA QUE SE DEFINA", "effects": { "aparatoDelEstado": 3, "pueblo": -2 } },
+      "right": { "text": "RESPETAR SU NEUTRALIDAD", "effects": { "aparatoDelEstado": -2, "relacionesExteriores": 2 } }
+    },
+    {
+      "text": "La prensa internacional cubre la crisis en vivo.",
+      "left": { "text": "DAR UNA CONFERENCIA DE PRENSA", "effects": { "relacionesExteriores": 3, "pueblo": 2 } },
+      "right": { "text": "CORTAR EL ACCESO A LA PRENSA", "effects": { "relacionesExteriores": -4, "aparatoDelEstado": 3 } }
+    },
+    {
+      "text": "Se descubre una célula golpista infiltrada en el gabinete.",
+      "left": { "text": "DEPURAR EL GABINETE", "effects": { "aparatoDelEstado": -3, "pueblo": 3 } },
+      "right": { "text": "ENCUBRIR EL HALLAZGO", "effects": { "aparatoDelEstado": 3, "pueblo": -4 } }
+    },
+    {
+      "text": "Los golpistas pierden apoyo en la capital.",
+      "left": { "text": "LANZAR LA CONTRAOFENSIVA", "effects": { "aparatoDelEstado": 5, "pueblo": -3, "economia": -4 } },
+      "right": { "text": "ESPERAR SU RENDICION", "effects": { "aparatoDelEstado": 2, "pueblo": 3 } }
+    },
+    {
+      "text": "Los líderes del golpe son capturados.",
+      "left": { "text": "JUZGARLOS PUBLICAMENTE", "effects": { "pueblo": 4, "aparatoDelEstado": -3, "relacionesExteriores": 2 } },
+      "right": { "text": "EJECUTARLOS SIN JUICIO", "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -5 } }
+    },
+    {
+      "text": "El país entero mira cómo termina la crisis.",
+      "left": { "text": "PROMETER UNA REFORMA MILITAR", "effects": { "aparatoDelEstado": -3, "pueblo": 4, "relacionesExteriores": 2 } },
+      "right": { "text": "REFORZAR EL CONTROL AUTORITARIO", "effects": { "aparatoDelEstado": 5, "pueblo": -4, "relacionesExteriores": -3 } }
+    },
+    {
+      "text": "La calma regresa lentamente a la isla.",
+      "left": { "text": "CONVOCAR A LA RECONCILIACION NACIONAL", "effects": { "pueblo": 5, "aparatoDelEstado": -3, "relacionesExteriores": 3 } },
+      "right": { "text": "MANTENER EL ESTADO DE EMERGENCIA", "effects": { "aparatoDelEstado": 4, "pueblo": -4 } }
+    }
+  ]
+},
+{
+  "id": "epidemia",
+  "title": "EPIDEMIA",
+  "image": "assets/images/characters/eventos/epidemia.png",
+  "bio": "Un brote de una enfermedad desconocida se propaga rápidamente por la isla. Los hospitales colapsan y el gobierno debe decidir entre proteger la economía o frenar el contagio.",
+  "prompts": [
+    {
+      "text": "Los primeros casos aparecen en la capital.",
+      "left": { "text": "DECRETAR CUARENTENA", "effects": { "pueblo": -3, "economia": -5, "aparatoDelEstado": 2 } },
+      "right": { "text": "MINIMIZAR EL BROTE", "effects": { "pueblo": -4, "aparatoDelEstado": 3 } }
+    },
+    {
+      "text": "Los hospitales reportan saturación.",
+      "left": { "text": "CONSTRUIR HOSPITALES DE EMERGENCIA", "effects": { "pueblo": 4, "economia": -6 } },
+      "right": { "text": "PRIORIZAR CASOS GRAVES", "effects": { "pueblo": -4, "aparatoDelEstado": 2 } }
+    },
+    {
+      "text": "Falta equipo de protección para el personal médico.",
+      "left": { "text": "IMPORTAR EQUIPO MEDICO", "effects": { "economia": -5, "relacionesExteriores": 2, "pueblo": 3 } },
+      "right": { "text": "RACIONAR EL EQUIPO EXISTENTE", "effects": { "pueblo": -5, "economia": 1 } }
+    },
+    {
+      "text": "Las fronteras siguen abiertas pese al riesgo.",
+      "left": { "text": "CERRAR FRONTERAS", "effects": { "relacionesExteriores": -5, "pueblo": 3, "economia": -3 } },
+      "right": { "text": "MANTENERLAS ABIERTAS", "effects": { "relacionesExteriores": 3, "pueblo": -4 } }
+    },
+    {
+      "text": "Los comercios exigen reabrir.",
+      "left": { "text": "REACTIVAR LA ECONOMIA", "effects": { "economia": 4, "pueblo": -4 } },
+      "right": { "text": "MANTENER EL CIERRE", "effects": { "economia": -5, "pueblo": 3 } }
+    },
+    {
+      "text": "Circulan noticias falsas sobre una cura milagrosa.",
+      "left": { "text": "DESMENTIR PUBLICAMENTE", "effects": { "aparatoDelEstado": 2, "pueblo": 2 } },
+      "right": { "text": "DEJAR QUE CIRCULEN", "effects": { "pueblo": -5, "aparatoDelEstado": -2 } }
+    },
+    {
+      "text": "Un laboratorio extranjero ofrece vacunas a cambio de favores.",
+      "left": { "text": "ACEPTAR EL TRATO", "effects": { "relacionesExteriores": 3, "economia": -3, "pueblo": 3 } },
+      "right": { "text": "RECHAZAR LAS CONDICIONES", "effects": { "relacionesExteriores": -4, "pueblo": -3 } }
+    },
+    {
+      "text": "El personal médico exige mejores salarios.",
+      "left": { "text": "AUMENTAR SALARIOS MEDICOS", "effects": { "economia": -5, "pueblo": 4 } },
+      "right": { "text": "APELAR AL DEBER PATRIOTICO", "effects": { "pueblo": -4, "aparatoDelEstado": 2 } }
+    },
+    {
+      "text": "Las escuelas siguen cerradas y los padres protestan.",
+      "left": { "text": "REABRIR CON PROTOCOLOS", "effects": { "pueblo": 3, "economia": -3 } },
+      "right": { "text": "EXTENDER EL CIERRE", "effects": { "pueblo": -4, "aparatoDelEstado": 2 } }
+    },
+    {
+      "text": "Se reportan saqueos en zonas de cuarentena estricta.",
+      "left": { "text": "ENVIAR AYUDA HUMANITARIA", "effects": { "pueblo": 4, "economia": -4 } },
+      "right": { "text": "REFORZAR LA VIGILANCIA", "effects": { "aparatoDelEstado": 4, "pueblo": -4 } }
+    },
+    {
+      "text": "Llega el primer lote de vacunas al país.",
+      "left": { "text": "VACUNAR A LA POBLACION VULNERABLE", "effects": { "pueblo": 5, "economia": -3 } },
+      "right": { "text": "VACUNAR PRIMERO AL APARATO DEL ESTADO", "effects": { "aparatoDelEstado": 4, "pueblo": -5 } }
+    },
+    {
+      "text": "Organismos internacionales piden transparencia en las cifras.",
+      "left": { "text": "PUBLICAR DATOS REALES", "effects": { "relacionesExteriores": 3, "pueblo": 3, "aparatoDelEstado": -3 } },
+      "right": { "text": "MANIPULAR LAS CIFRAS", "effects": { "aparatoDelEstado": 3, "relacionesExteriores": -4, "pueblo": -3 } }
+    },
+    {
+      "text": "Una segunda ola amenaza con desbordar el sistema.",
+      "left": { "text": "ENDURECER RESTRICCIONES", "effects": { "pueblo": -4, "economia": -5 } },
+      "right": { "text": "CONFIAR EN LA INMUNIDAD DE GRUPO", "effects": { "pueblo": -3, "economia": 3, "aparatoDelEstado": -2 } }
+    },
+    {
+      "text": "El país empieza a ver la luz al final del túnel.",
+      "left": { "text": "ANUNCIAR LA REAPERTURA TOTAL", "effects": { "economia": 5, "pueblo": 4, "aparatoDelEstado": -3 } },
+      "right": { "text": "MANTENER MEDIDAS PREVENTIVAS", "effects": { "pueblo": -3, "aparatoDelEstado": 3, "economia": -2 } }
+    },
+    {
+      "text": "La isla evalúa el costo total de la epidemia.",
+      "left": { "text": "INVERTIR EN SALUD PUBLICA A FUTURO", "effects": { "pueblo": 4, "economia": -5, "relacionesExteriores": 2 } },
+      "right": { "text": "DECLARAR LA CRISIS SUPERADA", "effects": { "pueblo": 2, "aparatoDelEstado": 3, "economia": -2 } }
+    }
+  ]
+}
 ]

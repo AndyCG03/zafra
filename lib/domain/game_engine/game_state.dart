@@ -15,6 +15,8 @@ class GameState {
   final String? activeEventId;
   final int eventCardsPlayed;
   final List<String> activeEventCardIds;
+  final int securityCompromises;
+  final int? assassinationCountdown;
 
   GameState({
     required this.stats,
@@ -30,6 +32,8 @@ class GameState {
     this.activeEventId,
     this.eventCardsPlayed = 0,
     this.activeEventCardIds = const [],
+    this.securityCompromises = 0,
+    this.assassinationCountdown,
   });
 
   factory GameState.initial() => GameState(
@@ -68,6 +72,9 @@ class GameState {
     bool clearActiveEvent = false,
     int? eventCardsPlayed,
     List<String>? activeEventCardIds,
+    int? securityCompromises,
+    int? assassinationCountdown,
+    bool clearAssassinationCountdown = false,
   }) => GameState(
         stats: stats ?? this.stats,
         currentEra: currentEra ?? this.currentEra,
@@ -82,5 +89,7 @@ class GameState {
         activeEventId: clearActiveEvent ? null : (activeEventId ?? this.activeEventId),
         eventCardsPlayed: clearActiveEvent ? 0 : (eventCardsPlayed ?? this.eventCardsPlayed),
         activeEventCardIds: clearActiveEvent ? const [] : (activeEventCardIds ?? this.activeEventCardIds),
+        securityCompromises: securityCompromises ?? this.securityCompromises,
+        assassinationCountdown: clearAssassinationCountdown ? null : (assassinationCountdown ?? this.assassinationCountdown),
       );
 }

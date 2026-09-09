@@ -1,5 +1,26 @@
 [
  {
+  "id": "era2_guardaeaspalda_trampa",
+  "character": "el_guardaeaspalda",
+  "era": "consolidacion",
+  "text": "El guardaespaldas propone eliminar los controles de seguridad en los actos públicos para acercar al gobernante al pueblo.",
+  "left": {
+   "text": "Elimina los controles",
+   "effects": {
+    "pueblo": 8,
+    "relacionesExteriores": 2
+   }
+  },
+  "right": {
+   "text": "Mantén los controles",
+   "effects": {
+    "aparatoDelEstado": 3
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
   "id": "era2_001",
   "character": "el_general",
   "era": "consolidacion",
@@ -62,6 +83,58 @@
   },
   "weight": 2
  },
+
+{
+  "id": "era2_disparador_epidemia",
+  "character": "la_enfermera",
+  "era": "consolidacion",
+  "text": "Aparecen los primeros casos de una enfermedad desconocida en un barrio portuario.",
+  "left": {
+    "text": "Aísla la zona de inmediato",
+    "effects": { "economia": -4, "pueblo": 2 }
+  },
+  "right": {
+    "text": "Espera confirmación médica",
+    "effects": { "pueblo": -3 },
+    "startsEvent": "epidemia"
+  },
+  "weight": 2
+},
+ {
+  "id": "era2_disparador_refugiados",
+  "character": "el_diplomatico",
+  "era": "consolidacion",
+  "text": "Un barco con refugiados de un país vecino pide atracar en el puerto.",
+  "left": {
+    "text": "Permite el desembarco",
+    "effects": { "pueblo": 3, "relacionesExteriores": 2 }
+  },
+  "right": {
+    "text": "Rechaza el barco",
+    "effects": { "relacionesExteriores": -5, "pueblo": -2 },
+    "startsEvent": "refugiados"
+  },
+  "weight": 2
+},
+
+{
+  "id": "era2_disparador_epidemia",
+  "character": "la_enfermera",
+  "era": "consolidacion",
+  "text": "Aparecen los primeros casos de una enfermedad desconocida en un barrio portuario.",
+  "left": {
+    "text": "Aísla la zona de inmediato",
+    "effects": { "economia": -4, "pueblo": 2 },
+    "startsEvent": "epidemia"
+  },
+  "right": {
+    "text": "Espera confirmación médica",
+    "effects": { "pueblo": -3 },
+    "startsEvent": "epidemia"
+  },
+  "weight": 2
+},
+
  {
   "id": "era2_004",
   "character": "la_lider_vecinal",

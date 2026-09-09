@@ -117,8 +117,6 @@ class _BestGameCard extends StatelessWidget {
   final GameRecord record;
   final Map<StatType, IconData> icons;
 
-  static const _medals = {1: '🥇', 2: '🥈', 3: '🥉'};
-
   @override
   Widget build(BuildContext context) => Container(
     margin: const EdgeInsets.only(bottom: 10),
@@ -130,7 +128,23 @@ class _BestGameCard extends StatelessWidget {
     ),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
-        Text(_medals[rank] ?? '#$rank', style: const TextStyle(fontSize: 20)),
+        Container(
+          width: 28,
+          height: 28,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: AppTheme.accent,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Text(
+            '$rank',
+            style: const TextStyle(
+              color: AppTheme.background,
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
+        ),
         const SizedBox(width: 8),
         Expanded(
           child: Text(

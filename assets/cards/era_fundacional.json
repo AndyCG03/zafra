@@ -1,5 +1,42 @@
 [
  {
+  "id": "era1_guardaeaspalda_trampa",
+  "character": "el_guardaeaspalda",
+  "era": "fundacional",
+  "text": "El guardaespaldas sugiere reducir la escolta presidencial para ahorrar recursos y mostrar confianza al pueblo.",
+  "left": {
+   "text": "Acepta la reducción",
+   "effects": {
+    "economia": 6,
+    "pueblo": 4
+   }
+  },
+  "right": {
+   "text": "Mantén la escolta",
+   "effects": {
+    "aparatoDelEstado": 3
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era1_disparador_corrupcion",
+  "character": "la_economista",
+  "era": "fundacional",
+  "text": "Un funcionario cercano desvía fondos de la reconstrucción inicial.",
+  "left": {
+    "text": "Investiga el desvío",
+    "effects": { "aparatoDelEstado": -4, "pueblo": 3 }
+  },
+  "right": {
+    "text": "Cúbrelo por ahora",
+    "effects": { "aparatoDelEstado": 3, "pueblo": -4 },
+    "startsEvent": "corrupcion"
+  },
+  "weight": 2
+},
+ {
   "id": "era1_001",
   "character": "el_general",
   "era": "fundacional",
@@ -269,10 +306,10 @@
   },
   "conditions": {
    "max": {
-    "pueblo": 15
+    "pueblo": 30
    }
   },
-  "weight": 1
+  "weight": 4
  },
  {
   "id": "era1_013",
@@ -571,5 +608,89 @@
   },
   "weight": 1,
   "rare": true
+ },
+ {
+  "id": "era1_riesgo_001",
+  "character": "el_diplomatico",
+  "era": "fundacional",
+  "text": "Una potencia vecina ofrece un préstamo urgente, pero exige control sobre el puerto principal durante 10 años.",
+  "left": {
+   "text": "Acepta el préstamo",
+   "effects": {
+    "economia": 10,
+    "relacionesExteriores": -8,
+    "pueblo": 2
+   }
+  },
+  "right": {
+   "text": "Rechaza la oferta",
+   "effects": {
+    "economia": -5,
+    "relacionesExteriores": 3
+   }
+  },
+  "weight": 2
+ },
+
+{
+  "id": "era1_disparador_rebelion",
+  "character": "la_lider_vecinal",
+  "era": "fundacional",
+  "text": "Los obreros de la zafra amenazan con levantarse si no hay mejoras salariales.",
+  "left": {
+    "text": "Reprime la amenaza",
+    "effects": { "aparatoDelEstado": 4, "pueblo": -4 },
+    "startsEvent": "rebelion"
+  },
+  "right": {
+    "text": "Mejora las condiciones",
+    "effects": { "pueblo": 4, "economia": -3 }
+  },
+  "weight": 2
+},
+ {
+  "id": "era1_riesgo_002",
+  "character": "el_general",
+  "era": "fundacional",
+  "text": "Un barco extranjero es capturado con mercancía ilegal. El capitán ofrece una gran suma por su liberación.",
+  "left": {
+   "text": "Acepta el soborno",
+   "effects": {
+    "economia": 12,
+    "relacionesExteriores": -10,
+    "pueblo": -2
+   }
+  },
+  "right": {
+   "text": "Procesa al capitán",
+   "effects": {
+    "relacionesExteriores": 5,
+    "economia": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_riesgo_005",
+  "character": "la_lider_vecinal",
+  "era": "fundacional",
+  "text": "Los vecinos piden romper el tratado de comercio con un país que explota a sus trabajadores.",
+  "left": {
+   "text": "Rompe el tratado",
+   "effects": {
+    "pueblo": 10,
+    "relacionesExteriores": -8,
+    "economia": -4
+   }
+  },
+  "right": {
+   "text": "Mantén el tratado",
+   "effects": {
+    "economia": 5,
+    "relacionesExteriores": 4,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
  }
 ]

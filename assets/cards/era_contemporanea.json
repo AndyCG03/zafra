@@ -161,7 +161,8 @@
    "effects": {
     "pueblo": 24,
     "economia": -3
-   }
+   },
+   "grantsRescue": "pueblo"
   },
   "right": {
    "text": "Hazla comunitaria",
@@ -172,10 +173,10 @@
   },
   "conditions": {
    "max": {
-    "pueblo": 15
+    "pueblo": 30
    }
   },
-  "weight": 1
+  "weight": 4
  },
  {
   "id": "era5_008",
@@ -769,5 +770,72 @@
   },
   "weight": 1,
   "rare": true
+ },
+ {
+  "id": "era5_riesgo_001",
+  "character": "el_diplomatico",
+  "era": "contemporanea",
+  "text": "Una alianza global ofrece fondos para el clima, pero exige que aceptemos un tratado que limita nuestra soberanía.",
+  "left": {
+   "text": "Acepta los fondos",
+   "effects": {
+    "economia": 10,
+    "relacionesExteriores": -8,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Rechaza el tratado",
+   "effects": {
+    "relacionesExteriores": 4,
+    "economia": -2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_riesgo_003",
+  "character": "el_general",
+  "era": "contemporanea",
+  "text": "Un país vecino ofrece tecnología militar, pero exige que rompamos la alianza con su rival.",
+  "left": {
+   "text": "Acepta la tecnología",
+   "effects": {
+    "economia": 8,
+    "relacionesExteriores": -9,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Mantén ambas alianzas",
+   "effects": {
+    "relacionesExteriores": 4,
+    "economia": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_riesgo_004",
+  "character": "la_lider_vecinal",
+  "era": "contemporanea",
+  "text": "Los jóvenes piden cancelar un acuerdo cultural con un país que viola derechos humanos.",
+  "left": {
+   "text": "Cancela el acuerdo",
+   "effects": {
+    "pueblo": 10,
+    "relacionesExteriores": -7,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Mantén el acuerdo",
+   "effects": {
+    "relacionesExteriores": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
  }
+
 ]

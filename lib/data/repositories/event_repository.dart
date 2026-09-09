@@ -125,6 +125,8 @@ class EventRepository {
     'refugiados',
     'terrorismo',
     'accidente',
+    'golpe_de_estado',
+    'epidemia',
   };
   static List<EventDefinition> _definitions = [];
 

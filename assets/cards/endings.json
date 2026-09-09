@@ -88,7 +88,17 @@
     "era": "contemporanea",
     "title": "La isla resiste",
     "description": "Atravesaste todas las eras sin dejar que ningún aspecto del gobierno colapsara. La historia no te absolvió, pero la isla sigue en pie.",
-    "imageAsset": "assets/images/logo/icon card.png",
+    "imageAsset": "assets/images/finals/orden_total.png",
     "isSurvival": true
   }
+,
+{
+  "id": "ending_aparato_min_asesinato",
+  "causedBy": "aparatoDelEstado",
+  "wasAtMin": true,
+  "era": "generic",
+  "title": "El precio del ahorro",
+  "description": "Ahorrar en seguridad pareció una decisión razonable hasta que el palacio quedó indefenso. Esa noche, el gobernante fue asesinado y nadie pudo detenerlo. La isla perdió a su líder por unos pesos mal ahorrados.",
+  "imageAsset": "assets/images/finals/el_precio_del_ahorro.png"
+}  
 ]

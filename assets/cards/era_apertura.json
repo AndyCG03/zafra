@@ -1,5 +1,26 @@
 [
  {
+  "id": "era4_guardaeaspalda_trampa",
+  "character": "el_guardaeaspalda",
+  "era": "apertura",
+  "text": "El guardaespaldas sugiere que la ostentación de seguridad aleja a los aliados internacionales.",
+  "left": {
+   "text": "Reduce la seguridad visible",
+   "effects": {
+    "relacionesExteriores": 8,
+    "economia": 3
+   }
+  },
+  "right": {
+   "text": "Mantén la seguridad visible",
+   "effects": {
+    "aparatoDelEstado": 3
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
   "id": "era4_001",
   "character": "el_diplomatico",
   "era": "apertura",
@@ -173,10 +194,10 @@
   },
   "conditions": {
    "max": {
-    "relacionesExteriores": 15
+    "relacionesExteriores": 30
    }
   },
-  "weight": 1
+  "weight": 4
  },
  {
   "id": "era4_008",
@@ -525,5 +546,72 @@
   },
   "weight": 1,
   "rare": true
+ },
+ {
+  "id": "era4_riesgo_001",
+  "character": "el_diplomatico",
+  "era": "apertura",
+  "text": "El bloque regional ofrece acceso preferencial si excluimos a una nación rival.",
+  "left": {
+   "text": "Excluye al rival",
+   "effects": {
+    "economia": 10,
+    "relacionesExteriores": -8,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Mantén relaciones con todos",
+   "effects": {
+    "relacionesExteriores": 4,
+    "economia": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_riesgo_003",
+  "character": "el_general",
+  "era": "apertura",
+  "text": "Un aliado pide que nos unamos a una coalición militar que el pueblo rechaza.",
+  "left": {
+   "text": "Únete a la coalición",
+   "effects": {
+    "relacionesExteriores": -8,
+    "economia": 4,
+    "pueblo": -5
+   }
+  },
+  "right": {
+   "text": "Mantén la neutralidad",
+   "effects": {
+    "relacionesExteriores": 3,
+    "pueblo": 4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_riesgo_004",
+  "character": "la_lider_vecinal",
+  "era": "apertura",
+  "text": "Los sindicatos piden romper con un tratado que favorece a empresas extranjeras.",
+  "left": {
+   "text": "Rompe el tratado",
+   "effects": {
+    "pueblo": 10,
+    "relacionesExteriores": -7,
+    "economia": -4
+   }
+  },
+  "right": {
+   "text": "Mantén el tratado",
+   "effects": {
+    "economia": 5,
+    "relacionesExteriores": 4,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
  }
 ]

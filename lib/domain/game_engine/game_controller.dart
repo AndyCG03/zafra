@@ -80,6 +80,12 @@ class GameControllerState {
 /// todas, se recicla automáticamente (se olvidan las vistas) para que
 /// el mazo nunca se acabe, sin importar cuántas cartas tengas escritas.
 class GameController extends StateNotifier<GameControllerState> {
+  static const _assassinationCardIds = {
+    'era1_guardaeaspalda_trampa',
+    'era2_guardaeaspalda_trampa',
+    'era3_guardaeaspalda_trampa',
+    'era4_guardaeaspalda_trampa',
+  };
   final CardRepository _repository;
   final CardSelector _selector = CardSelector();
   final EffectApplier _applier = EffectApplier();
@@ -105,18 +111,27 @@ class GameController extends StateNotifier<GameControllerState> {
   EventDefinition? _eventAfterDecision(CardOption option, GameState gameState) {
     if (gameState.turn < 5) return null;
     if (option.startsEvent != null) return EventRepository.byId(option.startsEvent!);
-    if (_random.nextDouble() >= .09) return null;
 
-    final candidates = <String>[];
     final pueblo = option.effects[StatType.pueblo] ?? 0;
     final economia = option.effects[StatType.economia] ?? 0;
     final exterior = option.effects[StatType.relacionesExteriores] ?? 0;
     final estado = option.effects[StatType.aparatoDelEstado] ?? 0;
+
+    var negativeCount = 0;
+    if (pueblo < 0) negativeCount++;
+    if (economia < 0) negativeCount++;
+    if (exterior < 0) negativeCount++;
+    if (estado < 0) negativeCount++;
+
+    final chance = .05 + (negativeCount * .10);
+    if (_random.nextDouble() >= chance) return null;
+
+    final candidates = <String>[];
     if (pueblo < 0) candidates.addAll(['rebelion', 'refugiados']);
     if (economia < 0) candidates.addAll(['corrupcion', 'accidente']);
     if (exterior < 0) candidates.addAll(['refugiados', 'terrorismo']);
     if (estado < 0) candidates.addAll(['rebelion', 'terrorismo']);
-    if (_random.nextDouble() < .18) candidates.add('huracan');
+    if (_random.nextDouble() < .08) candidates.add('huracan');
     candidates.removeWhere((id) => gameState.flags.contains('event_${id}_seen'));
     if (candidates.isEmpty) return null;
     return EventRepository.byId(candidates[_random.nextInt(candidates.length)]);
@@ -146,6 +161,7 @@ class GameController extends StateNotifier<GameControllerState> {
         rescueOpportunity: rescueIndex == null || rescueIndex < 0 || rescueIndex >= StatType.values.length
             ? null
             : StatType.values[rescueIndex],
+        statistics: GameStatistics.fromJson(saved['statistics'] as Map?),
       );
       return;
     }
@@ -188,6 +204,26 @@ class GameController extends StateNotifier<GameControllerState> {
       if (type != null) available.add(type);
     }
     final stateWithRescue = newState.copyWith(availableRescuePowers: available);
+    var stateWithRisk = stateWithRescue;
+    final isTrapChoice = _assassinationCardIds.contains(card.id) && direction == SwipeDirection.left;
+    if (isTrapChoice) {
+      final compromises = state.gameState.securityCompromises + 1;
+      stateWithRisk = stateWithRisk.copyWith(
+        securityCompromises: compromises,
+        assassinationCountdown: compromises >= 2 && state.gameState.assassinationCountdown == null
+            ? 4
+            : null,
+      );
+    }
+    var assassinationTriggered = false;
+    if (state.gameState.assassinationCountdown != null) {
+      final remaining = state.gameState.assassinationCountdown! - 1;
+      assassinationTriggered = remaining <= 0;
+      stateWithRisk = stateWithRisk.copyWith(
+        assassinationCountdown: remaining,
+        clearAssassinationCountdown: assassinationTriggered,
+      );
+    }
     final updatedStatistics = state.statistics.record(
       turn: state.statistics.totalTurns + 1,
       era: state.gameState.currentEra,
@@ -196,15 +232,33 @@ class GameController extends StateNotifier<GameControllerState> {
       after: newState.stats,
     );
 
-    if (stateWithRescue.hasCollapsed) {
-      final collapsed = stateWithRescue.collapsedStat;
+    if (assassinationTriggered) {
+      final ending = _repository.endings.firstWhere((e) => e.id == 'ending_aparato_min_asesinato');
+      state = state.copyWith(gameState: stateWithRisk, ending: ending, statistics: updatedStatistics);
+      await _progress.markEndingSeen(ending.id);
+      await _progress.registerMandate(
+        turns: updatedStatistics.totalTurns,
+        left: updatedStatistics.leftSwipes,
+        right: updatedStatistics.rightSwipes,
+        eraIndex: stateWithRisk.currentEra.index,
+        days: stateWithRisk.daysInPower,
+        endingId: ending.id,
+        endingTitle: ending.title,
+        finalStats: {for (final entry in stateWithRisk.stats.entries) entry.key: entry.value.value},
+      );
+      _saveCurrentGame();
+      return;
+    }
+
+    if (stateWithRisk.hasCollapsed) {
+      final collapsed = stateWithRisk.collapsedStat;
       if (collapsed != null && available.contains(collapsed)) {
-        state = state.copyWith(gameState: stateWithRescue, statistics: updatedStatistics, rescueOpportunity: collapsed);
+        state = state.copyWith(gameState: stateWithRisk, statistics: updatedStatistics, rescueOpportunity: collapsed);
         _saveCurrentGame();
         return;
       }
       final ending = _endingResolver.resolve(
-        state: stateWithRescue,
+        state: stateWithRisk,
         availableEndings: _repository.endings,
       );
       if (ending != null) {
@@ -223,7 +277,7 @@ class GameController extends StateNotifier<GameControllerState> {
         );
       }
       state = state.copyWith(
-        gameState: stateWithRescue,
+        gameState: stateWithRisk,
         ending: ending,
         statistics: updatedStatistics,
       );
@@ -231,7 +285,7 @@ class GameController extends StateNotifier<GameControllerState> {
       return;
     }
 
-    var progressedState = stateWithRescue.copyWith(
+    var progressedState = stateWithRisk.copyWith(
       currentEra: _eraForTurn(newState.turn),
       daysInPower: state.gameState.daysInPower + 1 + _random.nextInt(6),
     );
@@ -370,11 +424,10 @@ class GameController extends StateNotifier<GameControllerState> {
     return _PickResult(recycledCard, recycledCard != null);
   }
 
-  void restart() {
-    final statistics = state.statistics;
+  Future<void> restart() async {
     state = GameControllerState.loading();
-    _progress.clearGame();
-    _startWithStatistics(statistics);
+    await _progress.clearGame();
+    await _startWithStatistics(const GameStatistics());
   }
 
   Future<void> _startWithStatistics(GameStatistics statistics) async {
@@ -466,12 +519,15 @@ class GameController extends StateNotifier<GameControllerState> {
       'activeEvent': s.activeEventId,
       'eventPlayed': s.eventCardsPlayed,
       'eventCards': s.activeEventCardIds,
+      'statistics': state.statistics.toJson(),
+      'securityCompromises': s.securityCompromises,
+      'assassinationCountdown': s.assassinationCountdown,
     });
   }
 
   GameState _restoreState(Map<String, dynamic> data) {
     final rawStats = Map<String, dynamic>.from(data['stats'] as Map);
-    return GameState(stats: {for (final type in StatType.values) type: Stat(type, (rawStats[type.index.toString()] as num?)?.toInt() ?? Stat.initial)}, currentEra: Era.values[(data['era'] as num?)?.toInt() ?? 0], turn: (data['turn'] as num?)?.toInt() ?? 0, daysInPower: (data['days'] as num?)?.toInt() ?? 1, seenCardIds: {...((data['seen'] as List?)?.cast<String>() ?? [])}, flags: {...((data['flags'] as List?)?.cast<String>() ?? [])}, unlockedCharacterIds: {...((data['unlocked'] as List?)?.cast<String>() ?? [])}, usedRescuePowers: {...(((data['rescue'] as List?) ?? []).map((e) => StatType.values[(e as num).toInt()]))}, availableRescuePowers: {...(((data['availableRescue'] as List?) ?? []).map((e) => StatType.values[(e as num).toInt()]))}, pendingNextCardId: data['pending'] as String?, activeEventId: data['activeEvent'] as String?, eventCardsPlayed: (data['eventPlayed'] as num?)?.toInt() ?? 0, activeEventCardIds: ((data['eventCards'] as List?)?.cast<String>() ?? const []));
+    return GameState(stats: {for (final type in StatType.values) type: Stat(type, (rawStats[type.index.toString()] as num?)?.toInt() ?? Stat.initial)}, currentEra: Era.values[(data['era'] as num?)?.toInt() ?? 0], turn: (data['turn'] as num?)?.toInt() ?? 0, daysInPower: (data['days'] as num?)?.toInt() ?? 1, seenCardIds: {...((data['seen'] as List?)?.cast<String>() ?? [])}, flags: {...((data['flags'] as List?)?.cast<String>() ?? [])}, unlockedCharacterIds: {...((data['unlocked'] as List?)?.cast<String>() ?? [])}, usedRescuePowers: {...(((data['rescue'] as List?) ?? []).map((e) => StatType.values[(e as num).toInt()]))}, availableRescuePowers: {...(((data['availableRescue'] as List?) ?? []).map((e) => StatType.values[(e as num).toInt()]))}, pendingNextCardId: data['pending'] as String?, activeEventId: data['activeEvent'] as String?, eventCardsPlayed: (data['eventPlayed'] as num?)?.toInt() ?? 0, activeEventCardIds: ((data['eventCards'] as List?)?.cast<String>() ?? const []), securityCompromises: (data['securityCompromises'] as num?)?.toInt() ?? 0, assassinationCountdown: (data['assassinationCountdown'] as num?)?.toInt());
   }
 
   Era _eraForTurn(int turn) {
