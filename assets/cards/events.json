@@ -1,0 +1,1040 @@
+[
+  {
+    "id": "huracan",
+    "title": "HURACAN SOBRE LA ISLA",
+    "image": "assets/images/characters/eventos/huracan.png",
+    "bio": "Un huracán de categoría 5 amenaza la costa de la isla. Las autoridades deben decidir entre evacuar o reforzar las defensas.",
+    "prompts": [
+      {
+        "text": "El viento cambia de rumbo y golpea la costa.",
+        "left": {
+          "text": "EVACUAR LA COSTA",
+          "effects": { "pueblo": -4, "economia": -6, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "REFORZAR EL MALECON",
+          "effects": { "economia": -7, "pueblo": -5, "relacionesExteriores": -2 }
+        }
+      },
+      {
+        "text": "Los refugios comienzan a llenarse.",
+        "left": {
+          "text": "AMPLIAR REFUGIOS",
+          "effects": { "pueblo": 3, "economia": -5 }
+        },
+        "right": {
+          "text": "RACIONAR SUMINISTROS",
+          "effects": { "pueblo": -6, "economia": 2 }
+        }
+      },
+      {
+        "text": "El puerto queda bloqueado por los escombros.",
+        "left": {
+          "text": "DESPEJAR EL PUERTO",
+          "effects": { "economia": -6, "pueblo": 2 }
+        },
+        "right": {
+          "text": "DESVIAR LOS BARCOS",
+          "effects": { "economia": -4, "relacionesExteriores": -4 }
+        }
+      },
+      {
+        "text": "Faltan medicinas en los barrios aislados.",
+        "left": {
+          "text": "ENVIAR AYUDA AEREA",
+          "effects": { "pueblo": 4, "economia": -6 }
+        },
+        "right": {
+          "text": "PRIORIZAR EL CENTRO",
+          "effects": { "pueblo": -6, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "La red electrica cae en varias provincias.",
+        "left": {
+          "text": "REPARAR LA RED",
+          "effects": { "economia": -5, "pueblo": 3 }
+        },
+        "right": {
+          "text": "INSTALAR GENERADORES",
+          "effects": { "economia": -7, "aparatoDelEstado": 2 }
+        }
+      },
+      {
+        "text": "Los pescadores piden volver al mar.",
+        "left": {
+          "text": "AUTORIZAR LA PESCA",
+          "effects": { "pueblo": 3, "economia": 2 }
+        },
+        "right": {
+          "text": "PROHIBIR LA PESCA",
+          "effects": { "pueblo": -5, "relacionesExteriores": 2 }
+        }
+      },
+      {
+        "text": "La prensa denuncia abandono en la costa.",
+        "left": {
+          "text": "ATENDER LAS DENUNCIAS",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "DESACREDITAR A LA PRENSA",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "El agua contaminada amenaza los pozos.",
+        "left": {
+          "text": "POTABILIZAR EL AGUA",
+          "effects": { "pueblo": 4, "economia": -5 }
+        },
+        "right": {
+          "text": "RACIONAR EL AGUA",
+          "effects": { "pueblo": -4, "economia": 2 }
+        }
+      },
+      {
+        "text": "Las familias exigen recuperar sus casas.",
+        "left": {
+          "text": "RECONSTRUIR VIVIENDAS",
+          "effects": { "pueblo": 4, "economia": -6 }
+        },
+        "right": {
+          "text": "REUBICAR A LAS FAMILIAS",
+          "effects": { "pueblo": -4, "aparatoDelEstado": 2 }
+        }
+      },
+      {
+        "text": "El tesoro calcula el costo de la reconstruccion.",
+        "left": {
+          "text": "EMITIR BONOS DE RECONSTRUCCION",
+          "effects": { "economia": -6, "pueblo": 2 }
+        },
+        "right": {
+          "text": "RECORTAR OTROS GASTOS",
+          "effects": { "economia": -4, "aparatoDelEstado": -3 }
+        }
+      },
+      {
+        "text": "Una replica destruye un puente.",
+        "left": {
+          "text": "CONSTRUIR UN PUENTE PROVISIONAL",
+          "effects": { "economia": -6, "pueblo": 3 }
+        },
+        "right": {
+          "text": "DESVIAR EL TRAFICO",
+          "effects": { "economia": -3, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "Los almacenes pierden sus reservas.",
+        "left": {
+          "text": "IMPORTAR ALIMENTOS",
+          "effects": { "economia": -5, "relacionesExteriores": 2, "pueblo": 2 }
+        },
+        "right": {
+          "text": "RACIONAR RESERVAS",
+          "effects": { "pueblo": -5, "economia": 2 }
+        }
+      },
+      {
+        "text": "La ayuda extranjera llega con condiciones.",
+        "left": {
+          "text": "ACEPTAR LAS CONDICIONES",
+          "effects": { "economia": 3, "relacionesExteriores": 3, "pueblo": -4 }
+        },
+        "right": {
+          "text": "RECHAZAR LA AYUDA",
+          "effects": { "relacionesExteriores": -5, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "La poblacion reclama responsables.",
+        "left": {
+          "text": "CREAR UNA COMISION DE INVESTIGACION",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "IGNORAR LAS RECLAMACIONES",
+          "effects": { "pueblo": -5, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "La isla intenta volver a ponerse de pie.",
+        "left": {
+          "text": "LANZAR UN PLAN DE REACTIVACION",
+          "effects": { "economia": 4, "pueblo": 3, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "MANTENER LA AUSTERIDAD",
+          "effects": { "economia": -4, "aparatoDelEstado": 3, "pueblo": -3 }
+        }
+      }
+    ]
+  },
+  {
+    "id": "rebelion",
+    "title": "REBELION",
+    "image": "assets/images/characters/eventos/rebelion.png",
+    "bio": "Los barrios populares se levantan contra las medidas de austeridad. Las protestas se extienden y los sindicatos amenazan con paralizar el país. El gobierno debe elegir entre la negociación o la represión.",
+    "prompts": [
+      {
+        "text": "Una protesta crece frente al palacio.",
+        "left": {
+          "text": "NEGOCIAR CON LOS LIDERES",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "DISPERSAR LA PROTESTA",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -6, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Los sindicatos convocan una huelga.",
+        "left": {
+          "text": "ACEPTAR SUS DEMANDAS",
+          "effects": { "pueblo": 4, "economia": -5 }
+        },
+        "right": {
+          "text": "DECLARAR LA HUELGA ILEGAL",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La policia pierde el control de una plaza.",
+        "left": {
+          "text": "REFORZAR LA SEGURIDAD",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4 }
+        },
+        "right": {
+          "text": "RETIRAR A LA POLICIA",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        }
+      },
+      {
+        "text": "Los rumores encienden nuevos disturbios.",
+        "left": {
+          "text": "DESMENTIR LOS RUMORES",
+          "effects": { "aparatoDelEstado": 3, "pueblo": 2 }
+        },
+        "right": {
+          "text": "IGNORAR LOS RUMORES",
+          "effects": { "pueblo": -4, "aparatoDelEstado": -2 }
+        }
+      },
+      {
+        "text": "Los barrios levantan barricadas.",
+        "left": {
+          "text": "NEGOCIAR LA RETIRADA",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "DERRIBAR LAS BARRICADAS",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -7 }
+        }
+      },
+      {
+        "text": "Los comerciantes cierran sus puertas.",
+        "left": {
+          "text": "SUBSIDIAR A LOS COMERCIANTES",
+          "effects": { "economia": -4, "pueblo": 3 }
+        },
+        "right": {
+          "text": "IMPORTAR PRODUCTOS",
+          "effects": { "economia": 3, "pueblo": -4, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La radio transmite denuncias toda la noche.",
+        "left": {
+          "text": "INTERVENIR LA RADIO",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4, "relacionesExteriores": -2 }
+        },
+        "right": {
+          "text": "DEJAR TRANSMITIR",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -4 }
+        }
+      },
+      {
+        "text": "Una marcha llega a las oficinas centrales.",
+        "left": {
+          "text": "ABRIR UN DIALOGO",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "BLOQUEAR EL ACCESO",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Los mandos piden poderes especiales.",
+        "left": {
+          "text": "CONCEDER PODERES ESPECIALES",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -5, "relacionesExteriores": -3 }
+        },
+        "right": {
+          "text": "DENEGAR LOS PODERES",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -5 }
+        }
+      },
+      {
+        "text": "La oposicion exige elecciones.",
+        "left": {
+          "text": "CONVOCAR ELECCIONES",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -6, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "POSPONER LAS ELECCIONES",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -6, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La comida escasea en los barrios.",
+        "left": {
+          "text": "DISTRIBUIR ALIMENTOS",
+          "effects": { "pueblo": 5, "economia": -5 }
+        },
+        "right": {
+          "text": "MANTENER EL CONTROL",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -6 }
+        }
+      },
+      {
+        "text": "La represion divide al gabinete.",
+        "left": {
+          "text": "CAMBIO DE ESTRATEGIA",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "INTENSIFICAR LA REPRESION",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -6, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Un lider vecinal desaparece.",
+        "left": {
+          "text": "INVESTIGAR LA DESAPARICION",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "MINIMIZAR EL CASO",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -5 }
+        }
+      },
+      {
+        "text": "La multitud rodea el cuartel.",
+        "left": {
+          "text": "ABRIR NEGOCIACIONES",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "REFORZAR LA GUARDIA",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -6, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "El gobierno debe decidir si negocia.",
+        "left": {
+          "text": "NEGOCIAR LA PAZ",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -5, "relacionesExteriores": 3 }
+        },
+        "right": {
+          "text": "DECLARAR EL ESTADO DE EXCEPCION",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -7, "relacionesExteriores": -4 }
+        }
+      }
+    ]
+  },
+  {
+    "id": "corrupcion",
+    "title": "ESCANDALO DE CORRUPCION",
+    "image": "assets/images/characters/eventos/escandalo_de_corrupcion.png",
+    "bio": "Un escándalo de corrupción sacude los cimientos del gobierno. Pagos secretos, cuentas en el extranjero y contratos fraudulentos salen a la luz. La prensa internacional sigue el caso mientras la población exige justicia.",
+    "prompts": [
+      {
+        "text": "Un archivo revela pagos secretos.",
+        "left": {
+          "text": "PUBLICAR EL ARCHIVO",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "DESTRUIR EL ARCHIVO",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -6, "relacionesExteriores": -4 }
+        }
+      },
+      {
+        "text": "La prensa encuentra cuentas en el extranjero.",
+        "left": {
+          "text": "INVESTIGAR LAS CUENTAS",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "NEGAR LAS ACUSACIONES",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Un ministro niega haber recibido dinero.",
+        "left": {
+          "text": "ABRIR UNA INVESTIGACION",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "RESPALDAR AL MINISTRO",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Los contratos de obras desaparecen.",
+        "left": {
+          "text": "RECUPERAR LOS CONTRATOS",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "ARCHIVAR EL CASO",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -4 }
+        }
+      },
+      {
+        "text": "La fiscalia pide acceso a los registros.",
+        "left": {
+          "text": "CONCEDER EL ACCESO",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "DENEGAR EL ACCESO",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Los empresarios amenazan con retirar inversiones.",
+        "left": {
+          "text": "NEGOCIAR CON EMPRESARIOS",
+          "effects": { "economia": 4, "pueblo": -3, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "EXPROPIAR SUS BIENES",
+          "effects": { "economia": -6, "pueblo": 3, "relacionesExteriores": -5 }
+        }
+      },
+      {
+        "text": "El tesoro descubre facturas falsas.",
+        "left": {
+          "text": "PUBLICAR LAS FACTURAS",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "OCULTAR LAS FACTURAS",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La calle exige una investigacion publica.",
+        "left": {
+          "text": "ABRIR INVESTIGACION PUBLICA",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -6, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "CREAR UNA COMISION INTERNA",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -4 }
+        }
+      },
+      {
+        "text": "El partido intenta cerrar filas.",
+        "left": {
+          "text": "PERMITIR LA DEPURACION",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "MANTENER LA UNIDAD",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4 }
+        }
+      },
+      {
+        "text": "Un testigo ofrece declarar.",
+        "left": {
+          "text": "PROTEGER AL TESTIGO",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "DESACREDITAR AL TESTIGO",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -4, "relacionesExteriores": -2 }
+        }
+      },
+      {
+        "text": "Los jueces reciben presiones.",
+        "left": {
+          "text": "GARANTIZAR LA INDEPENDENCIA",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -5, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "EJERCER PRESION SOBRE LOS JUECES",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -4 }
+        }
+      },
+      {
+        "text": "La oposicion publica nuevos documentos.",
+        "left": {
+          "text": "RECONOCER LOS DOCUMENTOS",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -5, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "CUESTIONAR LOS DOCUMENTOS",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La confianza internacional se desploma.",
+        "left": {
+          "text": "PEDIR UN AUDITORIA INTERNACIONAL",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -4, "relacionesExteriores": 4 }
+        },
+        "right": {
+          "text": "RECHAZAR LA AUDITORIA",
+          "effects": { "relacionesExteriores": -5, "pueblo": -3, "aparatoDelEstado": 2 }
+        }
+      },
+      {
+        "text": "El gabinete debate a quien sacrificar.",
+        "left": {
+          "text": "DEPURAR A LOS CULPABLES",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -5, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "PROTEGER AL GABINETE",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La isla espera una explicacion.",
+        "left": {
+          "text": "DAR UNA EXPLICACION PUBLICA",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -4, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "MANTENER SILENCIO",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      }
+    ]
+  },
+  {
+    "id": "refugiados",
+    "title": "CRISIS DE REFUGIADOS",
+    "image": "assets/images/characters/eventos/crisis_de_refugiados.png",
+    "bio": "Una crisis humanitaria golpea las fronteras de la isla. Miles de refugiados llegan huyendo de la guerra y el hambre. Los recursos son limitados y la población local teme por su seguridad.",
+    "prompts": [
+      {
+        "text": "Una flotilla llega a la costa.",
+        "left": {
+          "text": "PERMITIR EL DESEMBARCO",
+          "effects": { "pueblo": 4, "relacionesExteriores": 3, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "RECHAZAR LA FLOTILLA",
+          "effects": { "relacionesExteriores": -5, "pueblo": -3, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "Los refugios no tienen capacidad.",
+        "left": {
+          "text": "CONSTRUIR REFUGIOS DE EMERGENCIA",
+          "effects": { "economia": -6, "pueblo": 4 }
+        },
+        "right": {
+          "text": "REUBICAR EN OTROS BARRIOS",
+          "effects": { "pueblo": -4, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "Los vecinos temen por el abastecimiento.",
+        "left": {
+          "text": "GARANTIZAR EL ABASTECIMIENTO",
+          "effects": { "pueblo": 4, "economia": -4 }
+        },
+        "right": {
+          "text": "RACIONAR LOS RECURSOS",
+          "effects": { "pueblo": -4, "economia": 2 }
+        }
+      },
+      {
+        "text": "El pais vecino exige una respuesta.",
+        "left": {
+          "text": "ACEPTAR SUS TERMINOS",
+          "effects": { "relacionesExteriores": 4, "pueblo": -3, "economia": -3 }
+        },
+        "right": {
+          "text": "RECHAZAR SUS TERMINOS",
+          "effects": { "relacionesExteriores": -5, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "Las familias buscan reunirse.",
+        "left": {
+          "text": "FACILITAR LA REUNIFICACION",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -4, "economia": -3 }
+        },
+        "right": {
+          "text": "DENEGAR LA REUNIFICACION",
+          "effects": { "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La prensa internacional llega al puerto.",
+        "left": {
+          "text": "DAR ACCESO A LA PRENSA",
+          "effects": { "pueblo": 3, "relacionesExteriores": 4, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "RESTRINGIR EL ACCESO",
+          "effects": { "relacionesExteriores": -5, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "Los hospitales reciben heridos.",
+        "left": {
+          "text": "REFORZAR LOS HOSPITALES",
+          "effects": { "pueblo": 5, "economia": -5 }
+        },
+        "right": {
+          "text": "DERIVAR A OTROS CENTROS",
+          "effects": { "pueblo": -4, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "El ejercito pide controlar los campamentos.",
+        "left": {
+          "text": "CONCEDER EL CONTROL",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4, "relacionesExteriores": -3 }
+        },
+        "right": {
+          "text": "MANTENER CONTROL CIVIL",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -4 }
+        }
+      },
+      {
+        "text": "Las iglesias ofrecen sus salones.",
+        "left": {
+          "text": "ACEPTAR LA AYUDA",
+          "effects": { "pueblo": 4, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "RECHAZAR LA AYUDA",
+          "effects": { "pueblo": -3, "aparatoDelEstado": 2 }
+        }
+      },
+      {
+        "text": "El comercio fronterizo se paraliza.",
+        "left": {
+          "text": "REABRIR EL COMERCIO",
+          "effects": { "economia": 4, "relacionesExteriores": 3, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "MANTENER EL CIERRE",
+          "effects": { "economia": -4, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Un grupo desaparece durante la noche.",
+        "left": {
+          "text": "INVESTIGAR LA DESAPARICION",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "IGNORAR EL CASO",
+          "effects": { "pueblo": -4, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "La tension divide a los barrios.",
+        "left": {
+          "text": "PROMOVER EL DIALOGO",
+          "effects": { "pueblo": 5, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "IMPLANTAR TOQUE DE QUEDA",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Los aliados condicionan su ayuda.",
+        "left": {
+          "text": "ACEPTAR CONDICIONES",
+          "effects": { "economia": 4, "relacionesExteriores": 4, "pueblo": -3 }
+        },
+        "right": {
+          "text": "RECHAZAR CONDICIONES",
+          "effects": { "relacionesExteriores": -5, "economia": -3 }
+        }
+      },
+      {
+        "text": "La frontera queda cerrada.",
+        "left": {
+          "text": "ABRIR LA FRONTERA PARCIALMENTE",
+          "effects": { "relacionesExteriores": 4, "pueblo": 3, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "MANTENER LA FRONTERA CERRADA",
+          "effects": { "aparatoDelEstado": 3, "relacionesExteriores": -4, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "El gobierno debe decidir quien puede quedarse.",
+        "left": {
+          "text": "PERMITIR LA ESTANCIA",
+          "effects": { "pueblo": 5, "relacionesExteriores": 4, "aparatoDelEstado": -5 }
+        },
+        "right": {
+          "text": "REPATRIAR A LOS REFUGIADOS",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -5 }
+        }
+      }
+    ]
+  },
+  {
+    "id": "terrorismo",
+    "title": "ATAQUE TERRORISTA",
+    "image": "assets/images/characters/eventos/ataque_terrorista.png",
+    "bio": "Un ataque terrorista sacude la capital y pone al país en estado de alerta máxima. Los servicios de inteligencia trabajan contrarreloj mientras la población vive con miedo. El gobierno debe decidir entre medidas drásticas o mantener la calma.",
+    "prompts": [
+      {
+        "text": "Una explosion sacude la capital.",
+        "left": {
+          "text": "DECLARAR ALERTA MAXIMA",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -5, "relacionesExteriores": -3 }
+        },
+        "right": {
+          "text": "MANTENER LA CALMA",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -4 }
+        }
+      },
+      {
+        "text": "El gobierno declara alerta maxima.",
+        "left": {
+          "text": "REFORZAR LA SEGURIDAD",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -4, "relacionesExteriores": -3 }
+        },
+        "right": {
+          "text": "ACTIVAR PROTOCOLOS CIVILES",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        }
+      },
+      {
+        "text": "Los hospitales se quedan sin camas.",
+        "left": {
+          "text": "HABILITAR HOSPITALES DE CAMPAÑA",
+          "effects": { "pueblo": 5, "economia": -5 }
+        },
+        "right": {
+          "text": "TRASLADAR A OTRAS CIUDADES",
+          "effects": { "pueblo": -3, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "La poblacion exige seguridad.",
+        "left": {
+          "text": "AUMENTAR LA PRESENCIA POLICIAL",
+          "effects": { "aparatoDelEstado": 4, "pueblo": 3 }
+        },
+        "right": {
+          "text": "CREAR PATRULLAS VECINALES",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -3 }
+        }
+      },
+      {
+        "text": "Aparecen sospechosos sin pruebas.",
+        "left": {
+          "text": "INVESTIGAR A FONDO",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "DETENER A LOS SOSPECHOSOS",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Los servicios de inteligencia reciben amenazas.",
+        "left": {
+          "text": "REFORZAR INTELIGENCIA",
+          "effects": { "aparatoDelEstado": 5, "economia": -4 }
+        },
+        "right": {
+          "text": "IGNORAR LAS AMENAZAS",
+          "effects": { "aparatoDelEstado": -3, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "El transporte queda suspendido.",
+        "left": {
+          "text": "REACTIVAR EL TRANSPORTE",
+          "effects": { "economia": 4, "pueblo": 3, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "MANTENER LA SUSPENSION",
+          "effects": { "economia": -4, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "Los mercados entran en panico.",
+        "left": {
+          "text": "INTERVENIR LOS MERCADOS",
+          "effects": { "economia": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "DEJAR QUE EL MERCADO SE REGULE",
+          "effects": { "economia": -4, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "Un grupo reivindica el ataque.",
+        "left": {
+          "text": "NEGOCIAR CON EL GRUPO",
+          "effects": { "pueblo": 3, "aparatoDelEstado": -4, "relacionesExteriores": 3 }
+        },
+        "right": {
+          "text": "RECHAZAR EL ULTIMATUM",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Los aliados ofrecen tropas.",
+        "left": {
+          "text": "ACEPTAR LAS TROPAS",
+          "effects": { "aparatoDelEstado": 4, "relacionesExteriores": 4, "pueblo": -3 }
+        },
+        "right": {
+          "text": "RECHAZAR LAS TROPAS",
+          "effects": { "relacionesExteriores": -4, "aparatoDelEstado": -3 }
+        }
+      },
+      {
+        "text": "La prensa denuncia abusos.",
+        "left": {
+          "text": "INVESTIGAR LAS DENUNCIAS",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "DESACREDITAR A LA PRENSA",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -4, "relacionesExteriores": -3 }
+        }
+      },
+      {
+        "text": "Un segundo objetivo es descubierto.",
+        "left": {
+          "text": "PROTEGER EL OBJETIVO",
+          "effects": { "aparatoDelEstado": 5, "economia": -4 }
+        },
+        "right": {
+          "text": "EVACUAR LA ZONA",
+          "effects": { "pueblo": 4, "economia": -4 }
+        }
+      },
+      {
+        "text": "El gabinete discute cerrar las fronteras.",
+        "left": {
+          "text": "CERRAR FRONTERAS",
+          "effects": { "aparatoDelEstado": 4, "relacionesExteriores": -5, "economia": -3 }
+        },
+        "right": {
+          "text": "MANTENER FRONTERAS ABIERTAS",
+          "effects": { "relacionesExteriores": 3, "aparatoDelEstado": -4 }
+        }
+      },
+      {
+        "text": "La ciudad vuelve lentamente a las calles.",
+        "left": {
+          "text": "FOMENTAR LA NORMALIDAD",
+          "effects": { "pueblo": 5, "economia": 3, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "MANTENER EL ESTADO DE ALERTA",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4 }
+        }
+      },
+      {
+        "text": "La isla debe decidir como responder.",
+        "left": {
+          "text": "RESPUESTA DIPLOMATICA",
+          "effects": { "relacionesExteriores": 5, "aparatoDelEstado": -4, "pueblo": 3 }
+        },
+        "right": {
+          "text": "RESPUESTA MILITAR",
+          "effects": { "aparatoDelEstado": 5, "pueblo": -5, "relacionesExteriores": -4 }
+        }
+      }
+    ]
+  },
+  {
+    "id": "accidente",
+    "title": "ACCIDENTE INDUSTRIAL",
+    "image": "assets/images/characters/eventos/accidente_industrial.png",
+    "bio": "Un accidente industrial libera sustancias tóxicas en una zona densamente poblada. Los trabajadores quedan atrapados y la contaminación amenaza el agua y el aire. El gobierno debe gestionar la emergencia mientras las empresas intentan evadir su responsabilidad.",
+    "prompts": [
+      {
+        "text": "Una planta libera humo toxico.",
+        "left": {
+          "text": "EVACUAR LA ZONA",
+          "effects": { "pueblo": 4, "economia": -5, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "CONTENER EL HUMO",
+          "effects": { "economia": -6, "pueblo": -3, "relacionesExteriores": -2 }
+        }
+      },
+      {
+        "text": "Los trabajadores quedan atrapados.",
+        "left": {
+          "text": "RESCATAR A LOS TRABAJADORES",
+          "effects": { "pueblo": 5, "economia": -5 }
+        },
+        "right": {
+          "text": "ASEGURAR LA PLANTA",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -4 }
+        }
+      },
+      {
+        "text": "El viento lleva la nube hacia la ciudad.",
+        "left": {
+          "text": "ALERTAR A LA POBLACION",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "MINIMIZAR EL RIESGO",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -4 }
+        }
+      },
+      {
+        "text": "Los bomberos piden equipos especiales.",
+        "left": {
+          "text": "COMPRAR EQUIPOS ESPECIALES",
+          "effects": { "economia": -6, "pueblo": 4 }
+        },
+        "right": {
+          "text": "IMPROVISAR CON RECURSOS",
+          "effects": { "pueblo": -3, "economia": -3 }
+        }
+      },
+      {
+        "text": "La empresa niega responsabilidad.",
+        "left": {
+          "text": "INVESTIGAR A LA EMPRESA",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4, "economia": -3 }
+        },
+        "right": {
+          "text": "APOYAR A LA EMPRESA",
+          "effects": { "economia": 3, "pueblo": -4, "relacionesExteriores": -2 }
+        }
+      },
+      {
+        "text": "El agua cercana aparece contaminada.",
+        "left": {
+          "text": "POTABILIZAR EL AGUA",
+          "effects": { "pueblo": 4, "economia": -5 }
+        },
+        "right": {
+          "text": "CORTAR EL SUMINISTRO",
+          "effects": { "pueblo": -4, "economia": 2 }
+        }
+      },
+      {
+        "text": "Las escuelas cierran sus puertas.",
+        "left": {
+          "text": "ABRIR ESCUELAS TEMPORALES",
+          "effects": { "pueblo": 4, "economia": -4 }
+        },
+        "right": {
+          "text": "MANTENER CIERRE",
+          "effects": { "pueblo": -4, "aparatoDelEstado": 2 }
+        }
+      },
+      {
+        "text": "Las familias exigen indemnizaciones.",
+        "left": {
+          "text": "PAGAR INDEMNIZACIONES",
+          "effects": { "pueblo": 5, "economia": -6 }
+        },
+        "right": {
+          "text": "NEGAR INDEMNIZACIONES",
+          "effects": { "pueblo": -5, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "La produccion nacional se detiene.",
+        "left": {
+          "text": "REACTIVAR PRODUCCION",
+          "effects": { "economia": 4, "pueblo": 3, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "MANTENER PARALIZACION",
+          "effects": { "economia": -4, "pueblo": -3 }
+        }
+      },
+      {
+        "text": "Los medicos alertan de nuevos sintomas.",
+        "left": {
+          "text": "REFORZAR ATENCION MEDICA",
+          "effects": { "pueblo": 5, "economia": -5 }
+        },
+        "right": {
+          "text": "RESTAR IMPORTANCIA",
+          "effects": { "pueblo": -5, "aparatoDelEstado": 3 }
+        }
+      },
+      {
+        "text": "El sindicato amenaza con huelga.",
+        "left": {
+          "text": "NEGOCIAR CON SINDICATO",
+          "effects": { "pueblo": 4, "economia": -4 }
+        },
+        "right": {
+          "text": "DECLARAR HUELGA ILEGAL",
+          "effects": { "aparatoDelEstado": 4, "pueblo": -5 }
+        }
+      },
+      {
+        "text": "Los inspectores encuentran fallos antiguos.",
+        "left": {
+          "text": "PUBLICAR LOS INFORMES",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -4 }
+        },
+        "right": {
+          "text": "OCULTAR LOS INFORMES",
+          "effects": { "aparatoDelEstado": 3, "pueblo": -4 }
+        }
+      },
+      {
+        "text": "El inversor extranjero exige proteccion.",
+        "left": {
+          "text": "GARANTIZAR PROTECCION",
+          "effects": { "economia": 4, "relacionesExteriores": 3, "pueblo": -4 }
+        },
+        "right": {
+          "text": "DENEGAR PROTECCION",
+          "effects": { "relacionesExteriores": -4, "economia": -3 }
+        }
+      },
+      {
+        "text": "La planta debe ser evacuada.",
+        "left": {
+          "text": "EVACUAR ORDENADAMENTE",
+          "effects": { "pueblo": 4, "aparatoDelEstado": -3 }
+        },
+        "right": {
+          "text": "MANTENER TRABAJADORES",
+          "effects": { "economia": 3, "pueblo": -5 }
+        }
+      },
+      {
+        "text": "El gobierno decide entre clausura y continuidad.",
+        "left": {
+          "text": "CLAUSURAR LA PLANTA",
+          "effects": { "pueblo": 5, "economia": -5, "relacionesExteriores": 2 }
+        },
+        "right": {
+          "text": "MANTENER LA PLANTA ABIERTA",
+          "effects": { "economia": 4, "pueblo": -5, "relacionesExteriores": -3 }
+        }
+      }
+    ]
+  }
+]

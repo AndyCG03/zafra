@@ -1,0 +1,570 @@
+[
+ {
+  "id": "era2_001",
+  "character": "el_general",
+  "era": "consolidacion",
+  "text": "Los mandos piden un desfile nacional cada mes.",
+  "left": {
+   "text": "Reduce los desfiles",
+   "effects": {
+    "economia": 4,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Hazlos obligatorios",
+   "effects": {
+    "aparatoDelEstado": 7,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_002",
+  "character": "la_economista",
+  "era": "consolidacion",
+  "text": "La cooperativa azucarera quiere fijar un precio estable para la zafra.",
+  "left": {
+   "text": "Deja el precio libre",
+   "effects": {
+    "economia": 5,
+    "pueblo": -4
+   }
+  },
+  "right": {
+   "text": "Fija el precio",
+   "effects": {
+    "pueblo": 5,
+    "economia": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_003",
+  "character": "el_diplomatico",
+  "era": "consolidacion",
+  "text": "Dos países invitan a la isla a sus ejercicios navales.",
+  "left": {
+   "text": "Declara neutralidad",
+   "effects": {
+    "relacionesExteriores": 3,
+    "aparatoDelEstado": -2
+   }
+  },
+  "right": {
+   "text": "Elige un país",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "relacionesExteriores": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_004",
+  "character": "la_lider_vecinal",
+  "era": "consolidacion",
+  "text": "Los jóvenes piden una radio local sin supervisión ministerial.",
+  "left": {
+   "text": "Autoriza la radio",
+   "effects": {
+    "pueblo": 6,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Mantén supervisión",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_005",
+  "character": "el_extranjero",
+  "era": "consolidacion",
+  "text": "Una naviera ofrece modernizar los muelles a cambio de una concesión larga.",
+  "left": {
+   "text": "Hazlo con recursos propios",
+   "effects": {
+    "economia": -5,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Firma la concesión",
+   "effects": {
+    "economia": 7,
+    "relacionesExteriores": 4,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_006",
+  "character": "la_economista",
+  "era": "consolidacion",
+  "text": "El almacén estatal pierde grano por falta de silos.",
+  "left": {
+   "text": "Raciona de inmediato",
+   "effects": {
+    "economia": 3,
+    "pueblo": -6
+   }
+  },
+  "right": {
+   "text": "Construye silos",
+   "effects": {
+    "economia": -5,
+    "pueblo": 4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_007",
+  "character": "el_general",
+  "era": "consolidacion",
+  "text": "Un sindicato portuario amenaza con detener los envíos.",
+  "left": {
+   "text": "Negocia su pliego",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Moviliza soldados",
+   "effects": {
+    "aparatoDelEstado": 6,
+    "pueblo": -7
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_rescate_economia",
+  "character": "la_economista",
+  "era": "consolidacion",
+  "rare": true,
+  "text": "Una contadora jubilada encuentra libros olvidados que revelan fondos recuperables.",
+  "left": {
+   "text": "Audita los fondos",
+   "effects": {
+    "economia": 0,
+    "aparatoDelEstado": -3
+   },
+   "grantsRescue": "economia"
+  },
+  "right": {
+   "text": "Hazlo público",
+   "effects": {
+    "economia": 8,
+    "pueblo": -4
+   }
+  },
+  "conditions": {
+   "max": {
+    "economia": 15
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era2_008",
+  "character": "el_sindicalista",
+  "era": "consolidacion",
+  "text": "Los obreros piden un día de descanso semanal.",
+  "left": {
+   "text": "Reconócelo",
+   "effects": {
+    "pueblo": 6,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Mantén el ritmo",
+   "effects": {
+    "economia": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_009",
+  "character": "la_ingeniera",
+  "era": "consolidacion",
+  "text": "El puente principal necesita cierre para evitar un derrumbe.",
+  "left": {
+   "text": "Ciérralo y repara",
+   "effects": {
+    "economia": -5,
+    "pueblo": 4
+   }
+  },
+  "right": {
+   "text": "Mantén el tránsito",
+   "effects": {
+    "economia": 3,
+    "aparatoDelEstado": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_010",
+  "character": "el_archivero",
+  "era": "consolidacion",
+  "text": "Aparecen contratos olvidados de la primera zafra.",
+  "left": {
+   "text": "Publícalos",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Clasifícalos",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_neg_001",
+  "character": "el_sindicalista",
+  "era": "consolidacion",
+  "text": "Los trabajadores portuarios bloquean el puerto por salarios impagos.",
+  "left": {
+   "text": "Paga lo que deben",
+   "effects": {
+    "economia": -6,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Usa soldados",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -6
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_neg_002",
+  "character": "la_ingeniera",
+  "era": "consolidacion",
+  "text": "El sistema eléctrico colapsa en plena zafra.",
+  "left": {
+   "text": "Apaga las fábricas",
+   "effects": {
+    "economia": -7,
+    "pueblo": -2
+   }
+  },
+  "right": {
+   "text": "Raciona la electricidad",
+   "effects": {
+    "pueblo": -5,
+    "economia": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_neg_003",
+  "character": "el_archivero",
+  "era": "consolidacion",
+  "text": "Aparecen documentos que implican a ministros en corrupción.",
+  "left": {
+   "text": "Destruye los papeles",
+   "effects": {
+    "aparatoDelEstado": -5,
+    "pueblo": -3
+   }
+  },
+  "right": {
+   "text": "Investiga en secreto",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "economia": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_neg_004",
+  "character": "el_general",
+  "era": "consolidacion",
+  "text": "La reserva de combustible baja a niveles críticos.",
+  "left": {
+   "text": "Raciona gasolina",
+   "effects": {
+    "economia": -4,
+    "pueblo": -4
+   }
+  },
+  "right": {
+   "text": "Compra barato en el extranjero",
+   "effects": {
+    "economia": -6,
+    "relacionesExteriores": 3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era2_neg_005",
+  "character": "la_economista",
+  "era": "consolidacion",
+  "text": "Los ingenios operan al 30% por falta de piezas.",
+  "left": {
+   "text": "Importa piezas urgentes",
+   "effects": {
+    "economia": -5,
+    "relacionesExteriores": 2
+   }
+  },
+  "right": {
+   "text": "Fabricación local",
+   "effects": {
+    "economia": -4,
+    "pueblo": 2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_carpintero_001",
+  "character": "el_carpintero",
+  "era": "consolidacion",
+  "text": "Los puentes de madera están podridos y amenazan con derrumbarse.",
+  "left": {
+   "text": "Reemplázalos",
+   "effects": {
+    "economia": -5,
+    "pueblo": 5
+   }
+  },
+  "right": {
+   "text": "Repara solo lo urgente",
+   "effects": {
+    "economia": -2,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_carpintero_002",
+  "character": "el_carpintero",
+  "era": "consolidacion",
+  "rare": true,
+  "text": "Se propone un programa de formación en carpintería para jóvenes.",
+  "left": {
+   "text": "Aprueba el programa",
+   "effects": {
+    "pueblo": 6,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Recorta fondos",
+   "effects": {
+    "economia": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era2_carpintero_003",
+  "character": "el_carpintero",
+  "era": "consolidacion",
+  "text": "Ofrecen madera de contrabando más barata para las obras públicas.",
+  "left": {
+   "text": "Apóyalo",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Permite el contrabando",
+   "effects": {
+    "economia": 5,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_enfermera_001",
+  "character": "la_enfermera",
+  "era": "consolidacion",
+  "text": "Los ancianos del barrio necesitan más visitas domiciliarias.",
+  "left": {
+   "text": "Amplía el programa",
+   "effects": {
+    "pueblo": 6,
+    "economia": -4
+   }
+  },
+  "right": {
+   "text": "Centraliza en el hospital",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_enfermera_002",
+  "character": "la_enfermera",
+  "era": "consolidacion",
+  "rare": true,
+  "text": "Se detecta un brote de tuberculosis en el barrio.",
+  "left": {
+   "text": "Aísla el foco",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Informa a la prensa",
+   "effects": {
+    "pueblo": 3,
+    "relacionesExteriores": 2
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era2_consejero_001",
+  "character": "el_consejero",
+  "era": "consolidacion",
+  "text": "Sugieren suavizar el discurso oficial para mejorar la imagen del gobierno.",
+  "left": {
+   "text": "Cambia el tono",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -2
+   }
+  },
+  "right": {
+   "text": "Mantén la firmeza",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_consejero_002",
+  "character": "el_consejero",
+  "era": "consolidacion",
+  "text": "Se advierte que dos ministros compiten en secreto por el poder.",
+  "left": {
+   "text": "Separa sus funciones",
+   "effects": {
+    "aparatoDelEstado": -3,
+    "economia": 2
+   }
+  },
+  "right": {
+   "text": "Deja que compitan",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -3
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era2_policia_001",
+  "character": "el_policia",
+  "era": "consolidacion",
+  "text": "Aumentan los robos menores en los mercados y piden más patrullas.",
+  "left": {
+   "text": "Refuerza las patrullas",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Deja que se organicen los comerciantes",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_policia_002",
+  "character": "el_policia",
+  "era": "consolidacion",
+  "text": "Un oficial denuncia sobornos dentro de su propia comisaría.",
+  "left": {
+   "text": "Investiga la denuncia",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "pueblo": 4
+   }
+  },
+  "right": {
+   "text": "Silencia el caso",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era2_primera_dama_001",
+  "character": "la_primera_dama",
+  "era": "consolidacion",
+  "text": "¿Debería el palacio de gobierno tener cortinas rojas o azules?",
+  "left": {
+   "text": "Rojas, dan más carácter",
+   "effects": {}
+  },
+  "right": {
+   "text": "Azules, dan más calma",
+   "effects": {}
+  },
+  "weight": 2
+ },
+ {
+  "id": "era2_primera_dama_002",
+  "character": "la_primera_dama",
+  "era": "consolidacion",
+  "text": "Un fotógrafo pregunta de qué lado prefiere que le tomen las fotos oficiales.",
+  "left": {
+   "text": "Del lado izquierdo",
+   "effects": {}
+  },
+  "right": {
+   "text": "Del lado derecho",
+   "effects": {}
+  },
+  "weight": 1,
+  "rare": true
+ }
+]

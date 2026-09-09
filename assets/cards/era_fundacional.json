@@ -1,0 +1,575 @@
+[
+ {
+  "id": "era1_001",
+  "character": "el_general",
+  "era": "fundacional",
+  "text": "Los oficiales piden purgar a los sospechosos de traición dentro del ejército.",
+  "left": {
+   "text": "Ignóralos",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -10
+   }
+  },
+  "right": {
+   "text": "Autoriza la purga",
+   "effects": {
+    "pueblo": -8,
+    "aparatoDelEstado": 12
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_002",
+  "character": "la_economista",
+  "era": "fundacional",
+  "text": "Proponen nacionalizar las tierras de los grandes terratenientes.",
+  "left": {
+   "text": "Mantén la propiedad privada",
+   "effects": {
+    "pueblo": -6,
+    "economia": 4,
+    "relacionesExteriores": 6
+   }
+  },
+  "right": {
+   "text": "Nacionaliza las tierras",
+   "effects": {
+    "pueblo": 10,
+    "economia": -4,
+    "relacionesExteriores": -10
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_003",
+  "character": "el_diplomatico",
+  "era": "fundacional",
+  "text": "Una potencia extranjera ofrece reconocer al nuevo gobierno a cambio de concesiones comerciales.",
+  "left": {
+   "text": "Rechaza las condiciones",
+   "effects": {
+    "relacionesExteriores": -8,
+    "pueblo": 6
+   }
+  },
+  "right": {
+   "text": "Acepta el trato",
+   "effects": {
+    "relacionesExteriores": 10,
+    "pueblo": -4
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era1_004",
+  "character": "la_lider_vecinal",
+  "era": "fundacional",
+  "text": "Los vecinos piden que se abran escuelas nuevas en los barrios más pobres.",
+  "left": {
+   "text": "No hay presupuesto ahora",
+   "effects": {
+    "pueblo": -7,
+    "economia": 3
+   }
+  },
+  "right": {
+   "text": "Prioriza la educación",
+   "effects": {
+    "pueblo": 9,
+    "economia": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_005",
+  "character": "el_extranjero",
+  "era": "fundacional",
+  "text": "Un empresario extranjero ofrece invertir en la isla, pero exige garantías especiales.",
+  "left": {
+   "text": "Recházalo",
+   "effects": {
+    "economia": -5,
+    "relacionesExteriores": -3,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Negocia el acuerdo",
+   "effects": {
+    "economia": 8,
+    "relacionesExteriores": 4,
+    "pueblo": -3
+   }
+  },
+  "conditions": {
+   "max": {
+    "relacionesExteriores": 80
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era1_006",
+  "character": "el_general",
+  "era": "fundacional",
+  "text": "El ejército solicita más recursos para modernizar su armamento.",
+  "left": {
+   "text": "Destina los recursos a otra área",
+   "effects": {
+    "aparatoDelEstado": -9,
+    "economia": 3
+   }
+  },
+  "right": {
+   "text": "Aprueba el presupuesto militar",
+   "effects": {
+    "aparatoDelEstado": 8,
+    "economia": -6
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era1_007",
+  "character": "la_economista",
+  "era": "fundacional",
+  "text": "El mercado negro empieza a crecer ante la escasez de productos básicos.",
+  "left": {
+   "text": "Ignora el fenómeno por ahora",
+   "effects": {
+    "economia": -4,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Ordena una represión del mercado negro",
+   "effects": {
+    "aparatoDelEstado": 6,
+    "pueblo": -7
+   }
+  },
+  "conditions": {
+   "max": {
+    "economia": 60
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era1_008",
+  "character": "la_lider_vecinal",
+  "era": "fundacional",
+  "text": "Un grupo de disidentes pide permiso para publicar un periódico independiente.",
+  "left": {
+   "text": "Prohíbelo",
+   "effects": {
+    "aparatoDelEstado": 6,
+    "pueblo": -6,
+    "relacionesExteriores": -3
+   }
+  },
+  "right": {
+   "text": "Permite la publicación",
+   "effects": {
+    "pueblo": 7,
+    "aparatoDelEstado": -5,
+    "relacionesExteriores": 3
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era1_009",
+  "character": "el_diplomatico",
+  "era": "fundacional",
+  "text": "Una misión médica vecina pide usar nuestro puerto durante una tormenta.",
+  "left": {
+   "text": "Cierra el puerto",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "relacionesExteriores": -7
+   }
+  },
+  "right": {
+   "text": "Abre el puerto",
+   "effects": {
+    "pueblo": 4,
+    "relacionesExteriores": 7
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_010",
+  "character": "la_economista",
+  "era": "fundacional",
+  "text": "El ingenio propone adelantar salarios con una deuda que vencerá pronto.",
+  "left": {
+   "text": "Evita la deuda",
+   "effects": {
+    "pueblo": -5,
+    "economia": 3
+   }
+  },
+  "right": {
+   "text": "Adelanta salarios",
+   "effects": {
+    "pueblo": 6,
+    "economia": -6
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_011",
+  "character": "la_lider_vecinal",
+  "era": "fundacional",
+  "text": "Los barrios organizan una jornada voluntaria para reparar los acueductos.",
+  "left": {
+   "text": "Deja que se organicen",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -2
+   }
+  },
+  "right": {
+   "text": "Dirige la jornada",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "economia": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_rescate_pueblo",
+  "character": "el_extranjero",
+  "era": "fundacional",
+  "rare": true,
+  "text": "Una vieja maestra ofrece abrir su casa como comedor comunitario antes de que el barrio estalle.",
+  "left": {
+   "text": "Déjala actuar",
+   "effects": {
+    "pueblo": 0,
+    "aparatoDelEstado": -3
+   },
+   "grantsRescue": "pueblo"
+  },
+  "right": {
+   "text": "Financia el comedor",
+   "effects": {
+    "pueblo": 8,
+    "economia": -5
+   }
+  },
+  "conditions": {
+   "max": {
+    "pueblo": 15
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era1_013",
+  "character": "la_maestra",
+  "era": "fundacional",
+  "text": "La escuela del pueblo pide abrir clases nocturnas.",
+  "left": {
+   "text": "Presta el local",
+   "effects": {
+    "pueblo": 6,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Espera presupuesto",
+   "effects": {
+    "economia": 3,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_014",
+  "character": "el_pescador",
+  "era": "fundacional",
+  "text": "Los pescadores piden reparar el muelle antes de la temporada.",
+  "left": {
+   "text": "Repara el muelle",
+   "effects": {
+    "economia": -4,
+    "pueblo": 5
+   }
+  },
+  "right": {
+   "text": "Cobra una tasa",
+   "effects": {
+    "economia": 4,
+    "pueblo": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_015",
+  "character": "la_medica",
+  "era": "fundacional",
+  "text": "La clínica necesita vacunas para los recién nacidos.",
+  "left": {
+   "text": "Compra las vacunas",
+   "effects": {
+    "pueblo": 7,
+    "economia": -5
+   }
+  },
+  "right": {
+   "text": "Guarda reservas",
+   "effects": {
+    "economia": 3,
+    "pueblo": -6
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_neg_001",
+  "character": "el_general",
+  "era": "fundacional",
+  "text": "La cosecha de tabaco se pudre por falta de transporte.",
+  "left": {
+   "text": "Saca el tabaco",
+   "effects": {
+    "economia": -4,
+    "pueblo": 2
+   }
+  },
+  "right": {
+   "text": "Destrúyelo para evitar pérdidas",
+   "effects": {
+    "economia": -5,
+    "pueblo": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_neg_002",
+  "character": "la_economista",
+  "era": "fundacional",
+  "text": "El tipo de cambio se dispara y el mercado tiembla.",
+  "left": {
+   "text": "Mantén el cambio fijo",
+   "effects": {
+    "economia": -6,
+    "relacionesExteriores": -3
+   }
+  },
+  "right": {
+   "text": "Devalúa la moneda",
+   "effects": {
+    "economia": -4,
+    "pueblo": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_neg_003",
+  "character": "el_diplomatico",
+  "era": "fundacional",
+  "text": "Un aliado rompe el tratado comercial por diferencias ideológicas.",
+  "left": {
+   "text": "Reintenta el acuerdo",
+   "effects": {
+    "relacionesExteriores": -5,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Busca otro socio",
+   "effects": {
+    "relacionesExteriores": -4,
+    "economia": -2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_neg_004",
+  "character": "la_lider_vecinal",
+  "era": "fundacional",
+  "text": "Las colas en las tiendas estatales generan peleas y heridos.",
+  "left": {
+   "text": "Envía patrullas",
+   "effects": {
+    "pueblo": -5,
+    "aparatoDelEstado": 4
+   }
+  },
+  "right": {
+   "text": "Duplica los turnos",
+   "effects": {
+    "pueblo": -3,
+    "economia": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era1_neg_005",
+  "character": "el_extranjero",
+  "era": "fundacional",
+  "text": "Un préstamo internacional vence y el banco exige el pago.",
+  "left": {
+   "text": "Paga con reservas",
+   "effects": {
+    "economia": -8,
+    "relacionesExteriores": 2
+   }
+  },
+  "right": {
+   "text": "Reestructura la deuda",
+   "effects": {
+    "relacionesExteriores": -3,
+    "economia": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_cura_001",
+  "character": "el_cura",
+  "era": "fundacional",
+  "text": "Piden que el Estado financie la reconstrucción de iglesias dañadas por el conflicto.",
+  "left": {
+   "text": "Niega el financiamiento",
+   "effects": {
+    "pueblo": -4,
+    "economia": 3
+   }
+  },
+  "right": {
+   "text": "Financia la reconstrucción",
+   "effects": {
+    "pueblo": 5,
+    "economia": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_cura_002",
+  "character": "el_cura",
+  "era": "fundacional",
+  "text": "Se ofrece mediación religiosa entre el gobierno y campesinos inconformes.",
+  "left": {
+   "text": "Acepta la mediación",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Rechaza su intervención",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era1_guardaeaspalda_001",
+  "character": "el_guardaeaspalda",
+  "era": "fundacional",
+  "text": "Rumores de un complot llevan a pedir el doble de escoltas para el líder.",
+  "left": {
+   "text": "Reduce la escolta",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Duplica la escolta",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "economia": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_guardaeaspalda_002",
+  "character": "el_guardaeaspalda",
+  "era": "fundacional",
+  "text": "Se descubre que un asesor cercano filtra información a extranjeros.",
+  "left": {
+   "text": "Investígalo en silencio",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "relacionesExteriores": -3
+   }
+  },
+  "right": {
+   "text": "Denúncialo públicamente",
+   "effects": {
+    "pueblo": 4,
+    "relacionesExteriores": -6,
+    "aparatoDelEstado": -3
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era1_vagabundo_001",
+  "character": "el_vagabundo",
+  "era": "fundacional",
+  "text": "Familias sin hogar piden refugio en los edificios estatales vacíos.",
+  "left": {
+   "text": "Ábreles las puertas",
+   "effects": {
+    "pueblo": 6,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Manténlos cerrados",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era1_vagabundo_002",
+  "character": "el_vagabundo",
+  "era": "fundacional",
+  "text": "Un relato desde la calle revela una red de corrupción en la distribución de alimentos.",
+  "left": {
+   "text": "Investiga a fondo",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Ignora el rumor",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "pueblo": -5
+   }
+  },
+  "weight": 1,
+  "rare": true
+ }
+]

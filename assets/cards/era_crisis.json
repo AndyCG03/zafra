@@ -1,0 +1,603 @@
+[
+ {
+  "id": "era3_001",
+  "character": "la_economista",
+  "era": "crisis",
+  "text": "La sequía reduce la cosecha por segundo año.",
+  "left": {
+   "text": "Importa alimentos",
+   "effects": {
+    "economia": -7,
+    "pueblo": 6,
+    "relacionesExteriores": 4
+   }
+  },
+  "right": {
+   "text": "Raciona la cosecha",
+   "effects": {
+    "economia": 3,
+    "pueblo": -7
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era3_002",
+  "character": "el_general",
+  "era": "crisis",
+  "text": "Hay saqueos en un depósito de combustible.",
+  "left": {
+   "text": "Envía mediadores",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Cierra el distrito",
+   "effects": {
+    "aparatoDelEstado": 7,
+    "pueblo": -7
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era3_003",
+  "character": "el_diplomatico",
+  "era": "crisis",
+  "text": "Un vecino ofrece crédito con condiciones de voto internacional.",
+  "left": {
+   "text": "Rechaza el crédito",
+   "effects": {
+    "economia": -5,
+    "relacionesExteriores": -3,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Acepta condiciones",
+   "effects": {
+    "economia": 7,
+    "relacionesExteriores": 6,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_004",
+  "character": "la_lider_vecinal",
+  "era": "crisis",
+  "text": "Las madres organizan comedores comunitarios en los barrios para alimentar a las familias más afectadas.",
+  "left": {
+    "text": "Entrega insumos",
+    "effects": {
+      "pueblo": 8,
+      "economia": -5
+    }
+  },
+  "right": {
+    "text": "Centraliza los comedores",
+    "effects": {
+      "aparatoDelEstado": 4,
+      "pueblo": -4
+    }
+  },
+  "weight": 3
+},
+ {
+  "id": "era3_005",
+  "character": "el_extranjero",
+  "era": "crisis",
+  "text": "Un canal extranjero quiere filmar la escasez.",
+  "left": {
+   "text": "Impide el acceso",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "relacionesExteriores": -6
+   }
+  },
+  "right": {
+   "text": "Muestra la situación",
+   "effects": {
+    "relacionesExteriores": 5,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_006",
+  "character": "el_general",
+  "era": "crisis",
+  "text": "Oficiales jóvenes cuestionan las órdenes del alto mando.",
+  "left": {
+   "text": "Renueva mandos",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Castiga la disidencia",
+   "effects": {
+    "aparatoDelEstado": 7,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_007",
+  "character": "la_economista",
+  "era": "crisis",
+  "text": "Se propone gravar los bienes de lujo para sostener hospitales.",
+  "left": {
+   "text": "Aprueba el gravamen",
+   "effects": {
+    "pueblo": 5,
+    "economia": 3
+   }
+  },
+  "right": {
+   "text": "Protege la inversión",
+   "effects": {
+    "economia": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era3_rescate_estado",
+  "character": "el_general",
+  "era": "crisis",
+  "rare": true,
+  "text": "Una capitana respetada ofrece mediar con los cuarteles antes del quiebre.",
+  "left": {
+   "text": "Escúchala",
+   "effects": {
+    "aparatoDelEstado": 0,
+    "pueblo": -3
+   },
+   "grantsRescue": "aparatoDelEstado"
+  },
+  "right": {
+   "text": "Dale mandato",
+   "effects": {
+    "aparatoDelEstado": 8,
+    "economia": -5
+   }
+  },
+  "conditions": {
+   "max": {
+    "aparatoDelEstado": 15
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era3_008",
+  "character": "la_campesina",
+  "era": "crisis",
+  "text": "Las semillas guardadas alcanzan para una sola siembra.",
+  "left": {
+   "text": "Reparte semillas",
+   "effects": {
+    "pueblo": 5,
+    "economia": -5
+   }
+  },
+  "right": {
+   "text": "Concentra la siembra",
+   "effects": {
+    "economia": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era3_009",
+  "character": "el_capitan",
+  "era": "crisis",
+  "text": "Una patrulla se niega a dispersar una protesta pacífica.",
+  "left": {
+   "text": "Respeta su decisión",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Releva a la patrulla",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_010",
+  "character": "la_periodista",
+  "era": "crisis",
+  "text": "Una emisora comunitaria informa sobre las colas.",
+  "left": {
+   "text": "Dale datos oficiales",
+   "effects": {
+    "relacionesExteriores": 3,
+    "pueblo": 4
+   }
+  },
+  "right": {
+   "text": "Intervén la emisora",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_neg_001",
+  "character": "la_campesina",
+  "era": "crisis",
+  "text": "Las lluvias destruyen la siembra en el valle central.",
+  "left": {
+   "text": "Declara emergencia",
+   "effects": {
+    "economia": -6,
+    "pueblo": -5
+   }
+  },
+  "right": {
+   "text": "Distribuye ayuda limitada",
+   "effects": {
+    "pueblo": -7,
+    "economia": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era3_neg_002",
+  "character": "el_capitan",
+  "era": "crisis",
+  "text": "Una parte del ejército se amotina por falta de pagos.",
+  "left": {
+   "text": "Negocia con los amotinados",
+   "effects": {
+    "aparatoDelEstado": -6,
+    "pueblo": 2
+   }
+  },
+  "right": {
+   "text": "Castiga la insubordinación",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -7
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era3_neg_003",
+  "character": "la_periodista",
+  "era": "crisis",
+  "text": "Filtran que el gobierno ocultó información sobre la sequía.",
+  "left": {
+   "text": "Niega las acusaciones",
+   "effects": {
+    "pueblo": -6,
+    "aparatoDelEstado": 3
+   }
+  },
+  "right": {
+   "text": "Asume el error público",
+   "effects": {
+    "pueblo": -4,
+    "relacionesExteriores": 2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_neg_004",
+  "character": "la_economista",
+  "era": "crisis",
+  "text": "La inflación hace que los precios suban cada semana.",
+  "left": {
+   "text": "Congela los precios",
+   "effects": {
+    "economia": -5,
+    "pueblo": -4
+   }
+  },
+  "right": {
+   "text": "Deja que el mercado se ajuste",
+   "effects": {
+    "economia": -4,
+    "pueblo": -6
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era3_neg_005",
+  "character": "el_general",
+  "era": "crisis",
+  "text": "Los refugiados llegan a la costa y saturan los albergues.",
+  "left": {
+   "text": "Reubícalos en el interior",
+   "effects": {
+    "pueblo": -3,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Construye albergues de emergencia",
+   "effects": {
+    "economia": -6,
+    "pueblo": 2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_bibliotecaria_001",
+  "character": "la_bibliotecaria",
+  "era": "crisis",
+  "text": "Aparecen documentos que prueban una deuda oculta del gobierno.",
+  "left": {
+   "text": "Publica los documentos",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -6
+   }
+  },
+  "right": {
+   "text": "Los guarda en secreto",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_bibliotecaria_002",
+  "character": "la_bibliotecaria",
+  "era": "crisis",
+  "rare": true,
+  "text": "Se propone un archivo comunitario de memorias de la crisis.",
+  "left": {
+   "text": "Financia el archivo",
+   "effects": {
+    "pueblo": 6,
+    "economia": -4
+   }
+  },
+  "right": {
+   "text": "Ignora la iniciativa",
+   "effects": {
+    "pueblo": -4,
+    "aparatoDelEstado": 2
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era3_bombero_001",
+  "character": "el_bombero",
+  "era": "crisis",
+  "text": "Un derrumbe en el puerto deja heridos bajo los escombros.",
+  "left": {
+   "text": "Da prioridad a los heridos",
+   "effects": {
+    "pueblo": 5,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Despeja el puerto",
+   "effects": {
+    "economia": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_enfermera_001",
+  "character": "la_enfermera",
+  "era": "crisis",
+  "text": "Familias desalojadas por las lluvias necesitan atención urgente.",
+  "left": {
+   "text": "Envía suministros",
+   "effects": {
+    "pueblo": 6,
+    "economia": -5
+   }
+  },
+  "right": {
+   "text": "Reubica en albergues",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_cura_001",
+  "character": "el_cura",
+  "era": "crisis",
+  "text": "Se organizan comedores solidarios en los templos durante la escasez.",
+  "left": {
+   "text": "Apoya los comedores",
+   "effects": {
+    "pueblo": 6,
+    "economia": -4
+   }
+  },
+  "right": {
+   "text": "Prohíbe la ayuda religiosa",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_cura_002",
+  "character": "el_cura",
+  "era": "crisis",
+  "text": "Un predicador muy querido es detenido por criticar al gobierno.",
+  "left": {
+   "text": "Libéralo",
+   "effects": {
+    "pueblo": 6,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Mantén la detención",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -7
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era3_guardaeaspalda_001",
+  "character": "el_guardaeaspalda",
+  "era": "crisis",
+  "text": "Durante los disturbios, piden blindar la residencia del gobierno.",
+  "left": {
+   "text": "Rechaza el gasto",
+   "effects": {
+    "economia": 3,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Autoriza el blindaje",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "economia": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_guardaeaspalda_002",
+  "character": "el_guardaeaspalda",
+  "era": "crisis",
+  "text": "Un intento de fuga de un preso político pone en alerta a la seguridad del Estado.",
+  "left": {
+   "text": "Refuerza las cárceles",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -4
+   }
+  },
+  "right": {
+   "text": "Investiga cómplices internos",
+   "effects": {
+    "aparatoDelEstado": -3,
+    "pueblo": 3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_policia_001",
+  "character": "el_policia",
+  "era": "crisis",
+  "text": "Las protestas por la escasez se vuelven violentas en el centro.",
+  "left": {
+   "text": "Dialoga con los manifestantes",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Dispersa con fuerza",
+   "effects": {
+    "aparatoDelEstado": 6,
+    "pueblo": -7
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_policia_002",
+  "character": "el_policia",
+  "era": "crisis",
+  "text": "Se pide autorización para usar gas lacrimógeno contra manifestantes.",
+  "left": {
+   "text": "Niega la autorización",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Autorízalo",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -6
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era3_vagabundo_001",
+  "character": "el_vagabundo",
+  "era": "crisis",
+  "text": "Aumenta la cantidad de personas durmiendo en las plazas públicas.",
+  "left": {
+   "text": "Habilita albergues",
+   "effects": {
+    "economia": -5,
+    "pueblo": 5
+   }
+  },
+  "right": {
+   "text": "Despeja las plazas",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era3_vagabundo_002",
+  "character": "el_vagabundo",
+  "era": "crisis",
+  "text": "Piden que se abran albergues de emergencia en escuelas cerradas.",
+  "left": {
+   "text": "Abre las escuelas",
+   "effects": {
+    "pueblo": 5,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Busca otro lugar",
+   "effects": {
+    "economia": 2,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ }
+]

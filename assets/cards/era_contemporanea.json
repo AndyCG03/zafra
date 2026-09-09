@@ -1,0 +1,773 @@
+[
+ {
+  "id": "era5_001",
+  "character": "la_economista",
+  "era": "contemporanea",
+  "text": "Una plataforma digital quiere procesar todos los pagos públicos.",
+  "left": {
+   "text": "Crea una plataforma propia",
+   "effects": {
+    "economia": -4,
+    "aparatoDelEstado": 4
+   }
+  },
+  "right": {
+   "text": "Contrata el servicio",
+   "effects": {
+    "economia": 5,
+    "relacionesExteriores": 4,
+    "aparatoDelEstado": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_002",
+  "character": "la_lider_vecinal",
+  "era": "contemporanea",
+  "text": "Los barrios proponen presupuestos participativos en línea.",
+  "left": {
+   "text": "Ensaya el sistema",
+   "effects": {
+    "pueblo": 6,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Déjalo para después",
+   "effects": {
+    "economia": 3,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_003",
+  "character": "el_general",
+  "era": "contemporanea",
+  "text": "Una filtración expone datos de la defensa nacional.",
+  "left": {
+   "text": "Informa lo esencial",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Bloquea la red",
+   "effects": {
+    "aparatoDelEstado": 6,
+    "pueblo": -5,
+    "relacionesExteriores": -2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_004",
+  "character": "el_diplomatico",
+  "era": "contemporanea",
+  "text": "La isla puede liderar una alianza climática del Caribe.",
+  "left": {
+   "text": "Asume el liderazgo",
+   "effects": {
+    "relacionesExteriores": 7,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Prioriza asuntos internos",
+   "effects": {
+    "economia": 3,
+    "relacionesExteriores": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_005",
+  "character": "el_extranjero",
+  "era": "contemporanea",
+  "text": "Una empresa ofrece instalar energía solar en cada escuela.",
+  "left": {
+   "text": "Negocia propiedad pública",
+   "effects": {
+    "economia": -3,
+    "pueblo": 5,
+    "relacionesExteriores": 2
+   }
+  },
+  "right": {
+   "text": "Acepta su propuesta",
+   "effects": {
+    "economia": 6,
+    "relacionesExteriores": 5,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_006",
+  "character": "la_economista",
+  "era": "contemporanea",
+  "text": "Los trabajadores de aplicaciones piden protección laboral.",
+  "left": {
+   "text": "Reconoce sus derechos",
+   "effects": {
+    "pueblo": 6,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Protege la flexibilidad",
+   "effects": {
+    "economia": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_007",
+  "character": "la_lider_vecinal",
+  "era": "contemporanea",
+  "text": "Una campaña ciudadana exige transparentar las compras públicas.",
+  "left": {
+   "text": "Publica los contratos",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Reserva los datos",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_rescate_pueblo",
+  "character": "la_lider_vecinal",
+  "era": "contemporanea",
+  "rare": true,
+  "text": "Un músico querido ofrece convertir su gira en una campaña de reconciliación nacional.",
+  "left": {
+   "text": "Apoya la gira",
+   "effects": {
+    "pueblo": 24,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Hazla comunitaria",
+   "effects": {
+    "pueblo": 19,
+    "aparatoDelEstado": -2
+   }
+  },
+  "conditions": {
+   "max": {
+    "pueblo": 15
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era5_008",
+  "character": "el_cientifico",
+  "era": "contemporanea",
+  "text": "El observatorio advierte que un huracán cambiará la costa.",
+  "left": {
+   "text": "Reubica viviendas",
+   "effects": {
+    "pueblo": 6,
+    "economia": -6
+   }
+  },
+  "right": {
+   "text": "Refuerza el malecón",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "economia": -4,
+    "pueblo": 3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_009",
+  "character": "la_artista",
+  "era": "contemporanea",
+  "text": "Un festival quiere reunir barrios que dejaron de hablarse.",
+  "left": {
+   "text": "Financia el festival",
+   "effects": {
+    "pueblo": 7,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Hazlo autogestionado",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -2
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_010",
+  "character": "el_emprendedor",
+  "era": "contemporanea",
+  "text": "Una cooperativa digital ofrece exportar software local.",
+  "left": {
+   "text": "Invierte en formación",
+   "effects": {
+    "economia": 5,
+    "relacionesExteriores": 4
+   }
+  },
+  "right": {
+   "text": "Cobra una tasa alta",
+   "effects": {
+    "economia": 4,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_neg_001",
+  "character": "el_cientifico",
+  "era": "contemporanea",
+  "text": "Los suelos se salinizan y las cosechas caen un 40%.",
+  "left": {
+   "text": "Importa alimentos",
+   "effects": {
+    "economia": -6,
+    "relacionesExteriores": 3
+   }
+  },
+  "right": {
+   "text": "Raciona alimentos",
+   "effects": {
+    "pueblo": -7,
+    "economia": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_neg_002",
+  "character": "la_artista",
+  "era": "contemporanea",
+  "text": "Un monumento histórico se desploma en el centro de la capital.",
+  "left": {
+   "text": "Reconstruye el monumento",
+   "effects": {
+    "economia": -5,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Demuele los restos",
+   "effects": {
+    "pueblo": -6,
+    "aparatoDelEstado": 2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_neg_003",
+  "character": "el_emprendedor",
+  "era": "contemporanea",
+  "text": "Un ciberataque paraliza el sistema bancario.",
+  "left": {
+   "text": "Refuerza el sistema",
+   "effects": {
+    "economia": -5,
+    "aparatoDelEstado": 2
+   }
+  },
+  "right": {
+   "text": "Desconecta los bancos",
+   "effects": {
+    "economia": -6,
+    "pueblo": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_neg_004",
+  "character": "la_lider_vecinal",
+  "era": "contemporanea",
+  "text": "Los barrios periféricos sufren cortes de agua continuos.",
+  "left": {
+   "text": "Invierte en acueductos",
+   "effects": {
+    "economia": -6,
+    "pueblo": 4
+   }
+  },
+  "right": {
+   "text": "Raciona el agua",
+   "effects": {
+    "pueblo": -6,
+    "economia": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era5_neg_005",
+  "character": "el_general",
+  "era": "contemporanea",
+  "text": "La cúpula militar presiona para declarar estado de excepción.",
+  "left": {
+   "text": "Cede a la presión",
+   "effects": {
+    "aparatoDelEstado": -6,
+    "pueblo": -5
+   }
+  },
+  "right": {
+   "text": "Rechaza la moción",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "relacionesExteriores": 3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_botanico_001",
+  "character": "el_botanico",
+  "era": "contemporanea",
+  "text": "Las especies invasoras están arrasando los cultivos locales.",
+  "left": {
+   "text": "Introduce depredadores naturales",
+   "effects": {
+    "economia": -4,
+    "pueblo": 5
+   }
+  },
+  "right": {
+   "text": "Usa pesticidas químicos",
+   "effects": {
+    "economia": 6,
+    "pueblo": -7
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_botanico_002",
+  "character": "el_botanico",
+  "era": "contemporanea",
+  "rare": true,
+  "text": "Se descubre una variedad de caña resistente a la sequía.",
+  "left": {
+   "text": "Patenta la variedad",
+   "effects": {
+    "economia": 8,
+    "pueblo": -3,
+    "relacionesExteriores": -2
+   }
+  },
+  "right": {
+   "text": "Comparte las semillas",
+   "effects": {
+    "pueblo": 6,
+    "economia": -4
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era5_cantinera_001",
+  "character": "la_cantinera",
+  "era": "contemporanea",
+  "text": "Los productos importados están desplazando a los locales del mercado.",
+  "left": {
+   "text": "Establece aranceles",
+   "effects": {
+    "economia": -4,
+    "pueblo": 5,
+    "relacionesExteriores": -3
+   }
+  },
+  "right": {
+   "text": "Deja la libre competencia",
+   "effects": {
+    "economia": 5,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_cantinera_002",
+  "character": "la_cantinera",
+  "era": "contemporanea",
+  "rare": true,
+  "text": "Una feria de productos locales se vuelve viral en redes.",
+  "left": {
+   "text": "Financia la feria",
+   "effects": {
+    "pueblo": 7,
+    "economia": -5
+   }
+  },
+  "right": {
+   "text": "Déjala autogestionarse",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -2
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era5_carpintero_001",
+  "character": "el_carpintero",
+  "era": "contemporanea",
+  "text": "La madera de construcción importada resulta ser de baja calidad.",
+  "left": {
+   "text": "Exige estándares locales",
+   "effects": {
+    "aparatoDelEstado": -3,
+    "pueblo": 4
+   }
+  },
+  "right": {
+   "text": "Permite la importación",
+   "effects": {
+    "economia": 5,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_carpintero_002",
+  "character": "el_carpintero",
+  "era": "contemporanea",
+  "rare": true,
+  "text": "Se propone un programa de viviendas sostenibles con materiales locales.",
+  "left": {
+   "text": "Aprueba el programa",
+   "effects": {
+    "pueblo": 6,
+    "economia": -5,
+    "relacionesExteriores": 2
+   }
+  },
+  "right": {
+   "text": "Lo pospone por falta de fondos",
+   "effects": {
+    "economia": 4,
+    "pueblo": -4
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era5_bibliotecaria_001",
+  "character": "la_bibliotecaria",
+  "era": "contemporanea",
+  "text": "Aparecen mapas antiguos que revelan derechos de pesca olvidados.",
+  "left": {
+   "text": "Publica los mapas",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Los guarda en el archivo",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_bibliotecaria_002",
+  "character": "la_bibliotecaria",
+  "era": "contemporanea",
+  "rare": true,
+  "text": "Proponen digitalizar los archivos históricos y subirlos a internet.",
+  "left": {
+   "text": "Apoya la digitalización",
+   "effects": {
+    "pueblo": 4,
+    "relacionesExteriores": 3
+   }
+  },
+  "right": {
+   "text": "Restringe el acceso",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era5_bombero_001",
+  "character": "el_bombero",
+  "era": "contemporanea",
+  "text": "Los edificios públicos no tienen salidas de emergencia adecuadas.",
+  "left": {
+   "text": "Ordena inspecciones",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "pueblo": 5
+   }
+  },
+  "right": {
+   "text": "Ignora el informe",
+   "effects": {
+    "economia": 3,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_bombero_002",
+  "character": "el_bombero",
+  "era": "contemporanea",
+  "rare": true,
+  "text": "Se planea un simulacro nacional de evacuación por huracán.",
+  "left": {
+   "text": "Apoya el simulacro",
+   "effects": {
+    "pueblo": 6,
+    "economia": -4,
+    "relacionesExteriores": 2
+   }
+  },
+  "right": {
+   "text": "Lo cancela por costos",
+   "effects": {
+    "economia": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era5_enfermera_001",
+  "character": "la_enfermera",
+  "era": "contemporanea",
+  "text": "Aumentan las enfermedades respiratorias por la contaminación.",
+  "left": {
+   "text": "Exige filtros en fábricas",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "pueblo": 5
+   }
+  },
+  "right": {
+   "text": "No interviene",
+   "effects": {
+    "economia": 4,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_enfermera_002",
+  "character": "la_enfermera",
+  "era": "contemporanea",
+  "rare": true,
+  "text": "Proponen crear una red de telemedicina para zonas rurales.",
+  "left": {
+   "text": "Financia la red",
+   "effects": {
+    "pueblo": 7,
+    "economia": -6
+   }
+  },
+  "right": {
+   "text": "La incorpora al sistema público",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": 3,
+    "economia": -4
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era5_consejero_001",
+  "character": "el_consejero",
+  "era": "contemporanea",
+  "text": "Propone usar redes sociales para comunicar las políticas directamente.",
+  "left": {
+   "text": "Adopta la estrategia",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Mantén los canales oficiales",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_consejero_002",
+  "character": "el_consejero",
+  "era": "contemporanea",
+  "text": "Advierte que una encuesta filtrada podría desatar pánico político.",
+  "left": {
+   "text": "Publícala tú primero",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Bloquea su difusión",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era5_policia_001",
+  "character": "el_policia",
+  "era": "contemporanea",
+  "text": "El uso de cámaras de reconocimiento facial genera debate sobre privacidad.",
+  "left": {
+   "text": "Limita su uso",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Amplía la vigilancia",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_policia_002",
+  "character": "el_policia",
+  "era": "contemporanea",
+  "text": "Un video viral muestra a agentes en un operativo violento.",
+  "left": {
+   "text": "Abre una investigación",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Respalda a los agentes",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -6
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era5_vagabundo_001",
+  "character": "el_vagabundo",
+  "era": "contemporanea",
+  "text": "Un programa de vivienda social prioriza a las personas en situación de calle.",
+  "left": {
+   "text": "Amplía el programa",
+   "effects": {
+    "pueblo": 6,
+    "economia": -5
+   }
+  },
+  "right": {
+   "text": "Redúcelo por costos",
+   "effects": {
+    "economia": 4,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_vagabundo_002",
+  "character": "el_vagabundo",
+  "era": "contemporanea",
+  "text": "Una organización internacional ofrece fondos para erradicar la indigencia.",
+  "left": {
+   "text": "Acepta los fondos",
+   "effects": {
+    "pueblo": 6,
+    "relacionesExteriores": 3,
+    "economia": -2
+   }
+  },
+  "right": {
+   "text": "Recházalos por condiciones políticas",
+   "effects": {
+    "relacionesExteriores": -3,
+    "aparatoDelEstado": 3
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era5_primera_dama_001",
+  "character": "la_primera_dama",
+  "era": "contemporanea",
+  "text": "¿Debería la cuenta oficial de redes sociales usar emojis en los comunicados?",
+  "left": {
+   "text": "Sí, se ve más cercano",
+   "effects": {}
+  },
+  "right": {
+   "text": "No, hay que ser formales",
+   "effects": {}
+  },
+  "weight": 2
+ },
+ {
+  "id": "era5_primera_dama_002",
+  "character": "la_primera_dama",
+  "era": "contemporanea",
+  "text": "El equipo de protocolo pregunta qué mascota adoptar para la residencia oficial.",
+  "left": {
+   "text": "Un perro",
+   "effects": {}
+  },
+  "right": {
+   "text": "Un gato",
+   "effects": {}
+  },
+  "weight": 1,
+  "rare": true
+ }
+]

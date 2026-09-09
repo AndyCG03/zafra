@@ -1,0 +1,529 @@
+[
+ {
+  "id": "era4_001",
+  "character": "el_diplomatico",
+  "era": "apertura",
+  "text": "La diáspora propone un programa para regresar profesionales.",
+  "left": {
+   "text": "Abre el programa",
+   "effects": {
+    "economia": 5,
+    "relacionesExteriores": 5,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Exige retorno gradual",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "relacionesExteriores": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_002",
+  "character": "la_economista",
+  "era": "apertura",
+  "text": "Pequeños negocios piden licencias para importar herramientas.",
+  "left": {
+   "text": "Emite licencias",
+   "effects": {
+    "economia": 7,
+    "pueblo": -3
+   }
+  },
+  "right": {
+   "text": "Mantén el control estatal",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "economia": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_003",
+  "character": "la_lider_vecinal",
+  "era": "apertura",
+  "text": "Las cooperativas quieren elegir a sus directivos sin tutela.",
+  "left": {
+   "text": "Permite elecciones",
+   "effects": {
+    "pueblo": 6,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Conserva la tutela",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_004",
+  "character": "el_general",
+  "era": "apertura",
+  "text": "Un antiguo servicio de seguridad pide conservar sus archivos secretos.",
+  "left": {
+   "text": "Abre los archivos",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -6
+   }
+  },
+  "right": {
+   "text": "Protégelos",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_005",
+  "character": "el_extranjero",
+  "era": "apertura",
+  "text": "Una cadena hotelera ofrece restaurar el malecón.",
+  "left": {
+   "text": "Impón reglas locales",
+   "effects": {
+    "pueblo": 4,
+    "economia": 3,
+    "relacionesExteriores": -2
+   }
+  },
+  "right": {
+   "text": "Acepta su plan",
+   "effects": {
+    "economia": 7,
+    "relacionesExteriores": 5,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_006",
+  "character": "el_diplomatico",
+  "era": "apertura",
+  "text": "Una cumbre regional pide una postura sobre derechos civiles.",
+  "left": {
+   "text": "Firma la declaración",
+   "effects": {
+    "relacionesExteriores": 6,
+    "pueblo": 4,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Evita compromisos",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "relacionesExteriores": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_007",
+  "character": "la_economista",
+  "era": "apertura",
+  "text": "El banco estatal ofrece créditos blandos para viviendas.",
+  "left": {
+   "text": "Amplía créditos",
+   "effects": {
+    "pueblo": 6,
+    "economia": -6
+   }
+  },
+  "right": {
+   "text": "Limita la cartera",
+   "effects": {
+    "economia": 4,
+    "pueblo": -4
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_rescate_relaciones",
+  "character": "el_diplomatico",
+  "era": "apertura",
+  "rare": true,
+  "text": "Una vieja amistad diplomática ofrece mediar en silencio con los vecinos.",
+  "left": {
+   "text": "Acepta la mediación",
+   "effects": {
+    "relacionesExteriores": 0,
+    "aparatoDelEstado": -3
+   },
+   "grantsRescue": "relacionesExteriores"
+  },
+  "right": {
+   "text": "Envía una delegación",
+   "effects": {
+    "relacionesExteriores": 8,
+    "economia": -4
+   }
+  },
+  "conditions": {
+   "max": {
+    "relacionesExteriores": 15
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era4_008",
+  "character": "el_emprendedor",
+  "era": "apertura",
+  "text": "Un taller quiere fabricar piezas para los ingenios.",
+  "left": {
+   "text": "Dale crédito",
+   "effects": {
+    "economia": 6,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Exige socio estatal",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "economia": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_009",
+  "character": "la_jurista",
+  "era": "apertura",
+  "text": "Un tribunal pide independencia para revisar actos del gobierno.",
+  "left": {
+   "text": "Garantiza independencia",
+   "effects": {
+    "pueblo": 6,
+    "aparatoDelEstado": -5
+   }
+  },
+  "right": {
+   "text": "Limita su alcance",
+   "effects": {
+    "aparatoDelEstado": 5,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_010",
+  "character": "la_periodista",
+  "era": "apertura",
+  "text": "Un diario propone un debate público entre ministros.",
+  "left": {
+   "text": "Acepta el debate",
+   "effects": {
+    "pueblo": 5,
+    "relacionesExteriores": 3
+   }
+  },
+  "right": {
+   "text": "Declina la invitación",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "pueblo": -4
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_neg_001",
+  "character": "el_emprendedor",
+  "era": "apertura",
+  "text": "Un negocio local quiebra por la competencia extranjera.",
+  "left": {
+   "text": "Protege el negocio",
+   "effects": {
+    "economia": -4,
+    "relacionesExteriores": -5
+   }
+  },
+  "right": {
+   "text": "Déjalo quebrar",
+   "effects": {
+    "pueblo": -5,
+    "economia": -3
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_neg_002",
+  "character": "la_jurista",
+  "era": "apertura",
+  "text": "El tribunal desestima una ley clave del gobierno.",
+  "left": {
+   "text": "Anula la sentencia",
+   "effects": {
+    "aparatoDelEstado": -5,
+    "pueblo": -3
+   }
+  },
+  "right": {
+   "text": "Respeta al tribunal",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "relacionesExteriores": 3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_neg_003",
+  "character": "la_periodista",
+  "era": "apertura",
+  "text": "Un escándalo sexual sacude a varios ministros.",
+  "left": {
+   "text": "Separa a los implicados",
+   "effects": {
+    "aparatoDelEstado": -6,
+    "pueblo": 3
+   }
+  },
+  "right": {
+   "text": "Calla el escándalo",
+   "effects": {
+    "aparatoDelEstado": -4,
+    "pueblo": -5
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_neg_004",
+  "character": "el_diplomatico",
+  "era": "apertura",
+  "text": "La vecina potencia rompe relaciones comerciales.",
+  "left": {
+   "text": "Envía un emisario",
+   "effects": {
+    "relacionesExteriores": -5,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Espera a que cambien",
+   "effects": {
+    "relacionesExteriores": -6,
+    "economia": -2
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_neg_005",
+  "character": "la_economista",
+  "era": "apertura",
+  "text": "El déficit fiscal se dispara por el gasto público.",
+  "left": {
+   "text": "Recorta el gasto",
+   "effects": {
+    "economia": -5,
+    "pueblo": -4
+   }
+  },
+  "right": {
+   "text": "Aumenta impuestos",
+   "effects": {
+    "economia": -4,
+    "pueblo": -6
+   }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era4_cantinera_001",
+  "character": "la_cantinera",
+  "era": "apertura",
+  "text": "Se rumora que varios comerciantes están acaparando grano.",
+  "left": {
+   "text": "Investiga los acaparamientos",
+   "effects": {
+    "pueblo": 4,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Ignora el rumor",
+   "effects": {
+    "economia": 3,
+    "pueblo": -5
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_cantinera_002",
+  "character": "la_cantinera",
+  "era": "apertura",
+  "rare": true,
+  "text": "Se propone crear un mercado local sin intermediarios.",
+  "left": {
+   "text": "Apoya el mercado",
+   "effects": {
+    "pueblo": 6,
+    "economia": -4
+   }
+  },
+  "right": {
+   "text": "Mantén los intermediarios",
+   "effects": {
+    "economia": 4,
+    "pueblo": -5
+   }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era4_cantinera_003",
+  "character": "la_cantinera",
+  "era": "apertura",
+  "text": "Los precios de los productos básicos suben demasiado rápido.",
+  "left": {
+   "text": "Congela los precios",
+   "effects": {
+    "pueblo": 5,
+    "economia": -5
+   }
+  },
+  "right": {
+   "text": "Deja que suban",
+   "effects": {
+    "economia": 3,
+    "pueblo": -6
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_consejero_001",
+  "character": "el_consejero",
+  "era": "apertura",
+  "text": "Recomienda anunciar reformas económicas antes de que lo haga la oposición.",
+  "left": {
+   "text": "Anuncia las reformas",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -3
+   }
+  },
+  "right": {
+   "text": "Espera el momento oportuno",
+   "effects": {
+    "aparatoDelEstado": 3,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_consejero_002",
+  "character": "el_consejero",
+  "era": "apertura",
+  "text": "Sugiere una gira internacional para mejorar la imagen del país.",
+  "left": {
+   "text": "Organiza la gira",
+   "effects": {
+    "relacionesExteriores": 6,
+    "economia": -3
+   }
+  },
+  "right": {
+   "text": "Prioriza los asuntos internos",
+   "effects": {
+    "economia": 3,
+    "relacionesExteriores": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_guardaeaspalda_001",
+  "character": "el_guardaeaspalda",
+  "era": "apertura",
+  "text": "Piden reducir la seguridad personal del líder como gesto de apertura.",
+  "left": {
+   "text": "Reduce la escolta",
+   "effects": {
+    "pueblo": 5,
+    "aparatoDelEstado": -4
+   }
+  },
+  "right": {
+   "text": "Mantén las medidas",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -3
+   }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_guardaeaspalda_002",
+  "character": "el_guardaeaspalda",
+  "era": "apertura",
+  "text": "Aparece un plan de fuga con nombres de altos oficiales implicados.",
+  "left": {
+   "text": "Investiga a fondo",
+   "effects": {
+    "aparatoDelEstado": -5,
+    "pueblo": 4
+   }
+  },
+  "right": {
+   "text": "Guarda silencio",
+   "effects": {
+    "aparatoDelEstado": 4,
+    "pueblo": -4
+   }
+  },
+  "weight": 1,
+  "rare": true
+ },
+ {
+  "id": "era4_primera_dama_001",
+  "character": "la_primera_dama",
+  "era": "apertura",
+  "text": "El chef de palacio pregunta qué postre servir en la cena de gala.",
+  "left": {
+   "text": "Flan tradicional",
+   "effects": {}
+  },
+  "right": {
+   "text": "Algo más moderno",
+   "effects": {}
+  },
+  "weight": 2
+ },
+ {
+  "id": "era4_primera_dama_002",
+  "character": "la_primera_dama",
+  "era": "apertura",
+  "text": "¿El vestido para la foto oficial debería llevar mangas largas o cortas?",
+  "left": {
+   "text": "Mangas largas",
+   "effects": {}
+  },
+  "right": {
+   "text": "Mangas cortas",
+   "effects": {}
+  },
+  "weight": 1,
+  "rare": true
+ }
+]

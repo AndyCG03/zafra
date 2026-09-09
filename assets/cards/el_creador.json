@@ -1,0 +1,162 @@
+[
+ {
+  "id": "creador_001",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Antes de que sigas, desliza a la izquierda o a la derecha para decidir.",
+  "left": {
+   "text": "Entendido, a gobernar",
+   "effects": {}
+  },
+  "right": {
+   "text": "Prefiero aprender jugando",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_002",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Un consejo antes de que te confíes, ninguna decisión sube todo a la vez. Pero si un medidor sube demasiado, ten cuidado.",
+  "left": {
+   "text": "Lo tendré en cuenta",
+   "effects": {}
+  },
+  "right": {
+   "text": "Prefiero arriesgarme",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_003",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Otra cosa, los personajes no te mienten, pero tampoco te lo dicen todo. Escúchalos, sí, pero la decisión final siempre es tuya.",
+  "left": {
+   "text": "Confiaré en mi criterio",
+   "effects": {}
+  },
+  "right": {
+   "text": "Confiaré en ellos",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_004",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Si ves que un medidor se acerca al borde, no esperes al último turno para corregirlo. Los rescates existen, pero no siempre llegan a tiempo.",
+  "left": {
+   "text": "Actuaré antes",
+   "effects": {}
+  },
+  "right": {
+   "text": "Me arriesgaré hasta el final",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_005",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Te lo digo sin rodeos, no busques el final feliz. Busca, mejor, el final que puedas explicar.",
+  "left": {
+   "text": "Interesante forma de verlo",
+   "effects": {}
+  },
+  "right": {
+   "text": "Voy a intentarlo igual",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_006",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Equilibrar cuatro cosas a la vez es imposible, y lo sé porque lo diseñé así. El objetivo no es ganar, es durar.",
+  "left": {
+   "text": "Duraré lo que pueda",
+   "effects": {}
+  },
+  "right": {
+   "text": "Intentaré ganar de todos modos",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_007",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "¿Te preguntas por qué hay personajes tan distintos entre sí? Es porque el poder real también los tiene.",
+  "left": {
+   "text": "Tiene sentido",
+   "effects": {}
+  },
+  "right": {
+   "text": "Nunca lo había pensado así",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_008",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Un secreto de diseño, ya que llegamos hasta aquí, las cartas raras aparecen cuando menos las esperas, igual que los golpes de suerte en la vida real.",
+  "left": {
+   "text": "Estaré atento",
+   "effects": {}
+  },
+  "right": {
+   "text": "Prefiero no saberlo",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_009",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Ya casi termino de darte consejos. Recuerda que cada decisión que tomas queda guardada, y podrás ver el resumen completo de tu mandato.",
+  "left": {
+   "text": "Con gusto lo revisaré",
+   "effects": {}
+  },
+  "right": {
+   "text": "Prefiero no mirar atrás",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ },
+ {
+  "id": "creador_010",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Mi último consejo, por ahora, juega como si el país realmente te necesitara. Buena suerte gobernando.",
+  "left": {
+   "text": "Gracias, seguiré jugando",
+   "effects": {}
+  },
+  "right": {
+   "text": "Nos vemos en la próxima crisis",
+   "effects": {}
+  },
+  "weight": 1,
+  "easterEgg": true
+ }
+]

@@ -1,0 +1,250 @@
+[
+ {
+  "id": "el_general",
+  "name": "El General",
+  "role": "Aparato del Estado",
+  "imageAsset": "assets/images/characters/el_general.png",
+  "unlockEra": "fundacional",
+  "bio": "Veterano de la revolución. Cree que la estabilidad vale más que la popularidad, y no duda en decírtelo con la firmeza de quien ha visto demasiadas tormentas."
+ },
+ {
+  "id": "la_economista",
+  "name": "La Economista",
+  "role": "Economía",
+  "imageAsset": "assets/images/characters/la_economista.png",
+  "unlockEra": "fundacional",
+  "bio": "Calculadora fría y precisa. Sabe que cada peso gastado es un voto perdido o ganado, y que las reservas no se reponen con discursos."
+ },
+ {
+  "id": "el_diplomatico",
+  "name": "El Diplomático",
+  "role": "Relaciones Exteriores",
+  "imageAsset": "assets/images/characters/el_diplomatico.png",
+  "unlockEra": "fundacional",
+  "bio": "Sobrevive a base de sonrisas medidas y apretones de manos. Cree que el mundo se gana con paciencia, no con cañones."
+ },
+ {
+  "id": "la_lider_vecinal",
+  "name": "La Líder Vecinal",
+  "role": "Pueblo",
+  "imageAsset": "assets/images/characters/la_lider_vecinal.png",
+  "unlockEra": "fundacional",
+  "bio": "Conoce el hambre y la esperanza en cada rostro. Su fuerza está en los barrios, y no le tiembla la voz para recordarlo."
+ },
+ {
+  "id": "el_extranjero",
+  "name": "El Extranjero",
+  "role": "Comodín",
+  "imageAsset": "assets/images/characters/el_extranjero.png",
+  "unlockEra": "fundacional",
+  "bio": "Observa sin pertenecer. Trae consigo otras miradas, otras monedas y preguntas incómodas que nadie más se atreve a hacer."
+ },
+ {
+  "id": "la_maestra",
+  "name": "La Maestra",
+  "role": "Educación y memoria",
+  "imageAsset": "assets/images/characters/la_maestra.png",
+  "unlockEra": "fundacional",
+  "bio": "Sabe que el futuro se escribe en las aulas. Lleva décadas enseñando que la historia no se repite, pero a veces rima."
+ },
+ {
+  "id": "el_pescador",
+  "name": "El Pescador",
+  "role": "Costa y abastecimiento",
+  "imageAsset": "assets/images/characters/el_pescador.png",
+  "unlockEra": "fundacional",
+  "bio": "Cada amanecer en el mar le enseña que la naturaleza no negocia. Sabe que la costa alimenta o hunde, y no hay gobierno que cambie el viento."
+ },
+ {
+  "id": "la_medica",
+  "name": "La Médica",
+  "role": "Salud pública",
+  "imageAsset": "assets/images/characters/la_medica.png",
+  "unlockEra": "fundacional",
+  "bio": "Ha visto más miserias y milagros que cualquier burócrata. Sabe que la salud no espera decretos, y suele recordarlo con urgencia."
+ },
+ {
+  "id": "el_sindicalista",
+  "name": "El Sindicalista",
+  "role": "Trabajo organizado",
+  "imageAsset": "assets/images/characters/el_sindicalista.png",
+  "unlockEra": "consolidacion",
+  "bio": "Vive de la palabra empeñada. Organiza, convoca, exige. Sabe que ningún gobierno dura si los obreros dejan de remar."
+ },
+ {
+  "id": "la_ingeniera",
+  "name": "La Ingeniera",
+  "role": "Infraestructura",
+  "imageAsset": "assets/images/characters/la_ingeniera.png",
+  "unlockEra": "consolidacion",
+  "bio": "Construye puentes que otros prometen. Sabe que el progreso no se decreta, se diseña, y que los planos no mienten."
+ },
+ {
+  "id": "el_archivero",
+  "name": "El Archivero",
+  "role": "Transparencia y archivos",
+  "imageAsset": "assets/images/characters/el_archivero.png",
+  "unlockEra": "consolidacion",
+  "bio": "Sabe que el papel lo aguanta todo, pero la memoria no. Su oficio es recordar lo que otros prefieren olvidar."
+ },
+ {
+  "id": "la_campesina",
+  "name": "La Campesina",
+  "role": "Tierra y alimentos",
+  "imageAsset": "assets/images/characters/la_campesina.png",
+  "unlockEra": "crisis",
+  "bio": "Tiene la tierra en las manos y el hambre en la memoria. Sabe que sin alimentos no hay gobierno que valga, y no teme decirlo."
+ },
+ {
+  "id": "el_capitan",
+  "name": "El Capitán",
+  "role": "Defensa y disciplina",
+  "imageAsset": "assets/images/characters/el_capitan.png",
+  "unlockEra": "crisis",
+  "bio": "Cree en el orden y la jerarquía. Sabe que en tiempos de caos, la disciplina es más importante que la democracia."
+ },
+ {
+  "id": "la_periodista",
+  "name": "La Periodista",
+  "role": "Información pública",
+  "imageAsset": "assets/images/characters/la_periodista.png",
+  "unlockEra": "crisis",
+  "bio": "Escribe lo que otros callan. Sabe que la verdad es incómoda, pero que el silencio es más caro."
+ },
+ {
+  "id": "el_emprendedor",
+  "name": "El Emprendedor",
+  "role": "Innovación local",
+  "imageAsset": "assets/images/characters/el_emprendedor.png",
+  "unlockEra": "apertura",
+  "bio": "Ve oportunidades donde otros ven ruinas. Sabe que el cambio no viene de arriba, sino de quienes se atreven a probar."
+ },
+ {
+  "id": "la_jurista",
+  "name": "La Jurista",
+  "role": "Derechos e instituciones",
+  "imageAsset": "assets/images/characters/la_jurista.png",
+  "unlockEra": "apertura",
+  "bio": "Defiende la letra de la ley como quien defiende una muralla. Sabe que sin instituciones, cualquier gobierno es un espejismo."
+ },
+ {
+  "id": "el_cientifico",
+  "name": "El Científico",
+  "role": "Clima y tecnología",
+  "imageAsset": "assets/images/characters/el_cientifico.png",
+  "unlockEra": "contemporanea",
+  "bio": "Mira los datos mientras otros miran las encuestas. Sabe que el clima y la tecnología no esperan decisiones políticas."
+ },
+ {
+  "id": "la_artista",
+  "name": "La Artista",
+  "role": "Cultura y reconciliación",
+  "imageAsset": "assets/images/characters/la_artista.png",
+  "unlockEra": "contemporanea",
+  "bio": "Cree que la cultura es la única revolución que vale la pena. Sabe que un país se reconcilia cuando sus historias se cuentan, no cuando se silencian."
+ },
+ {
+  "id": "el_botanico",
+  "name": "El Botánico",
+  "role": "Recursos naturales",
+  "imageAsset": "assets/images/characters/el_botanico.png",
+  "unlockEra": "consolidacion",
+  "bio": "Conoce cada semilla y cada plaga de la isla. Sabe que la tierra tiene memoria propia, y que ningún decreto hace crecer nada más rápido."
+ },
+ {
+  "id": "el_bombero",
+  "name": "El Bombero",
+  "role": "Emergencias y protección civil",
+  "imageAsset": "assets/images/characters/el_bombero.png",
+  "unlockEra": "crisis",
+  "bio": "Llega cuando ya nadie más quiere llegar. Sabe que el caos no espera reuniones, y que el valor no siempre se aplaude a tiempo."
+ },
+ {
+  "id": "el_carpintero",
+  "name": "El Carpintero",
+  "role": "Oficios y reconstrucción",
+  "imageAsset": "assets/images/characters/el_carpintero.png",
+  "unlockEra": "apertura",
+  "bio": "Reconstruye lo que las crisis derriban, tabla a tabla. Sabe que un país también se repara con las manos, no solo con discursos."
+ },
+ {
+  "id": "la_enfermera",
+  "name": "La Enfermera",
+  "role": "Atención primaria",
+  "imageAsset": "assets/images/characters/la_enfermera.png",
+  "unlockEra": "crisis",
+  "bio": "Sostiene lo que el sistema de salud no alcanza a cubrir. Sabe que cuidar no es un lujo, aunque a veces el presupuesto diga lo contrario."
+ },
+ {
+  "id": "la_bibliotecaria",
+  "name": "La Bibliotecaria",
+  "role": "Memoria y conocimiento",
+  "imageAsset": "assets/images/characters/la_bibliotecaria.png",
+  "unlockEra": "contemporanea",
+  "bio": "Guarda lo que el país ha sido, no solo lo que quiere aparentar. Sabe que quien controla los libros, controla cómo se recuerda todo."
+ },
+ {
+  "id": "la_cantinera",
+  "name": "La Cantinera",
+  "role": "Vida social y rumor popular",
+  "imageAsset": "assets/images/characters/la_cantinera.png",
+  "unlockEra": "fundacional",
+  "bio": "Escucha todo lo que se dice después de la tercera copa. Sabe más del verdadero estado del país que cualquier informe oficial."
+ },
+ {
+  "id": "el_cura",
+  "name": "El Cura",
+  "role": "Fe y moral pública",
+  "imageAsset": "assets/images/characters/el_cura.png",
+  "unlockEra": "fundacional",
+  "bio": "Bendice cunas y entierra a los caídos del mismo barrio. Sabe que la fe no se decreta, y que el pueblo confía más en su palabra que en la de cualquier ministro."
+ },
+ {
+  "id": "el_guardaeaspalda",
+  "name": "El Guardaespaldas",
+  "role": "Seguridad personal",
+  "imageAsset": "assets/images/characters/el_guardaeaspalda.png",
+  "unlockEra": "fundacional",
+  "bio": "Duerme con un ojo abierto y la mano cerca del arma. Sabe que el poder tiene enemigos hasta en la propia sombra, y que su trabajo es no confiar en nadie."
+ },
+ {
+  "id": "el_vagabundo",
+  "name": "El Vagabundo",
+  "role": "Voz de la calle",
+  "imageAsset": "assets/images/characters/el_vagabundo.png",
+  "unlockEra": "fundacional",
+  "bio": "No tiene techo, pero lo ha visto todo desde la acera. Sabe que los discursos suenan distinto cuando se duerme sin colchón."
+ },
+ {
+  "id": "el_consejero",
+  "name": "El Consejero",
+  "role": "Estrategia y comunicación",
+  "imageAsset": "assets/images/characters/el_consejero.png",
+  "unlockEra": "consolidacion",
+  "bio": "Susurra al oído lo que otros no se atreven a decir de frente. Sabe que gobernar es también saber cuándo callar y cuándo hablar."
+ },
+ {
+  "id": "el_policia",
+  "name": "El Policía",
+  "role": "Orden público",
+  "imageAsset": "assets/images/characters/el_policia.png",
+  "unlockEra": "consolidacion",
+  "bio": "Camina la misma calle todos los días y conoce sus tensiones de memoria. Sabe que mantener el orden a veces cuesta la confianza de quien lo pide."
+ },
+ {
+  "id": "la_primera_dama",
+  "name": "La Primera Dama",
+  "role": "Imagen y vida de palacio",
+  "imageAsset": "assets/images/characters/la_primera_dama.png",
+  "unlockEra": "consolidacion",
+  "bio": "Vive entre protocolos, fotografías y galas. Sus decisiones no cambian el rumbo del país, pero sí el humor con que se lo mira."
+ },
+ {
+  "id": "el_creador",
+  "name": "El Creador",
+  "role": "Voz fuera del juego",
+  "imageAsset": "assets/images/characters/el_creador.png",
+  "unlockEra": "cualquiera",
+  "bio": "No pertenece a la isla ni a su historia. Es la voz que de vez en cuando rompe la ficción para recordarte que, al final, esto también es un juego."
+ }
+]

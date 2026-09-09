@@ -1,0 +1,94 @@
+[
+  {
+    "id": "ending_pueblo_min_fundacional",
+    "causedBy": "pueblo",
+    "wasAtMin": true,
+    "era": "fundacional",
+    "title": "La plaza vacía",
+    "description": "El pueblo dejó de creer antes de que el proyecto echara raíces. Sin apoyo, el gobierno cae en su primer año.",
+    "imageAsset": "assets/images/finals/la_plaza_vacia.png"
+  },
+  {
+    "id": "ending_pueblo_min_generic",
+    "causedBy": "pueblo",
+    "wasAtMin": true,
+    "era": "generic",
+    "title": "El levantamiento",
+    "description": "Las calles se llenaron. Nadie pudo contener lo que se venía gestando desde hacía tiempo.",
+    "imageAsset": "assets/images/finals/el_levantamiento.png"
+  },
+  {
+    "id": "ending_economia_min_generic",
+    "causedBy": "economia",
+    "wasAtMin": true,
+    "era": "generic",
+    "title": "Los anaqueles vacíos",
+    "description": "La escasez llegó a un punto sin retorno. El país no pudo sostenerse a sí mismo.",
+    "imageAsset": "assets/images/finals/los_anaqueles_vacios.png"
+  },
+  {
+    "id": "ending_aparato_min_generic",
+    "causedBy": "aparatoDelEstado",
+    "wasAtMin": true,
+    "era": "generic",
+    "title": "La noche de los cuarteles",
+    "description": "Sin la lealtad de quienes debían protegerlo, el gobierno cayó antes del amanecer.",
+    "imageAsset": "assets/images/finals/la_noche_de_los_cuarteles.png"
+  },
+  {
+    "id": "ending_relaciones_min_generic",
+    "causedBy": "relacionesExteriores",
+    "wasAtMin": true,
+    "era": "generic",
+    "title": "La isla sola",
+    "description": "El aislamiento total dejó al país sin aliados en el momento en que más los necesitaba.",
+    "imageAsset": "assets/images/finals/la_isla_sola.png"
+  },
+  {
+    "id": "ending_relaciones_max_generic",
+    "causedBy": "relacionesExteriores",
+    "wasAtMin": false,
+    "era": "generic",
+    "title": "Un nuevo dueño",
+    "description": "La dependencia de la potencia extranjera se volvió total. Ya no quedaban decisiones propias que tomar.",
+    "imageAsset": "assets/images/finals/un_nuevo_dueño.png"
+  },
+  {
+    "id": "ending_pueblo_max_generic",
+    "causedBy": "pueblo",
+    "wasAtMin": false,
+    "era": "generic",
+    "title": "La multitud manda",
+    "description": "La euforia se volvió exigencia y toda institución quedó sometida al grito de la plaza.",
+    "imageAsset": "assets/images/finals/la_multitud_manda.png"
+  },
+  {
+    "id": "ending_economia_max_generic",
+    "causedBy": "economia",
+    "wasAtMin": false,
+    "era": "generic",
+    "title": "El país en venta",
+    "description": "La bonanza sin freno concentró el poder y la isla dejó de pertenecer a quienes la habitaban.",
+    "imageAsset": "assets/images/finals/el_pais_en_venta.png"
+  },
+  {
+    "id": "ending_aparato_max_generic",
+    "causedBy": "aparatoDelEstado",
+    "wasAtMin": false,
+    "era": "generic",
+    "title": "El orden absoluto",
+    "description": "La maquinaria del Estado creció hasta no obedecer a nadie. Gobernar ya no fue posible.",
+    "imageAsset": "assets/images/finals/el_orden_absoluto.png"
+  }
+,
+  {
+    "id": "ending_supervivencia_total",
+    "causedBy": "pueblo",
+    "wasAtMin": false,
+    "era": "contemporanea",
+    "title": "La isla resiste",
+    "description": "Atravesaste todas las eras sin dejar que ningún aspecto del gobierno colapsara. La historia no te absolvió, pero la isla sigue en pie.",
+    "imageAsset": "assets/images/logo/icon card.png",
+    "isSurvival": true
+  }
+]
