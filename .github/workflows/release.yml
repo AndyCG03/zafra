@@ -1,7 +1,6 @@
 name: Build and Release Zafra
 
 on:
-  # Release builds are created only for semantic-version tags.
   push:
     tags:
       - 'v*.*.*'
@@ -13,8 +12,10 @@ permissions:
   contents: write
 
 env:
-  FLUTTER_VERSION: '3.22.0'
+  FLUTTER_VERSION: '3.38.6'
   JAVA_VERSION: '17'
+  GRADLE_VERSION: '8.14'
+  NDK_VERSION: '28.0.13004108'
 
 jobs:
   android:
@@ -35,6 +36,28 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: gradle
 
+      # ✅ FIX: Asegurar que Gradle 8.14 use la URL oficial
+      - name: Fix Gradle wrapper URL
+        run: |
+          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip|' android/gradle/wrapper/gradle-wrapper.properties
+          echo "=== gradle-wrapper.properties ==="
+          cat android/gradle/wrapper/gradle-wrapper.properties
+
+      # ✅ Pre-descargar Gradle 8.14 en el runner
+      - name: Set up Gradle 8.14
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: ${{ env.GRADLE_VERSION }}
+          cache-disabled: false
+
+      # ✅ Instalar Android NDK 28
+      - name: Install Android NDK 28
+        run: |
+          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;${NDK_VERSION}"
+          echo "NDK instalado en: ${ANDROID_HOME}/ndk/${NDK_VERSION}"
+          ls -la ${ANDROID_HOME}/ndk/ || true
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -44,14 +67,16 @@ jobs:
           cache-key: flutter-${{ runner.os }}-${{ env.FLUTTER_VERSION }}
           pub-cache: true
 
-      - name: Install dependencies
+      - name: Verify Flutter and Dart versions
         run: |
           flutter --version
+          dart --version
+
+      - name: Install dependencies
+        run: |
           flutter clean
           flutter pub get
 
-      # Optional signing. Without these secrets, the project's configured
-      # release signing (currently debug signing) remains in effect.
       - name: Configure release keystore
         if: ${{ env.ANDROID_KEYSTORE_BASE64 != '' }}
         env:
@@ -118,13 +143,14 @@ jobs:
           cache: true
           pub-cache: true
 
+      - name: Verify Flutter version
+        run: flutter --version
+
       - name: Install dependencies
         run: |
           flutter clean
           flutter pub get
 
-      # No Apple signing secrets are assumed. This produces an unsigned app
-      # bundle suitable for CI validation; App Store signing can be added later.
       - name: Build unsigned iOS app
         run: flutter build ios --release --no-codesign
 
@@ -150,6 +176,9 @@ jobs:
           channel: stable
           cache: true
           pub-cache: true
+
+      - name: Verify Flutter version
+        run: flutter --version
 
       - name: Install dependencies and build web
         run: |
