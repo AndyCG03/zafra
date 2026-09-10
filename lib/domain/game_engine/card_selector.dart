@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../../data/models/game_card.dart';
+import '../../data/models/era.dart';
 import 'game_state.dart';
 
 /// Elige la próxima carta a mostrar, respetando:
@@ -21,7 +22,9 @@ class CardSelector {
     // 1. Ramificación forzada por la carta anterior.
     if (state.pendingNextCardId != null) {
       final forced = findById(state.pendingNextCardId!);
-      if (forced != null) return forced;
+      // Las ramificaciones mantienen prioridad, pero tampoco pueden saltarse
+      // la progresión temporal si pertenecen a una era futura bloqueada.
+      if (forced != null && _isEraAvailable(forced, state)) return forced;
     }
 
     // 2 y 3. Filtrar por condiciones y por no-repetición.
@@ -46,6 +49,7 @@ class CardSelector {
   }
 
   bool _matchesConditions(GameCard card, GameState state) {
+    if (!_isEraAvailable(card, state)) return false;
     final condition = card.condition;
 
     for (final entry in condition.minValues.entries) {
@@ -61,5 +65,12 @@ class CardSelector {
       if (state.flags.contains(flag)) return false;
     }
     return true;
+  }
+
+  bool _isEraAvailable(GameCard card, GameState state) {
+    final cardEraIndex = Era.values.indexWhere((era) => era.name == card.eraId);
+    if (cardEraIndex < 0) return false;
+    if (cardEraIndex <= state.currentEra.index) return true;
+    return state.unlockedCharacterIds.contains(card.characterId);
   }
 }

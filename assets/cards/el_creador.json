@@ -3,13 +3,13 @@
   "id": "creador_001",
   "character": "el_creador",
   "era": "cualquiera",
-  "text": "Antes de que sigas, desliza a la izquierda o a la derecha para decidir.",
+  "text": "Antes de que sigas, desliza la carta a la izquierda o a la derecha.",
   "left": {
-   "text": "Entendido, a gobernar",
+   "text": "Deslizar izquierda",
    "effects": {}
   },
   "right": {
-   "text": "Prefiero aprender jugando",
+   "text": "Deslizar derecha",
    "effects": {}
   },
   "weight": 1,
@@ -158,5 +158,61 @@
   },
   "weight": 1,
   "easterEgg": true
+ },
+ {
+  "id": "tutorial_options",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "¿Quieres revisar las opciones de sonido y vibración antes de empezar?",
+  "left": {"text": "Sí, abrir ajustes", "effects": {}},
+  "right": {"text": "No, empezar", "effects": {}}
+ },
+ {
+  "id": "tutorial_question",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Veo que eres nuevo. ¿Quieres que te guíe por los conceptos básicos del gobierno?",
+  "left": {"text": "Sí, guíame", "effects": {}},
+  "right": {"text": "No, prefiero aprender jugando", "effects": {}}
+ },
+ {
+  "id": "tutorial_001",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Bienvenido a ZAFRA. Vas a gobernar una isla que acaba de salir de una crisis. Cada decisión tendrá consecuencias.",
+  "left": {"text": "Suena difícil", "effects": {}},
+  "right": {"text": "Estoy listo", "effects": {}}
+ },
+ {
+  "id": "tutorial_002",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Tienes 4 recursos: PUEBLO, ECONOMÍA, RELACIONES EXTERIORES y APARATO DEL ESTADO. Cuida todos.",
+  "left": {"text": "Ok", "effects": {}},
+  "right": {"text": "Entendido, los cuidaré", "effects": {}}
+ },
+ {
+  "id": "tutorial_003",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Cada carta presenta una situación. Desliza a la IZQUIERDA o DERECHA para elegir. Cada opción subirá o bajará tus estadísticas.",
+  "left": {"text": "Deslizar izquierda", "effects": {}},
+  "right": {"text": "Deslizar derecha", "effects": {}}
+ },
+ {
+  "id": "tutorial_004",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Toca el recuadro de abajo (donde dice tutorial y luego dirá DIAS EN EL PODER) para abrir el menú.",
+  "left": {"text": "Vale", "effects": {}},
+  "right": {"text": "Entendido", "effects": {}}
+ },
+ {
+  "id": "tutorial_005",
+  "character": "el_creador",
+  "era": "cualquiera",
+  "text": "Ya estás listo. Cada decisión deja cosecha. Buena suerte, gobernante.",
+  "left": {"text": "¡A gobernar!", "effects": {}},
+  "right": {"text": "Gracias, creador", "effects": {}}
  }
 ]

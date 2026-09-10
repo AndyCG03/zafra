@@ -78,6 +78,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       if (rescue != null && previous?.rescueOpportunity != rescue) {
         WidgetsBinding.instance.addPostFrameCallback((_) => _showRescueDialog(context, rescue));
       }
+      if (next.openOptionsRequested && previous?.openOptionsRequested != true) {
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
+          if (!mounted) return;
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const OptionsScreen()),
+          );
+          if (mounted) {
+            ref.read(gameControllerProvider.notifier).finishOptionsSetup();
+          }
+        });
+      }
       final character = next.unlockedCharacter;
       if (character == null || previous?.unlockedCharacter?.id == character.id) {
         return;
@@ -121,12 +133,20 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
     final GameCard? card = state.currentCard;
     if (card == null) {
+      if (state.openOptionsRequested) return const SizedBox.shrink();
       return const Scaffold(
         body: Center(child: Text('No hay cartas disponibles.')),
       );
     }
 
     final bool isEvent = card.characterId.startsWith('evento_');
+
+    // ✅ Detectar si es una carta de tutorial
+    final bool isTutorialCard = state.isTutorial ||
+        card.id == 'creador_001' ||
+        card.id == 'tutorial_question' ||
+        card.id == 'tutorial_options' ||
+        card.id.startsWith('tutorial_');
 
     String? characterName;
     if (isEvent) {
@@ -140,7 +160,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
     if (state.ending == null) _endingAudioPlayed = false;
 
-    if (!_introShown && state.gameState.turn == 0) {
+    if (!_introShown && state.gameState.turn == 0 && !isTutorialCard) {
       _introShown = true;
       WidgetsBinding.instance.addPostFrameCallback((_) => _showGameIntro(context, onComplete: _completeWelcome));
     }
@@ -155,6 +175,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             children: [
               Positioned(top: 0, left: 0, right: 0, height: height * .21, child: _Header(
                 state: state,
+                isTutorial: isTutorialCard,
                 highlightedStats: _highlightedStats,
                 canUseRescue: ref.read(gameControllerProvider.notifier).canUseRescuePower,
                 onUseRescue: ref.read(gameControllerProvider.notifier).useRescuePower,
@@ -174,17 +195,21 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   ),
                 ),
               )),
-              Positioned(bottom: 0, left: 0, right: 0, height: height * .13, child: _Footer(days: state.gameState.daysInPower, onTap: () {
-                GameAudio.instance.click();
-                _showFooterMenu(context, state, () => ref.read(gameControllerProvider.notifier).restart());
-              })),
+              Positioned(bottom: 0, left: 0, right: 0, height: height * .13, child: _Footer(
+                days: state.gameState.daysInPower,
+                isTutorial: isTutorialCard, // ✅ NUEVO
+                onTap: () {
+                  GameAudio.instance.click();
+                  _showFooterMenu(context, state, () => ref.read(gameControllerProvider.notifier).restart());
+                },
+              )),
               Positioned(top: height * .35, left: 0, right: 0, height: height * .52, child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 6),
                 child: _CardArea(
                   card: card,
                   characterName: characterName ?? 'Desconocido',
                   imageAsset: repository.imageAssetFor(card),
-                  showIntro: !_dealingDone,
+                  showIntro: !_dealingDone && !isTutorialCard, // ✅ No mostrar intro en tutorial
                   onIntroComplete: () {
                     setState(() => _dealingDone = true);
                     final pending = _pendingCharacter;
@@ -268,7 +293,7 @@ void _showRescueDialog(BuildContext context, StatType type) {
       actions: [
         TextButton(
           onPressed: () {
-            GameAudio.instance.click(); // ✅ Click al usar comodín
+            GameAudio.instance.click();
             Navigator.pop(dialog);
             controller.useRescuePower(type);
           },
@@ -276,7 +301,7 @@ void _showRescueDialog(BuildContext context, StatType type) {
         ),
         FilledButton(
           onPressed: () {
-            GameAudio.instance.click(); // ✅ Click al aceptar derrota
+            GameAudio.instance.click();
             Navigator.pop(dialog);
             controller.declineRescue();
           },
@@ -352,7 +377,7 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
             leading: const Icon(Icons.refresh, color: Color(0xFFC79A3E)),
             title: const Text('REINICIAR PARTIDA'),
             onTap: () async {
-              GameAudio.instance.click(); // ✅ Click al presionar
+              GameAudio.instance.click();
               Navigator.pop(sheet);
               final ok = await showDialog<bool>(
                 context: context,
@@ -362,14 +387,14 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
                   actions: [
                     TextButton(
                       onPressed: () {
-                        GameAudio.instance.click(); // ✅ Click al cancelar
+                        GameAudio.instance.click();
                         Navigator.pop(dialog, false);
                       },
                       child: const Text('CANCELAR'),
                     ),
                     FilledButton(
                       onPressed: () {
-                        GameAudio.instance.click(); // ✅ Click al confirmar
+                        GameAudio.instance.click();
                         Navigator.pop(dialog, true);
                       },
                       child: const Text('REINICIAR'),
@@ -384,7 +409,7 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
             leading: const Icon(Icons.tune, color: Color(0xFFC79A3E)),
             title: const Text('AJUSTES'),
             onTap: () {
-              GameAudio.instance.click(); // ✅ Click al presionar
+              GameAudio.instance.click();
               Navigator.pop(sheet);
               Navigator.push(
                 context,
@@ -396,7 +421,7 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
             leading: const Icon(Icons.bar_chart, color: Color(0xFFC79A3E)),
             title: const Text('ESTADISTICAS'),
             onTap: () {
-              GameAudio.instance.click(); // ✅ Click al presionar
+              GameAudio.instance.click();
               Navigator.pop(sheet);
               Navigator.push(
                 context,
@@ -410,7 +435,7 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
             leading: const Icon(Icons.credit_card_rounded, color: Color(0xFFC79A3E)),
             title: const Text('PERSONAJES'),
             onTap: () {
-              GameAudio.instance.click(); // ✅ Click al presionar
+              GameAudio.instance.click();
               Navigator.pop(sheet);
               Navigator.push(
                 context,
@@ -507,7 +532,7 @@ class _CharacterUnlockDialog extends StatelessWidget {
     actions: [
       FilledButton.icon(
         onPressed: () {
-          GameAudio.instance.click(); // ✅ Click al cerrar
+          GameAudio.instance.click();
           Navigator.pop(context);
         },
         icon: const Icon(Icons.volume_up),
@@ -602,12 +627,14 @@ class _CardArea extends StatelessWidget {
 class _Header extends StatelessWidget {
   const _Header({
     required this.state,
+    required this.isTutorial,
     required this.highlightedStats,
     required this.canUseRescue,
     required this.onUseRescue,
   });
 
   final GameControllerState state;
+  final bool isTutorial;
   final Map<StatType, bool> highlightedStats;
   final bool Function(StatType) canUseRescue;
   final void Function(StatType) onUseRescue;
@@ -628,14 +655,15 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasAnyRescue = _statOrder.any((type) => canUseRescue(type));
-
     const Color boneWhite = Color(0xFFFFF8E7);
     const Color ink = Color(0xFF16211B);
 
+    final hasAnyRescue = _statOrder.any((type) => canUseRescue(type));
+
     return GestureDetector(
-      onTap: () {
-        // ✅ Click al presionar el header (volver atrás)
+      onTap: isTutorial
+          ? null // ✅ En tutorial no se puede volver atrás con el header
+          : () {
         GameAudio.instance.click();
         Navigator.pop(context);
       },
@@ -686,9 +714,11 @@ class _Header extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
+            // ✅ Mostrar "TUTORIAL" durante el tutorial, si no, turno y era
             Text(
-              'TURNO ${state.gameState.turn}  ·  '
-                  '${state.gameState.currentEra.label.toUpperCase()}',
+              isTutorial
+                  ? 'TUTORIAL'
+                  : 'TURNO ${state.gameState.turn}  ·  ${state.gameState.currentEra.label.toUpperCase()}',
               style: const TextStyle(
                 fontFamily: 'monospace',
                 color: boneWhite,
@@ -749,9 +779,14 @@ class _RescuePower extends StatelessWidget {
 }
 
 class _Footer extends StatelessWidget {
-  const _Footer({required this.days, required this.onTap});
+  const _Footer({
+    required this.days,
+    required this.onTap,
+    this.isTutorial = false, // ✅ NUEVO
+  });
   final int days;
   final VoidCallback onTap;
+  final bool isTutorial; // ✅ NUEVO
 
   @override
   Widget build(BuildContext context) => Container(
@@ -763,34 +798,38 @@ class _Footer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'DIAS EN EL PODER',
-              style: TextStyle(
+            // ✅ Mostrar "TUTORIAL" durante el tutorial
+            Text(
+              isTutorial ? 'TUTORIAL' : 'DIAS EN EL PODER',
+              style: const TextStyle(
                 fontFamily: 'monospace',
                 color: Color(0xFFFFF8E7),
                 fontSize: 22,
                 letterSpacing: 3,
               ),
             ),
-            const SizedBox(height: 2),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: '$days',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+            // ✅ Ocultar el contador de días durante el tutorial
+            if (!isTutorial) ...[
+              const SizedBox(height: 2),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '$days',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                style: const TextStyle(
+                  fontFamily: 'monospace',
+                  color: Color(0xFFFFF8E7),
+                  fontSize: 11,
+                ),
               ),
-              style: const TextStyle(
-                fontFamily: 'monospace',
-                color: Color(0xFFFFF8E7),
-                fontSize: 11,
-              ),
-            ),
+            ],
           ],
         ),
       ),

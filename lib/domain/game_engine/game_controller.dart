@@ -32,6 +32,10 @@ class GameControllerState {
   final Character? unlockedCharacter;
   final GameStatistics statistics;
   final StatType? rescueOpportunity;
+  final bool tutorialQuestion;
+  final bool tutorialOptionsQuestion;
+  final bool openOptionsRequested;
+  final bool isTutorial;
 
   const GameControllerState({
     required this.gameState,
@@ -41,6 +45,10 @@ class GameControllerState {
     this.unlockedCharacter,
     this.statistics = const GameStatistics(),
     this.rescueOpportunity,
+    this.tutorialQuestion = false,
+    this.tutorialOptionsQuestion = false,
+    this.openOptionsRequested = false,
+    this.isTutorial = false,
   });
 
   factory GameControllerState.loading() => GameControllerState(
@@ -48,6 +56,7 @@ class GameControllerState {
     currentCard: null,
     ending: null,
     isLoading: true,
+    isTutorial: false,
   );
 
   GameControllerState copyWith({
@@ -57,12 +66,17 @@ class GameControllerState {
     bool? isLoading,
     Character? unlockedCharacter,
     bool clearUnlockedCharacter = false,
+    bool clearCurrentCard = false,
     GameStatistics? statistics,
     StatType? rescueOpportunity,
+    bool? tutorialQuestion,
+    bool? tutorialOptionsQuestion,
+    bool? openOptionsRequested,
+    bool? isTutorial,
   }) {
     return GameControllerState(
       gameState: gameState ?? this.gameState,
-      currentCard: currentCard ?? this.currentCard,
+      currentCard: clearCurrentCard ? null : (currentCard ?? this.currentCard),
       ending: ending ?? this.ending,
       isLoading: isLoading ?? this.isLoading,
       unlockedCharacter: clearUnlockedCharacter
@@ -70,15 +84,14 @@ class GameControllerState {
           : (unlockedCharacter ?? this.unlockedCharacter),
       statistics: statistics ?? this.statistics,
       rescueOpportunity: rescueOpportunity,
+      tutorialQuestion: tutorialQuestion ?? this.tutorialQuestion,
+      tutorialOptionsQuestion: tutorialOptionsQuestion ?? this.tutorialOptionsQuestion,
+      openOptionsRequested: openOptionsRequested ?? this.openOptionsRequested,
+      isTutorial: isTutorial ?? this.isTutorial,
     );
   }
 }
 
-/// CAMBIO CLAVE de esta versión: ya no hay progresión de eras ni
-/// filtrado por era. `_pickNextCard` elige siempre de
-/// `_repository.allCards` (el mazo completo). Cuando ya se vieron
-/// todas, se recicla automáticamente (se olvidan las vistas) para que
-/// el mazo nunca se acabe, sin importar cuántas cartas tengas escritas.
 class GameController extends StateNotifier<GameControllerState> {
   static const _assassinationCardIds = {
     'era1_guardaeaspalda_trampa',
@@ -92,6 +105,15 @@ class GameController extends StateNotifier<GameControllerState> {
   final EndingResolver _endingResolver = EndingResolver();
   final Random _random = Random();
   final ProgressService _progress = ProgressService();
+  static const _tutorialCardIds = [
+    'tutorial_001',
+    'tutorial_002',
+    'tutorial_003',
+    'tutorial_004',
+    'tutorial_005',
+  ];
+  static const _tutorialQuestionCardId = 'tutorial_question';
+  static const _tutorialOptionsCardId = 'tutorial_options';
 
   CardOption cardOptionFor(GameCard card, SwipeDirection direction) => direction == SwipeDirection.left ? card.left : card.right;
   StatType? _statType(String value) {
@@ -102,6 +124,9 @@ class GameController extends StateNotifier<GameControllerState> {
   GameCard? _findCard(String id) {
     final normal = _repository.cardById(id);
     if (normal != null) return normal;
+    for (final creator in _repository.creatorCards) {
+      if (creator.id == id) return creator;
+    }
     for (final event in EventRepository.definitions) {
       for (final card in event.cards) { if (card.id == id) return card; }
     }
@@ -162,6 +187,10 @@ class GameController extends StateNotifier<GameControllerState> {
             ? null
             : StatType.values[rescueIndex],
         statistics: GameStatistics.fromJson(saved['statistics'] as Map?),
+        tutorialQuestion: saved['tutorialQuestion'] as bool? ?? false,
+        tutorialOptionsQuestion: saved['tutorialOptionsQuestion'] as bool? ?? false,
+        openOptionsRequested: saved['openOptionsRequested'] as bool? ?? false,
+        isTutorial: saved['isTutorial'] as bool? ?? false,
       );
       return;
     }
@@ -170,23 +199,51 @@ class GameController extends StateNotifier<GameControllerState> {
     final character = nextCard == null
         ? null
         : _repository.characterById(nextCard.characterId);
-    final notifyCharacter = character != null && !_progress.unlockedCharacters.contains(character.id);
-    if (character != null) await _progress.markCharacterUnlocked(character.id);
-    final stateWithCharacter = character == null
+    final characterBelongsToEra = nextCard != null &&
+        nextCard.eraId == initialState.currentEra.name;
+    final notifyCharacter = characterBelongsToEra &&
+        character != null &&
+        !_progress.unlockedCharacters.contains(character.id);
+    if (notifyCharacter) await _progress.markCharacterUnlocked(character!.id);
+    final stateWithCharacter = !characterBelongsToEra || character == null
         ? initialState
         : initialState.copyWith(unlockedCharacterIds: {character.id});
+
+    final isFirstGame = _progress.gamesPlayed == 1 &&
+        !_progress.hasCompletedTutorial;
+    final isCreatorCard = nextCard?.characterId == 'el_creador';
+
     state = GameControllerState(
       gameState: stateWithCharacter,
       currentCard: nextCard,
       ending: null,
       isLoading: false,
       unlockedCharacter: notifyCharacter ? character : null,
+      isTutorial: isFirstGame && isCreatorCard,
     );
   }
 
   Future<void> choose(SwipeDirection direction) async {
     final card = state.currentCard;
     if (card == null || state.ending != null) return;
+
+    if (state.isTutorial) {
+      _advanceTutorial(card, direction);
+      return;
+    }
+
+    if (!_progress.hasCompletedTutorial &&
+        _progress.gamesPlayed == 1 &&
+        card.id == 'creador_001') {
+      state = state.copyWith(
+        isTutorial: true,
+        currentCard: _findCard(_tutorialQuestionCardId),
+        tutorialQuestion: true,
+      );
+      _saveCurrentGame();
+      return;
+    }
+
     _progress.addDiscoveredCard(card.id);
     if (card.characterId == 'el_creador') {
       await _progress.markCreatorMessageSeen(card.id);
@@ -290,7 +347,7 @@ class GameController extends StateNotifier<GameControllerState> {
       daysInPower: state.gameState.daysInPower + 1 + _random.nextInt(6),
     );
     await _progress.markEraReached(progressedState.currentEra.index);
-    if (progressedState.turn >= Era.contemporanea.unlockAtTurn) {
+    if (progressedState.turn >= Era.futurista.unlockAtTurn) {
       final survival = _endingResolver.resolveSurvival(
         state: progressedState,
         availableEndings: _repository.endings,
@@ -364,9 +421,13 @@ class GameController extends StateNotifier<GameControllerState> {
     final nextCharacter = result.card == null
         ? null
         : _repository.characterById(result.card!.characterId);
-    final isNewCharacter = nextCharacter != null &&
+    final characterBelongsToEra = result.card != null &&
+        result.card!.eraId == finalState.currentEra.name;
+    final isNewCharacter = characterBelongsToEra &&
+        nextCharacter != null &&
         !finalState.unlockedCharacterIds.contains(nextCharacter.id);
-    final firstTimeCharacter = nextCharacter != null &&
+    final firstTimeCharacter = characterBelongsToEra &&
+        nextCharacter != null &&
         !_progress.unlockedCharacters.contains(nextCharacter.id);
     if (firstTimeCharacter) _progress.markCharacterUnlocked(nextCharacter.id);
     final stateWithCharacter = isNewCharacter
@@ -385,6 +446,105 @@ class GameController extends StateNotifier<GameControllerState> {
     _saveCurrentGame();
   }
 
+  void _advanceTutorial(GameCard card, SwipeDirection direction) {
+    final isLeft = direction == SwipeDirection.left;
+
+    if (card.id == 'creador_001') {
+      state = state.copyWith(
+        currentCard: _findCard(_tutorialQuestionCardId),
+        tutorialQuestion: true,
+      );
+      _saveCurrentGame();
+      return;
+    }
+
+    if (card.id == _tutorialQuestionCardId) {
+      final accepted = isLeft;
+      state = state.copyWith(
+        currentCard: accepted
+            ? _findCard(_tutorialCardIds.first)
+            : _findCard(_tutorialOptionsCardId),
+        tutorialQuestion: false,
+        tutorialOptionsQuestion: !accepted,
+      );
+      _saveCurrentGame();
+      return;
+    }
+
+    if (_tutorialCardIds.contains(card.id)) {
+      final index = _tutorialCardIds.indexOf(card.id);
+      final nextCard = index + 1 < _tutorialCardIds.length
+          ? _findCard(_tutorialCardIds[index + 1])
+          : _findCard(_tutorialOptionsCardId);
+      state = state.copyWith(
+        currentCard: nextCard,
+        clearCurrentCard: nextCard == null,
+        tutorialOptionsQuestion: nextCard?.id == _tutorialOptionsCardId,
+      );
+      _saveCurrentGame();
+      return;
+    }
+
+    if (card.id == _tutorialOptionsCardId) {
+      final openOptions = isLeft;
+      if (openOptions) {
+        state = state.copyWith(
+          currentCard: null,
+          clearCurrentCard: true,
+          openOptionsRequested: true,
+          tutorialOptionsQuestion: false,
+        );
+      } else {
+        _finishTutorial();
+      }
+      _saveCurrentGame();
+      return;
+    }
+  }
+
+  Future<void> _finishTutorial() async {
+    await _progress.markTutorialCompleted();
+
+    final fresh = GameState.initial();
+    final nextCard = _pickNextCard(fresh);
+
+    final character = nextCard == null
+        ? null
+        : _repository.characterById(nextCard.characterId);
+    final characterBelongsToEra = nextCard != null &&
+        nextCard.eraId == fresh.currentEra.name;
+    final notifyCharacter = characterBelongsToEra &&
+        character != null &&
+        !_progress.unlockedCharacters.contains(character.id);
+    if (notifyCharacter) await _progress.markCharacterUnlocked(character!.id);
+    final stateWithCharacter = !characterBelongsToEra || character == null
+        ? fresh
+        : fresh.copyWith(unlockedCharacterIds: {character.id});
+
+    state = GameControllerState(
+      gameState: stateWithCharacter,
+      currentCard: nextCard,
+      ending: null,
+      isLoading: false,
+      unlockedCharacter: notifyCharacter ? character : null,
+      isTutorial: false,
+    );
+    _saveCurrentGame();
+  }
+
+  void finishOptionsSetup() {
+    if (!state.openOptionsRequested) return;
+    if (state.isTutorial) {
+      _finishTutorial();
+      return;
+    }
+    state = state.copyWith(
+      currentCard: _pickNextCard(state.gameState),
+      openOptionsRequested: false,
+    );
+    _saveCurrentGame();
+  }
+
   GameCard? _pickNextCard(GameState gameState) {
     return _pickNextCardResult(gameState: gameState).card;
   }
@@ -399,12 +559,9 @@ class GameController extends StateNotifier<GameControllerState> {
   }
 
   _PickResult _pickNextCardResult({required GameState gameState}) {
-    // El mazo completo evita quedarse sin cartas cuando una era agotó sus
-    // cartas elegibles por condiciones o por historial.
     final eraCards = _repository.allCards;
     if (eraCards.isEmpty) return const _PickResult(null, false);
 
-    // 1er intento: cartas nuevas (no vistas) que cumplan condiciones.
     final card = _selector.selectNext(
       state: gameState,
       availableCards: eraCards,
@@ -412,9 +569,6 @@ class GameController extends StateNotifier<GameControllerState> {
     );
     if (card != null) return _PickResult(card, false);
 
-    // 2do intento (reciclaje): ya se vio todo el mazo -> se olvida el
-    // historial de "vistas" y se vuelve a barajar desde cero, para que
-    // el juego jamás se quede sin cartas.
     final recycledState = gameState.copyWith(seenCardIds: const {});
     final recycledCard = _selector.selectNext(
       state: recycledState,
@@ -440,11 +594,20 @@ class GameController extends StateNotifier<GameControllerState> {
     final character = nextCard == null
         ? null
         : _repository.characterById(nextCard.characterId);
-    final notifyCharacter = character != null && !_progress.unlockedCharacters.contains(character.id);
-    if (character != null) await _progress.markCharacterUnlocked(character.id);
-    final stateWithCharacter = character == null
+    final characterBelongsToEra = nextCard != null &&
+        nextCard.eraId == initialState.currentEra.name;
+    final notifyCharacter = characterBelongsToEra &&
+        character != null &&
+        !_progress.unlockedCharacters.contains(character.id);
+    if (notifyCharacter) await _progress.markCharacterUnlocked(character!.id);
+    final stateWithCharacter = !characterBelongsToEra || character == null
         ? initialState
         : initialState.copyWith(unlockedCharacterIds: {character.id});
+
+    final isFirstGame = _progress.gamesPlayed == 1 &&
+        !_progress.hasCompletedTutorial;
+    final isCreatorCard = nextCard?.characterId == 'el_creador';
+
     state = GameControllerState(
       gameState: stateWithCharacter,
       currentCard: nextCard,
@@ -452,6 +615,7 @@ class GameController extends StateNotifier<GameControllerState> {
       isLoading: false,
       unlockedCharacter: notifyCharacter ? character : null,
       statistics: statistics,
+      isTutorial: isFirstGame && isCreatorCard,
     );
   }
 
@@ -520,8 +684,12 @@ class GameController extends StateNotifier<GameControllerState> {
       'eventPlayed': s.eventCardsPlayed,
       'eventCards': s.activeEventCardIds,
       'statistics': state.statistics.toJson(),
+      'tutorialQuestion': state.tutorialQuestion,
+      'tutorialOptionsQuestion': state.tutorialOptionsQuestion,
+      'openOptionsRequested': state.openOptionsRequested,
       'securityCompromises': s.securityCompromises,
       'assassinationCountdown': s.assassinationCountdown,
+      'isTutorial': state.isTutorial,
     });
   }
 

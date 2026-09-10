@@ -1,5 +1,13 @@
 [
  {
+  "id": "el_creador",
+  "name": "El Creador",
+  "role": "Voz fuera del juego",
+  "imageAsset": "assets/images/characters/el_creador.png",
+  "unlockEra": "cualquiera",
+  "bio": "No pertenece a la isla ni a su historia. Es la voz que de vez en cuando rompe la ficción para recordarte que, al final, esto también es un juego."
+ },
+ {
   "id": "el_general",
   "name": "El General",
   "role": "Aparato del Estado",
@@ -240,11 +248,51 @@
   "bio": "Vive entre protocolos, fotografías y galas. Sus decisiones no cambian el rumbo del país, pero sí el humor con que se lo mira."
  },
  {
-  "id": "el_creador",
-  "name": "El Creador",
-  "role": "Voz fuera del juego",
-  "imageAsset": "assets/images/characters/el_creador.png",
-  "unlockEra": "cualquiera",
-  "bio": "No pertenece a la isla ni a su historia. Es la voz que de vez en cuando rompe la ficción para recordarte que, al final, esto también es un juego."
+  "id": "el_ingeniero_ia",
+  "name": "El Ingeniero de IA",
+  "role": "Automatización del Estado",
+  "imageAsset": "assets/images/characters/el_ingeniero_ia.png",
+  "unlockEra": "futurista",
+  "bio": "Cree que cada proceso lento es un problema sin resolver. Sabe que la eficiencia tiene un precio, y no siempre lo paga quien decide instalarla."
+ },
+ {
+  "id": "la_activista_digital",
+  "name": "La Activista Digital",
+  "role": "Derechos y privacidad",
+  "imageAsset": "assets/images/characters/la_activista_digital.png",
+  "unlockEra": "futurista",
+  "bio": "Pelea batallas que casi nadie ve hasta que ya es tarde. Sabe que la libertad también se pierde un dato a la vez."
+ },
+ {
+  "id": "el_magnate_tech",
+  "name": "El Magnate Tech",
+  "role": "Inversión y poder corporativo",
+  "imageAsset": "assets/images/characters/el_magnate_tech.png",
+  "unlockEra": "futurista",
+  "bio": "Habla de progreso, pero siempre con letra pequeña. Sabe que el capital no tiene bandera, solo condiciones."
+ },
+ {
+  "id": "la_cientifica",
+  "name": "La Científica",
+  "role": "Innovación y crisis técnicas",
+  "imageAsset": "assets/images/characters/la_cientifica.png",
+  "unlockEra": "futurista",
+  "bio": "Confía en los datos más que en los discursos. Sabe que el futuro se construye en laboratorios, no en promesas de campaña."
+ },
+ {
+  "id": "el_hacker",
+  "name": "El Hacker",
+  "role": "Ciberseguridad y filtraciones",
+  "imageAsset": "assets/images/characters/el_hacker.png",
+  "unlockEra": "futurista",
+  "bio": "Conoce las grietas de cada sistema antes que sus propios creadores. Sabe que la verdad, tarde o temprano, siempre encuentra una puerta trasera."
+ },
+ {
+  "id": "la_bioetica",
+  "name": "La Bioética",
+  "role": "Dilemas morales y ciencia",
+  "imageAsset": "assets/images/characters/la_bioetica.png",
+  "unlockEra": "futurista",
+  "bio": "Pregunta lo que la ciencia prefiere no responder. Sabe que poder hacer algo nunca fue lo mismo que deber hacerlo."
  }
 ]

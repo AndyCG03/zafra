@@ -6,16 +6,11 @@
   "text": "El guardaespaldas recomienda abrir las puertas del palacio como gesto de transparencia.",
   "left": {
    "text": "Abre las puertas",
-   "effects": {
-    "pueblo": 10,
-    "economia": -2
-   }
+   "effects": { "pueblo": 13, "economia": -3 }
   },
   "right": {
    "text": "Mantén las puertas cerradas",
-   "effects": {
-    "aparatoDelEstado": 4
-   }
+   "effects": { "aparatoDelEstado": 5 }
   },
   "weight": 1,
   "rare": true
@@ -27,18 +22,11 @@
   "text": "La sequía reduce la cosecha por segundo año.",
   "left": {
    "text": "Importa alimentos",
-   "effects": {
-    "economia": -7,
-    "pueblo": 6,
-    "relacionesExteriores": 4
-   }
+   "effects": { "economia": -9, "pueblo": 8, "relacionesExteriores": 5 }
   },
   "right": {
    "text": "Raciona la cosecha",
-   "effects": {
-    "economia": 3,
-    "pueblo": -7
-   }
+   "effects": { "economia": 4, "pueblo": -9 }
   },
   "weight": 3
  },
@@ -49,17 +37,11 @@
   "text": "Hay saqueos en un depósito de combustible.",
   "left": {
    "text": "Envía mediadores",
-   "effects": {
-    "pueblo": 4,
-    "aparatoDelEstado": -5
-   }
+   "effects": { "pueblo": 5, "aparatoDelEstado": -7 }
   },
   "right": {
    "text": "Cierra el distrito",
-   "effects": {
-    "aparatoDelEstado": 7,
-    "pueblo": -7
-   }
+   "effects": { "aparatoDelEstado": 9, "pueblo": -9 }
   },
   "weight": 3
  },
@@ -70,19 +52,11 @@
   "text": "Un vecino ofrece crédito con condiciones de voto internacional.",
   "left": {
    "text": "Rechaza el crédito",
-   "effects": {
-    "economia": -5,
-    "relacionesExteriores": -3,
-    "pueblo": 3
-   }
+   "effects": { "economia": -7, "relacionesExteriores": -4, "pueblo": 4 }
   },
   "right": {
    "text": "Acepta condiciones",
-   "effects": {
-    "economia": 7,
-    "relacionesExteriores": 6,
-    "pueblo": -4
-   }
+   "effects": { "economia": 9, "relacionesExteriores": 8, "pueblo": -5 }
   },
   "weight": 2
  },
@@ -93,20 +67,14 @@
   "text": "Las madres organizan comedores comunitarios en los barrios para alimentar a las familias más afectadas.",
   "left": {
     "text": "Entrega insumos",
-    "effects": {
-      "pueblo": 8,
-      "economia": -5
-    }
+    "effects": { "pueblo": 10, "economia": -7 }
   },
   "right": {
     "text": "Centraliza los comedores",
-    "effects": {
-      "aparatoDelEstado": 4,
-      "pueblo": -4
-    }
+    "effects": { "aparatoDelEstado": 5, "pueblo": -5 }
   },
   "weight": 3
-},
+ },
  {
   "id": "era3_005",
   "character": "el_extranjero",
@@ -114,17 +82,11 @@
   "text": "Un canal extranjero quiere filmar la escasez.",
   "left": {
    "text": "Impide el acceso",
-   "effects": {
-    "aparatoDelEstado": 4,
-    "relacionesExteriores": -6
-   }
+   "effects": { "aparatoDelEstado": 5, "relacionesExteriores": -8 }
   },
   "right": {
    "text": "Muestra la situación",
-   "effects": {
-    "relacionesExteriores": 5,
-    "pueblo": -3
-   }
+   "effects": { "relacionesExteriores": 7, "pueblo": -4 }
   },
   "weight": 2
  },
@@ -135,17 +97,11 @@
   "text": "Oficiales jóvenes cuestionan las órdenes del alto mando.",
   "left": {
    "text": "Renueva mandos",
-   "effects": {
-    "aparatoDelEstado": -4,
-    "pueblo": 3
-   }
+   "effects": { "aparatoDelEstado": -5, "pueblo": 4 }
   },
   "right": {
    "text": "Castiga la disidencia",
-   "effects": {
-    "aparatoDelEstado": 7,
-    "pueblo": -6
-   }
+   "effects": { "aparatoDelEstado": 9, "pueblo": -8 }
   },
   "weight": 2
  },
@@ -156,17 +112,11 @@
   "text": "Se propone gravar los bienes de lujo para sostener hospitales.",
   "left": {
    "text": "Aprueba el gravamen",
-   "effects": {
-    "pueblo": 5,
-    "economia": 3
-   }
+   "effects": { "pueblo": 7, "economia": 4 }
   },
   "right": {
    "text": "Protege la inversión",
-   "effects": {
-    "economia": 5,
-    "pueblo": -5
-   }
+   "effects": { "economia": 7, "pueblo": -7 }
   },
   "weight": 3
  },
@@ -178,24 +128,14 @@
   "text": "Una capitana respetada ofrece mediar con los cuarteles antes del quiebre.",
   "left": {
    "text": "Escúchala",
-   "effects": {
-    "aparatoDelEstado": 0,
-    "pueblo": -3
-   },
+   "effects": { "aparatoDelEstado": 0, "pueblo": -4 },
    "grantsRescue": "aparatoDelEstado"
   },
   "right": {
    "text": "Dale mandato",
-   "effects": {
-    "aparatoDelEstado": 8,
-    "economia": -5
-   }
+   "effects": { "aparatoDelEstado": 10, "economia": -7 }
   },
-  "conditions": {
-   "max": {
-    "aparatoDelEstado": 15
-   }
-  },
+  "conditions": { "max": { "aparatoDelEstado": 15 } },
   "weight": 1
  },
  {
@@ -205,17 +145,11 @@
   "text": "Las semillas guardadas alcanzan para una sola siembra.",
   "left": {
    "text": "Reparte semillas",
-   "effects": {
-    "pueblo": 5,
-    "economia": -5
-   }
+   "effects": { "pueblo": 7, "economia": -7 }
   },
   "right": {
    "text": "Concentra la siembra",
-   "effects": {
-    "economia": 4,
-    "pueblo": -5
-   }
+   "effects": { "economia": 5, "pueblo": -7 }
   },
   "weight": 3
  },
@@ -226,17 +160,11 @@
   "text": "Una patrulla se niega a dispersar una protesta pacífica.",
   "left": {
    "text": "Respeta su decisión",
-   "effects": {
-    "pueblo": 5,
-    "aparatoDelEstado": -5
-   }
+   "effects": { "pueblo": 7, "aparatoDelEstado": -7 }
   },
   "right": {
    "text": "Releva a la patrulla",
-   "effects": {
-    "aparatoDelEstado": 5,
-    "pueblo": -6
-   }
+   "effects": { "aparatoDelEstado": 7, "pueblo": -8 }
   },
   "weight": 2
  },
@@ -247,17 +175,11 @@
   "text": "Una emisora comunitaria informa sobre las colas.",
   "left": {
    "text": "Dale datos oficiales",
-   "effects": {
-    "relacionesExteriores": 3,
-    "pueblo": 4
-   }
+   "effects": { "relacionesExteriores": 4, "pueblo": 5 }
   },
   "right": {
    "text": "Intervén la emisora",
-   "effects": {
-    "aparatoDelEstado": 5,
-    "pueblo": -5
-   }
+   "effects": { "aparatoDelEstado": 7, "pueblo": -7 }
   },
   "weight": 2
  },
@@ -268,17 +190,11 @@
   "text": "Las lluvias destruyen la siembra en el valle central.",
   "left": {
    "text": "Declara emergencia",
-   "effects": {
-    "economia": -6,
-    "pueblo": -5
-   }
+   "effects": { "economia": -8, "pueblo": -7 }
   },
   "right": {
    "text": "Distribuye ayuda limitada",
-   "effects": {
-    "pueblo": -7,
-    "economia": -3
-   }
+   "effects": { "pueblo": -9, "economia": -4 }
   },
   "weight": 3
  },
@@ -289,17 +205,11 @@
   "text": "Una parte del ejército se amotina por falta de pagos.",
   "left": {
    "text": "Negocia con los amotinados",
-   "effects": {
-    "aparatoDelEstado": -6,
-    "pueblo": 2
-   }
+   "effects": { "aparatoDelEstado": -8, "pueblo": 3 }
   },
   "right": {
    "text": "Castiga la insubordinación",
-   "effects": {
-    "aparatoDelEstado": 4,
-    "pueblo": -7
-   }
+   "effects": { "aparatoDelEstado": 5, "pueblo": -9 }
   },
   "weight": 3
  },
@@ -310,17 +220,11 @@
   "text": "Filtran que el gobierno ocultó información sobre la sequía.",
   "left": {
    "text": "Niega las acusaciones",
-   "effects": {
-    "pueblo": -6,
-    "aparatoDelEstado": 3
-   }
+   "effects": { "pueblo": -8, "aparatoDelEstado": 4 }
   },
   "right": {
    "text": "Asume el error público",
-   "effects": {
-    "pueblo": -4,
-    "relacionesExteriores": 2
-   }
+   "effects": { "pueblo": -5, "relacionesExteriores": 3 }
   },
   "weight": 2
  },
@@ -331,17 +235,11 @@
   "text": "La inflación hace que los precios suban cada semana.",
   "left": {
    "text": "Congela los precios",
-   "effects": {
-    "economia": -5,
-    "pueblo": -4
-   }
+   "effects": { "economia": -7, "pueblo": -5 }
   },
   "right": {
    "text": "Deja que el mercado se ajuste",
-   "effects": {
-    "economia": -4,
-    "pueblo": -6
-   }
+   "effects": { "economia": -5, "pueblo": -8 }
   },
   "weight": 3
  },
@@ -352,17 +250,11 @@
   "text": "Los refugiados llegan a la costa y saturan los albergues.",
   "left": {
    "text": "Reubícalos en el interior",
-   "effects": {
-    "pueblo": -3,
-    "aparatoDelEstado": -5
-   }
+   "effects": { "pueblo": -4, "aparatoDelEstado": -7 }
   },
   "right": {
    "text": "Construye albergues de emergencia",
-   "effects": {
-    "economia": -6,
-    "pueblo": 2
-   }
+   "effects": { "economia": -8, "pueblo": 3 }
   },
   "weight": 2
  },
@@ -373,17 +265,11 @@
   "text": "Aparecen documentos que prueban una deuda oculta del gobierno.",
   "left": {
    "text": "Publica los documentos",
-   "effects": {
-    "pueblo": 5,
-    "aparatoDelEstado": -6
-   }
+   "effects": { "pueblo": 7, "aparatoDelEstado": -8 }
   },
   "right": {
    "text": "Los guarda en secreto",
-   "effects": {
-    "aparatoDelEstado": 4,
-    "pueblo": -5
-   }
+   "effects": { "aparatoDelEstado": 5, "pueblo": -7 }
   },
   "weight": 2
  },
@@ -395,17 +281,11 @@
   "text": "Se propone un archivo comunitario de memorias de la crisis.",
   "left": {
    "text": "Financia el archivo",
-   "effects": {
-    "pueblo": 6,
-    "economia": -4
-   }
+   "effects": { "pueblo": 8, "economia": -5 }
   },
   "right": {
    "text": "Ignora la iniciativa",
-   "effects": {
-    "pueblo": -4,
-    "aparatoDelEstado": 2
-   }
+   "effects": { "pueblo": -5, "aparatoDelEstado": 3 }
   },
   "weight": 1
  },
@@ -416,17 +296,11 @@
   "text": "Un derrumbe en el puerto deja heridos bajo los escombros.",
   "left": {
    "text": "Da prioridad a los heridos",
-   "effects": {
-    "pueblo": 5,
-    "economia": -3
-   }
+   "effects": { "pueblo": 7, "economia": -4 }
   },
   "right": {
    "text": "Despeja el puerto",
-   "effects": {
-    "economia": 4,
-    "pueblo": -5
-   }
+   "effects": { "economia": 5, "pueblo": -7 }
   },
   "weight": 2
  },
@@ -437,17 +311,11 @@
   "text": "Familias desalojadas por las lluvias necesitan atención urgente.",
   "left": {
    "text": "Envía suministros",
-   "effects": {
-    "pueblo": 6,
-    "economia": -5
-   }
+   "effects": { "pueblo": 8, "economia": -7 }
   },
   "right": {
    "text": "Reubica en albergues",
-   "effects": {
-    "aparatoDelEstado": 3,
-    "pueblo": -4
-   }
+   "effects": { "aparatoDelEstado": 4, "pueblo": -5 }
   },
   "weight": 2
  },
@@ -458,17 +326,11 @@
   "text": "Se organizan comedores solidarios en los templos durante la escasez.",
   "left": {
    "text": "Apoya los comedores",
-   "effects": {
-    "pueblo": 6,
-    "economia": -4
-   }
+   "effects": { "pueblo": 8, "economia": -5 }
   },
   "right": {
    "text": "Prohíbe la ayuda religiosa",
-   "effects": {
-    "aparatoDelEstado": 4,
-    "pueblo": -6
-   }
+   "effects": { "aparatoDelEstado": 5, "pueblo": -8 }
   },
   "weight": 2
  },
@@ -479,17 +341,11 @@
   "text": "Un predicador muy querido es detenido por criticar al gobierno.",
   "left": {
    "text": "Libéralo",
-   "effects": {
-    "pueblo": 6,
-    "aparatoDelEstado": -5
-   }
+   "effects": { "pueblo": 8, "aparatoDelEstado": -7 }
   },
   "right": {
    "text": "Mantén la detención",
-   "effects": {
-    "aparatoDelEstado": 5,
-    "pueblo": -7
-   }
+   "effects": { "aparatoDelEstado": 7, "pueblo": -9 }
   },
   "weight": 1,
   "rare": true
@@ -501,17 +357,11 @@
   "text": "Durante los disturbios, piden blindar la residencia del gobierno.",
   "left": {
    "text": "Rechaza el gasto",
-   "effects": {
-    "economia": 3,
-    "aparatoDelEstado": -4
-   }
+   "effects": { "economia": 4, "aparatoDelEstado": -5 }
   },
   "right": {
    "text": "Autoriza el blindaje",
-   "effects": {
-    "aparatoDelEstado": 5,
-    "economia": -5
-   }
+   "effects": { "aparatoDelEstado": 7, "economia": -7 }
   },
   "weight": 2
  },
@@ -522,17 +372,11 @@
   "text": "Un intento de fuga de un preso político pone en alerta a la seguridad del Estado.",
   "left": {
    "text": "Refuerza las cárceles",
-   "effects": {
-    "aparatoDelEstado": 5,
-    "pueblo": -4
-   }
+   "effects": { "aparatoDelEstado": 7, "pueblo": -5 }
   },
   "right": {
    "text": "Investiga cómplices internos",
-   "effects": {
-    "aparatoDelEstado": -3,
-    "pueblo": 3
-   }
+   "effects": { "aparatoDelEstado": -4, "pueblo": 4 }
   },
   "weight": 2
  },
@@ -543,17 +387,11 @@
   "text": "Las protestas por la escasez se vuelven violentas en el centro.",
   "left": {
    "text": "Dialoga con los manifestantes",
-   "effects": {
-    "pueblo": 5,
-    "aparatoDelEstado": -4
-   }
+   "effects": { "pueblo": 7, "aparatoDelEstado": -5 }
   },
   "right": {
    "text": "Dispersa con fuerza",
-   "effects": {
-    "aparatoDelEstado": 6,
-    "pueblo": -7
-   }
+   "effects": { "aparatoDelEstado": 8, "pueblo": -9 }
   },
   "weight": 2
  },
@@ -564,17 +402,11 @@
   "text": "Se pide autorización para usar gas lacrimógeno contra manifestantes.",
   "left": {
    "text": "Niega la autorización",
-   "effects": {
-    "pueblo": 4,
-    "aparatoDelEstado": -3
-   }
+   "effects": { "pueblo": 5, "aparatoDelEstado": -4 }
   },
   "right": {
    "text": "Autorízalo",
-   "effects": {
-    "aparatoDelEstado": 5,
-    "pueblo": -6
-   }
+   "effects": { "aparatoDelEstado": 7, "pueblo": -8 }
   },
   "weight": 1,
   "rare": true
@@ -586,17 +418,11 @@
   "text": "Aumenta la cantidad de personas durmiendo en las plazas públicas.",
   "left": {
    "text": "Habilita albergues",
-   "effects": {
-    "economia": -5,
-    "pueblo": 5
-   }
+   "effects": { "economia": -7, "pueblo": 7 }
   },
   "right": {
    "text": "Despeja las plazas",
-   "effects": {
-    "aparatoDelEstado": 3,
-    "pueblo": -6
-   }
+   "effects": { "aparatoDelEstado": 4, "pueblo": -8 }
   },
   "weight": 2
  },
@@ -607,21 +433,14 @@
   "text": "Piden que se abran albergues de emergencia en escuelas cerradas.",
   "left": {
    "text": "Abre las escuelas",
-   "effects": {
-    "pueblo": 5,
-    "economia": -3
-   }
+   "effects": { "pueblo": 7, "economia": -4 }
   },
   "right": {
    "text": "Busca otro lugar",
-   "effects": {
-    "economia": 2,
-    "pueblo": -4
-   }
+   "effects": { "economia": 3, "pueblo": -5 }
   },
   "weight": 2
  },
-
  {
   "id": "era3_disparador_golpe",
   "character": "el_general",
@@ -629,17 +448,15 @@
   "text": "Un grupo de oficiales descontentos se reúne en secreto durante la crisis.",
   "left": {
     "text": "Depura a los sospechosos",
-    "effects": { "aparatoDelEstado": 4, "pueblo": -3 },
+    "effects": { "aparatoDelEstado": 5, "pueblo": -4 },
     "startsEvent": "golpe_de_estado"
   },
   "right": {
     "text": "Cierra los ojos por ahora",
-    "effects": { "aparatoDelEstado": -4, "pueblo": 2 },
-    "startsEvent": "golpe_de_estado"
+    "effects": { "aparatoDelEstado": -5, "pueblo": 3 }
   },
   "weight": 2
-},
-
+ },
  {
   "id": "era3_riesgo_001",
   "character": "el_diplomatico",
@@ -647,18 +464,11 @@
   "text": "Un vecino ofrece ayuda humanitaria, pero exige que declaremos su régimen como aliado oficial.",
   "left": {
    "text": "Acepta la ayuda",
-   "effects": {
-    "pueblo": 10,
-    "relacionesExteriores": -10,
-    "economia": 2
-   }
+   "effects": { "pueblo": 13, "relacionesExteriores": -13, "economia": 3 }
   },
   "right": {
    "text": "Rechaza la ayuda",
-   "effects": {
-    "relacionesExteriores": 4,
-    "pueblo": -6
-   }
+   "effects": { "relacionesExteriores": 5, "pueblo": -8 }
   },
   "weight": 2
  },
@@ -669,18 +479,11 @@
   "text": "Los vecinos ofrecen combustible a bajo precio, pero exigen acceso a nuestras aguas territoriales.",
   "left": {
    "text": "Acepta el combustible",
-   "effects": {
-    "economia": 8,
-    "relacionesExteriores": -8,
-    "pueblo": 3
-   }
+   "effects": { "economia": 10, "relacionesExteriores": -10, "pueblo": 4 }
   },
   "right": {
    "text": "Niega el acceso",
-   "effects": {
-    "relacionesExteriores": 4,
-    "economia": -5
-   }
+   "effects": { "relacionesExteriores": 5, "economia": -7 }
   },
   "weight": 2
  },
@@ -691,18 +494,11 @@
   "text": "El pueblo exige expulsar a una ONG extranjera que acusan de intromisión política.",
   "left": {
    "text": "Expulsa la ONG",
-   "effects": {
-    "pueblo": 10,
-    "relacionesExteriores": -9,
-    "economia": -3
-   }
+   "effects": { "pueblo": 13, "relacionesExteriores": -12, "economia": -4 }
   },
   "right": {
    "text": "Permite la ONG",
-   "effects": {
-    "relacionesExteriores": 5,
-    "pueblo": -5
-   }
+   "effects": { "relacionesExteriores": 7, "pueblo": -7 }
   },
   "weight": 2
  }

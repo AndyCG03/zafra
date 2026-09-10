@@ -23,6 +23,14 @@ class ProgressService {
 
   Box? _box;
 
+  static const _tutorialCompletedKey = 'tutorial_completed';
+
+  bool get hasCompletedTutorial =>
+      _box?.get(_tutorialCompletedKey, defaultValue: false) as bool? ?? false;
+
+  Future<void> markTutorialCompleted() async =>
+      _box?.put(_tutorialCompletedKey, true);
+
   Future<void> init() async {
     _box = await Hive.openBox(_boxName);
   }

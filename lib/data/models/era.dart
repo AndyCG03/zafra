@@ -11,6 +11,7 @@ enum Era {
   crisis,
   apertura,
   contemporanea,
+  futurista,
 }
 
 extension EraAssets on Era {
@@ -26,6 +27,8 @@ extension EraAssets on Era {
         return 'era_apertura.json';
       case Era.contemporanea:
         return 'era_contemporanea.json';
+      case Era.futurista:
+        return 'era_futurista.json';
     }
   }
 
@@ -41,6 +44,8 @@ extension EraAssets on Era {
         return 'Era de Apertura';
       case Era.contemporanea:
         return 'Era Contemporánea';
+      case Era.futurista:
+        return 'Era Futurista';
     }
   }
 
@@ -62,6 +67,7 @@ extension EraAssets on Era {
       case Era.crisis: return 26;
       case Era.apertura: return 42;
       case Era.contemporanea: return 60;
+      case Era.futurista: return 78;
     }
   }
 }

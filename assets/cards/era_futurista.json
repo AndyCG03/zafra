@@ -1,0 +1,277 @@
+[
+ {
+  "id": "era6_001",
+  "character": "el_ingeniero_ia",
+  "era": "futurista",
+  "text": "Un sistema de inteligencia artificial ofrece automatizar la administración pública.",
+  "left": {
+   "text": "Implementa la IA",
+   "effects": { "economia": 6, "aparatoDelEstado": -6, "pueblo": -3 }
+  },
+  "right": {
+   "text": "Mantén el control humano",
+   "effects": { "aparatoDelEstado": 5, "economia": -4 }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era6_002",
+  "character": "la_activista_digital",
+  "era": "futurista",
+  "text": "Piden prohibir la vigilancia biométrica masiva en espacios públicos.",
+  "left": {
+   "text": "Prohíbe la vigilancia",
+   "effects": { "pueblo": 7, "aparatoDelEstado": -6 }
+  },
+  "right": {
+   "text": "Amplía el programa",
+   "effects": { "aparatoDelEstado": 7, "pueblo": -7 }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era6_003",
+  "character": "el_magnate_tech",
+  "era": "futurista",
+  "text": "Una corporación extranjera ofrece instalar un centro de datos a cambio de exenciones fiscales.",
+  "left": {
+   "text": "Acepta el trato",
+   "effects": { "economia": 8, "relacionesExteriores": 4, "pueblo": -4 }
+  },
+  "right": {
+   "text": "Exige impuestos plenos",
+   "effects": { "economia": -3, "pueblo": 4 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_004",
+  "character": "la_cientifica",
+  "era": "futurista",
+  "text": "Se descubre una fuente de energía limpia, pero requiere cerrar minas tradicionales.",
+  "left": {
+   "text": "Cierra las minas",
+   "effects": { "economia": -6, "relacionesExteriores": 4, "pueblo": 3 }
+  },
+  "right": {
+   "text": "Mantén ambas industrias",
+   "effects": { "economia": 4, "pueblo": -4 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_005",
+  "character": "el_hacker",
+  "era": "futurista",
+  "text": "Un grupo denuncia una falla de seguridad en los sistemas del Estado.",
+  "left": {
+   "text": "Corrige la falla en público",
+   "effects": { "pueblo": 6, "aparatoDelEstado": -5 }
+  },
+  "right": {
+   "text": "Oculta el fallo",
+   "effects": { "aparatoDelEstado": 5, "pueblo": -6 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_006",
+  "character": "la_bioetica",
+  "era": "futurista",
+  "text": "Se debate legalizar la edición genética para prevenir enfermedades hereditarias.",
+  "left": {
+   "text": "Autoriza la edición genética",
+   "effects": { "pueblo": 5, "relacionesExteriores": -3 }
+  },
+  "right": {
+   "text": "Prohíbela por ahora",
+   "effects": { "pueblo": -4, "aparatoDelEstado": 3 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_007",
+  "character": "el_ingeniero_ia",
+  "era": "futurista",
+  "text": "Los robots reemplazan a miles de trabajadores en la industria textil.",
+  "left": {
+   "text": "Financia recapacitación laboral",
+   "effects": { "pueblo": 6, "economia": -6 }
+  },
+  "right": {
+   "text": "Acelera la automatización",
+   "effects": { "economia": 7, "pueblo": -7 }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era6_rescate_relaciones",
+  "character": "el_magnate_tech",
+  "era": "futurista",
+  "rare": true,
+  "text": "Un consorcio internacional ofrece mediar una alianza tecnológica antes de que se rompan lazos.",
+  "left": {
+   "text": "Acepta la mediación",
+   "effects": { "relacionesExteriores": 0, "aparatoDelEstado": -3 },
+   "grantsRescue": "relacionesExteriores"
+  },
+  "right": {
+   "text": "Negocia por tu cuenta",
+   "effects": { "relacionesExteriores": 8, "economia": -5 }
+  },
+  "conditions": { "max": { "relacionesExteriores": 15 } },
+  "weight": 1
+ },
+ {
+  "id": "era6_008",
+  "character": "la_activista_digital",
+  "era": "futurista",
+  "text": "Circula una campaña de desinformación generada por IA contra el gobierno.",
+  "left": {
+   "text": "Desmiente con transparencia",
+   "effects": { "pueblo": 5, "aparatoDelEstado": -3 }
+  },
+  "right": {
+   "text": "Censura la campaña",
+   "effects": { "aparatoDelEstado": 6, "pueblo": -6 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_009",
+  "character": "el_magnate_tech",
+  "era": "futurista",
+  "text": "Se ofrece a la isla un puesto en un programa espacial internacional financiado por corporaciones privadas.",
+  "left": {
+   "text": "Participa en el programa",
+   "effects": { "relacionesExteriores": 7, "economia": -6 }
+  },
+  "right": {
+   "text": "Declina por costos",
+   "effects": { "economia": 3, "relacionesExteriores": -4 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_010",
+  "character": "la_cientifica",
+  "era": "futurista",
+  "text": "Un virus informático ataca la red eléctrica nacional.",
+  "left": {
+   "text": "Aísla los sistemas críticos",
+   "effects": { "aparatoDelEstado": 4, "economia": -5 }
+  },
+  "right": {
+   "text": "Mantén todo conectado",
+   "effects": { "economia": 3, "pueblo": -6 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_neg_001",
+  "character": "el_hacker",
+  "era": "futurista",
+  "text": "Se filtran datos personales de millones de ciudadanos.",
+  "left": {
+   "text": "Asume responsabilidad pública",
+   "effects": { "pueblo": -5, "aparatoDelEstado": -4 }
+  },
+  "right": {
+   "text": "Minimiza el escándalo",
+   "effects": { "pueblo": -7, "aparatoDelEstado": 3 }
+  },
+  "weight": 3
+ },
+ {
+  "id": "era6_neg_002",
+  "character": "el_ingeniero_ia",
+  "era": "futurista",
+  "text": "Una IA de decisiones judiciales muestra sesgos discriminatorios.",
+  "left": {
+   "text": "Suspende el sistema",
+   "effects": { "aparatoDelEstado": -5, "economia": -4 }
+  },
+  "right": {
+   "text": "Ajusta en silencio",
+   "effects": { "aparatoDelEstado": 4, "pueblo": -6 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_neg_003",
+  "character": "el_magnate_tech",
+  "era": "futurista",
+  "text": "La corporación tecnológica amenaza con irse si no baja la regulación.",
+  "left": {
+   "text": "Mantén la regulación",
+   "effects": { "pueblo": 4, "economia": -7 }
+  },
+  "right": {
+   "text": "Cede a sus exigencias",
+   "effects": { "economia": 5, "pueblo": -6, "relacionesExteriores": -3 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_bioetica_001",
+  "character": "la_bioetica",
+  "era": "futurista",
+  "rare": true,
+  "text": "Se propone extender la vida útil mediante implantes, solo accesibles para las élites.",
+  "left": {
+   "text": "Subsidia el acceso universal",
+   "effects": { "pueblo": 6, "economia": -6 }
+  },
+  "right": {
+   "text": "Déjalo como mercado privado",
+   "effects": { "economia": 5, "pueblo": -6 }
+  },
+  "weight": 1
+ },
+ {
+  "id": "era6_satelite_002",
+  "character": "la_cientifica",
+  "era": "futurista",
+  "text": "Un satélite propio permitiría independencia en telecomunicaciones.",
+  "left": {
+   "text": "Financia el satélite",
+   "effects": { "economia": -6, "relacionesExteriores": 5 }
+  },
+  "right": {
+   "text": "Sigue rentando servicios extranjeros",
+   "effects": { "economia": 3, "relacionesExteriores": -3 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_disparador_epidemia_digital",
+  "character": "el_hacker",
+  "era": "futurista",
+  "text": "Un malware se propaga entre los dispositivos médicos conectados del país.",
+  "left": {
+   "text": "Desconecta la red médica",
+   "effects": { "aparatoDelEstado": 4, "pueblo": -3 },
+   "startsEvent": "epidemia"
+  },
+  "right": {
+   "text": "Confía en los parches de seguridad",
+   "effects": { "pueblo": 3, "aparatoDelEstado": -3 }
+  },
+  "weight": 2
+ },
+ {
+  "id": "era6_riesgo_001",
+  "character": "el_magnate_tech",
+  "era": "futurista",
+  "text": "Una potencia rival ofrece tecnología militar avanzada a cambio de una base en la isla.",
+  "left": {
+   "text": "Acepta la base",
+   "effects": { "aparatoDelEstado": 9, "relacionesExteriores": -10, "economia": 4 }
+  },
+  "right": {
+   "text": "Rechaza la oferta",
+   "effects": { "relacionesExteriores": 5, "aparatoDelEstado": -4 }
+  },
+  "weight": 2
+ }
+]
