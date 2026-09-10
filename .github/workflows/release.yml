@@ -36,10 +36,19 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: gradle
 
-      # ✅ FIX: Asegurar que Gradle 8.14 use la URL oficial
+      # ✅ FIX: Reescribir gradle-wrapper.properties con URL oficial de Gradle 8.14
+      # (hardcoded para evitar el problema de expansión de variables en sed)
       - name: Fix Gradle wrapper URL
         run: |
-          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip|' android/gradle/wrapper/gradle-wrapper.properties
+          cat > android/gradle/wrapper/gradle-wrapper.properties <<'EOF'
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.14-all.zip
+          networkTimeout=10000
+          validateDistributionUrl=true
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          EOF
           echo "=== gradle-wrapper.properties ==="
           cat android/gradle/wrapper/gradle-wrapper.properties
 
@@ -47,16 +56,23 @@ jobs:
       - name: Set up Gradle 8.14
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: ${{ env.GRADLE_VERSION }}
+          gradle-version: '8.14'
           cache-disabled: false
 
       # ✅ Instalar Android NDK 28
       - name: Install Android NDK 28
         run: |
-          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses || true
-          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;${NDK_VERSION}"
-          echo "NDK instalado en: ${ANDROID_HOME}/ndk/${NDK_VERSION}"
-          ls -la ${ANDROID_HOME}/ndk/ || true
+          SDKMANAGER="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -f "$SDKMANAGER" ]; then
+            SDKMANAGER="${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager"
+          fi
+          echo "Usando sdkmanager: $SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+          "$SDKMANAGER" --install "ndk;${NDK_VERSION}" || \
+          "$SDKMANAGER" --install "ndk;28.0.12433566" || \
+          "$SDKMANAGER" --install "ndk;27.2.12479018"
+          echo "=== NDK instalados ==="
+          ls -la "${ANDROID_HOME}/ndk/" || ls -la "${ANDROID_SDK_ROOT}/ndk/" || true
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
