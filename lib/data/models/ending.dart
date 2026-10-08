@@ -11,6 +11,7 @@ class Ending {
   final String description;
   final String imageAsset;
   final bool isSurvival;
+  final bool isStoryEnding;
 
   const Ending({
     required this.id,
@@ -21,6 +22,7 @@ class Ending {
     required this.description,
     required this.imageAsset,
     this.isSurvival = false,
+    this.isStoryEnding = false,
   });
 
   factory Ending.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class Ending {
       description: json['description'] as String,
       imageAsset: json['imageAsset'] as String,
       isSurvival: json['isSurvival'] as bool? ?? false,
+      isStoryEnding: json['isStoryEnding'] as bool? ?? false,
     );
   }
 }

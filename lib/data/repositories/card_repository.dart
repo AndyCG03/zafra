@@ -6,12 +6,7 @@ import '../models/game_card.dart';
 import '../models/character.dart';
 import '../models/ending.dart';
 
-/// NOTA DE ESTE CAMBIO: se agregó `allCards`. Ya no se filtra por era
-/// para elegir la siguiente carta — todas las cartas de todos los
-/// archivos JSON de assets/cards/ entran al mismo mazo aleatorio.
-/// Los archivos por era siguen existiendo solo como forma de ORGANIZAR
-/// el guion (para que no tengas un solo JSON gigante), pero el juego
-/// ya no restringe qué se muestra según en qué "era" narrativa estás.
+/// Catálogo de contenido. La selección aplica las condiciones y la era.
 class CardRepository {
   final Map<String, List<GameCard>> _cardsByEra = {};
   final Map<String, Character> _characters = {};
@@ -21,10 +16,37 @@ class CardRepository {
   static const String fallbackImage = 'assets/images/logo/icon card.png';
 
   bool _loaded = false;
+  Future<void>? _loading;
+  List<GameCard> _allCards = const [];
+  final Map<String, GameCard> _cardsById = {};
+  List<String> _campaignCardIds = const [];
+  List<Map<String, dynamic>> _campaignActs = const [];
+  List<String> get campaignCardIds => _campaignCardIds;
+  String campaignActTitle(int index) {
+    var cursor = 0;
+    for (var n = 0; n < _campaignActs.length; n++) {
+      final act = _campaignActs[n];
+      cursor += (act['cards'] as List).length;
+      if (index < cursor) return 'ACTO ${n + 1} · ${act['title']}';
+    }
+    return 'CAMPAÑA COMPLETADA';
+  }
 
   Future<void> loadAll() async {
     if (_loaded) return;
+    if (_loading != null) return _loading;
+    _loading = _loadContent();
+    try {
+      await _loading;
+    } finally {
+      _loading = null;
+    }
+  }
 
+  Future<void> _loadContent() async {
+    _characters.clear();
+    _endings.clear();
+    _cardsByEra.clear();
     await _loadCharacters();
     await _loadEndings();
     await _loadCreatorCards();
@@ -32,19 +54,42 @@ class CardRepository {
       await _loadEraCards(era);
     }
 
+    final stories = jsonDecode(
+            await rootBundle.loadString('assets/cards/arcos_narrativos.json'))
+        as List;
+    final campaign =
+        jsonDecode(await rootBundle.loadString('assets/cards/campana.json'))
+            as Map<String, dynamic>;
+    _campaignActs = (campaign['acts'] as List).cast<Map<String, dynamic>>();
+    _campaignCardIds = List.unmodifiable(
+        _campaignActs.expand((act) => (act['cards'] as List).cast<String>()));
+    _allCards = List.unmodifiable([
+      ..._cardsByEra.values.expand((cards) => cards),
+      ...stories.map((e) => GameCard.fromJson(e as Map<String, dynamic>)),
+      ...(campaign['cards'] as List)
+          .map((e) => GameCard.fromJson(e as Map<String, dynamic>)),
+    ]);
+    _cardsById.clear();
+    for (final card in [..._allCards, ..._creatorCards]) {
+      if (_cardsById.containsKey(card.id)) {
+        throw FormatException('Carta duplicada: ${card.id}');
+      }
+      _cardsById[card.id] = card;
+    }
+    if (_campaignCardIds.toSet().length != _campaignCardIds.length ||
+        _campaignCardIds.any((id) => !_cardsById.containsKey(id))) {
+      throw const FormatException(
+          'El recorrido de campaña contiene escenas duplicadas o inexistentes.');
+    }
     _loaded = true;
   }
 
   Future<void> _loadCreatorCards() async {
-    try {
-      final raw = await rootBundle.loadString('assets/cards/el_creador.json');
-      final list = jsonDecode(raw) as List<dynamic>;
-      _creatorCards
-        ..clear()
-        ..addAll(list.map((e) => GameCard.fromJson(e as Map<String, dynamic>)));
-    } catch (_) {
-      _creatorCards.clear();
-    }
+    final raw = await rootBundle.loadString('assets/cards/el_creador.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    _creatorCards
+      ..clear()
+      ..addAll(list.map((e) => GameCard.fromJson(e as Map<String, dynamic>)));
   }
 
   List<GameCard> get creatorCards => List.unmodifiable(_creatorCards);
@@ -64,26 +109,24 @@ class CardRepository {
     _endings.addAll(
       list.map((e) => Ending.fromJson(e as Map<String, dynamic>)),
     );
+    final storyEndings = jsonDecode(
+            await rootBundle.loadString('assets/cards/finales_historia.json'))
+        as List;
+    _endings.addAll(
+        storyEndings.map((e) => Ending.fromJson(e as Map<String, dynamic>)));
   }
 
   Future<void> _loadEraCards(Era era) async {
-    try {
-      final raw = await rootBundle.loadString(
-        'assets/cards/${era.cardsFileName}',
-      );
-      final List<dynamic> list = jsonDecode(raw) as List<dynamic>;
-      _cardsByEra[era.name] = list
-          .map((e) => GameCard.fromJson(e as Map<String, dynamic>))
-          .toList();
-    } catch (_) {
-      _cardsByEra[era.name] = [];
-    }
+    final raw = await rootBundle.loadString(
+      'assets/cards/${era.cardsFileName}',
+    );
+    final List<dynamic> list = jsonDecode(raw) as List<dynamic>;
+    _cardsByEra[era.name] =
+        list.map((e) => GameCard.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-  /// TODAS las cartas del juego, sin importar de qué archivo/era vienen.
-  /// Esta es la lista que ahora usa GameController para elegir al azar.
-  List<GameCard> get allCards =>
-      _cardsByEra.values.expand((list) => list).toList();
+  /// Vista inmutable, construida una vez al cargar el catálogo.
+  List<GameCard> get allCards => _allCards;
 
   List<GameCard> cardsForEra(Era era) =>
       List.unmodifiable(_cardsByEra[era.name] ?? const []);
@@ -95,12 +138,7 @@ class CardRepository {
 
   List<Ending> get endings => List.unmodifiable(_endings);
 
-  GameCard? cardById(String id) {
-    for (final card in allCards) {
-      if (card.id == id) return card;
-    }
-    return null;
-  }
+  GameCard? cardById(String id) => _cardsById[id];
 
   /// Obtiene el asset de imagen para un personaje por su ID.
   /// Usa la misma lógica que imageAssetFor(GameCard) pero para personajes.

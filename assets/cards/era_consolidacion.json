@@ -84,22 +84,6 @@
   "weight": 2
  },
 
-{
-  "id": "era2_disparador_epidemia",
-  "character": "la_enfermera",
-  "era": "consolidacion",
-  "text": "Aparecen los primeros casos de una enfermedad desconocida en un barrio portuario.",
-  "left": {
-    "text": "Aísla la zona de inmediato",
-    "effects": { "economia": -4, "pueblo": 2 }
-  },
-  "right": {
-    "text": "Espera confirmación médica",
-    "effects": { "pueblo": -3 },
-    "startsEvent": "epidemia"
-  },
-  "weight": 2
-},
  {
   "id": "era2_disparador_refugiados",
   "character": "el_diplomatico",

@@ -64,12 +64,12 @@ class _ToastContent extends StatelessWidget {
         color: _ink,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: _accent.withOpacity(0.3),
+          color: _accent.withValues(alpha: 0.3),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withValues(alpha: 0.4),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),

@@ -36,11 +36,11 @@ class _SwipeableCardState extends State<SwipeableCard>
     duration: const Duration(milliseconds: 320),
   )..forward();
 
-  late Animation<double> _enterScale = CurvedAnimation(
+  late final Animation<double> _enterScale = CurvedAnimation(
     parent: _enterController,
     curve: Curves.easeOutCubic,
   );
-  late Animation<double> _enterOpacity = CurvedAnimation(
+  late final Animation<double> _enterOpacity = CurvedAnimation(
     parent: _enterController,
     curve: Curves.easeOut,
   );
@@ -231,7 +231,7 @@ class _SwipeableCardState extends State<SwipeableCard>
       if (widget.onHighlightChange != null) {
         final Map<StatType, bool> highlights = {};
         if (activeEffects != null) {
-          for (final StatType type in activeEffects!.keys) {
+          for (final StatType type in activeEffects.keys) {
             highlights[type] = true;
           }
         }
@@ -308,11 +308,11 @@ class _SwipeableCardState extends State<SwipeableCard>
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF16211B).withOpacity(0.88),
+                        color: const Color(0xFF16211B).withValues(alpha: 0.88),
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withValues(alpha: 0.5),
                             blurRadius: 12,
                             offset: const Offset(0, 4),
                           ),
@@ -345,11 +345,11 @@ class _SwipeableCardState extends State<SwipeableCard>
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF16211B).withOpacity(0.88),
+                        color: const Color(0xFF16211B).withValues(alpha: 0.88),
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withValues(alpha: 0.5),
                             blurRadius: 12,
                             offset: const Offset(0, 4),
                           ),

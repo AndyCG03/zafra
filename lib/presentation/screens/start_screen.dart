@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../domain/game_engine/game_controller.dart';
 import 'game_screen.dart';
 import 'options_screen.dart';
+import 'modes_screen.dart';
 import '../../services/audio/game_audio.dart';
-import '../../services/persistence/progress_service.dart';
 
 class StartScreen extends ConsumerWidget {
   const StartScreen({super.key});
@@ -16,7 +14,8 @@ class StartScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final game = ref.watch(gameControllerProvider);
-    final hasPendingGame = !game.isLoading && game.currentCard != null && game.ending == null && game.gameState.turn > 0;
+    final hasPendingGame =
+        !game.isLoading && game.currentCard != null && game.ending == null;
 
     return Scaffold(
       backgroundColor: AppTheme.background,
@@ -26,9 +25,8 @@ class StartScreen extends ConsumerWidget {
             final screenHeight = constraints.maxHeight;
 
             return SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
               child: SizedBox(
-                height: screenHeight,
+                height: screenHeight < 560 ? 560 : screenHeight,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),
                   child: Column(
@@ -42,7 +40,7 @@ class StartScreen extends ConsumerWidget {
                           children: [
                             Image.asset(
                               'assets/images/logo/icon simply.png',
-                              height: 180,
+                              height: screenHeight < 560 ? 130 : 180,
                               fit: BoxFit.contain,
                               errorBuilder: (_, __, ___) => const Icon(
                                 Icons.style_rounded,
@@ -89,19 +87,41 @@ class StartScreen extends ConsumerWidget {
                                 child: Column(
                                   children: [
                                     _MenuButton(
-                                      label: hasPendingGame ? 'CONTINUAR GOBIERNO' : 'COMENZAR GOBIERNO',
-                                      icon: hasPendingGame ? Icons.play_circle_fill_rounded : Icons.play_arrow_rounded,
-                                      onPressed: () => Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (_) => const GameScreen()),
+                                      label: hasPendingGame
+                                          ? 'CONTINUAR GOBIERNO'
+                                          : 'COMENZAR GOBIERNO',
+                                      icon: hasPendingGame
+                                          ? Icons.play_circle_fill_rounded
+                                          : Icons.play_arrow_rounded,
+                                      onPressed: () =>
+                                          Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) => hasPendingGame
+                                                ? const GameScreen()
+                                                : const ModesScreen()),
                                       ),
                                     ),
+                                    if (hasPendingGame) ...[
+                                      const SizedBox(height: 10),
+                                      _MenuButton(
+                                          label: 'ELEGIR MODO',
+                                          icon: Icons.auto_stories,
+                                          outlined: true,
+                                          onPressed: () => Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const ModesScreen()))),
+                                    ],
                                     const SizedBox(height: 10),
                                     _MenuButton(
                                       label: 'OPCIONES',
                                       icon: Icons.tune_rounded,
                                       outlined: true,
-                                      onPressed: () => Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (_) => const OptionsScreen()),
+                                      onPressed: () =>
+                                          Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const OptionsScreen()),
                                       ),
                                     ),
                                     const SizedBox(height: 16),
@@ -116,7 +136,7 @@ class StartScreen extends ConsumerWidget {
                                       ),
                                     ),
                                     // ✅ MÁS ESPACIO ABAJO - Aumentado de 16 a 32
-                                    const SizedBox(height: 60),
+                                    const SizedBox(height: 24),
                                   ],
                                 ),
                               ),
@@ -136,84 +156,6 @@ class StartScreen extends ConsumerWidget {
   }
 }
 
-Future<void> _showCreatorConversation(BuildContext context) async {
-  final progress = ProgressService();
-  await progress.init();
-  final count = progress.gamesPlayed;
-  List<dynamic> messages = [];
-  try {
-    final raw = await rootBundle.loadString('assets/cards/el_creador.json');
-    messages = jsonDecode(raw) as List<dynamic>;
-  } catch (_) {}
-  final seen = progress.seenCreatorMessageIds;
-  final eligible = <Map<String, dynamic>>[];
-  for (var index = 0; index < messages.length; index++) {
-    final item = messages[index];
-    if (item is! Map) continue;
-    final id = item['id']?.toString() ?? 'creador_$index';
-    final minGames = (item['minGames'] as num?)?.toInt() ?? index;
-    if (count >= minGames && !seen.contains(id)) {
-      eligible.add({...item.cast<String, dynamic>(), 'id': id});
-    }
-  }
-  if (eligible.isEmpty) return;
-  final selected = eligible.first;
-  final message = (selected['message'] ?? selected['text'] ?? '').toString();
-  final messageId = selected['id'].toString();
-  if (!context.mounted) return;
-  await showDialog<void>(
-    context: context,
-    barrierDismissible: false,
-    builder: (dialog) => AlertDialog(
-      backgroundColor: AppTheme.container,
-      title: const Text(
-        'EL CREADOR',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontFamily: 'monospace',
-          color: AppTheme.accent,
-          letterSpacing: 1.5,
-        ),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/characters/el_creador.png',
-            height: 150,
-            errorBuilder: (_, __, ___) => const Icon(
-              Icons.person,
-              color: AppTheme.accent,
-              size: 80,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            message,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontFamily: 'monospace',
-              color: Colors.white,
-              height: 1.4,
-            ),
-          ),
-        ],
-      ),
-      actionsAlignment: MainAxisAlignment.center,
-      actions: [
-        FilledButton(
-          onPressed: () {
-            GameAudio.instance.click();
-            Navigator.pop(dialog);
-          },
-          child: const Text('CONTINUAR'),
-        ),
-      ],
-    ),
-  );
-  await progress.markCreatorMessageSeen(messageId);
-}
-
 class _MenuButton extends StatelessWidget {
   const _MenuButton({
     required this.label,
@@ -229,33 +171,33 @@ class _MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 50,
-    child: OutlinedButton.icon(
-      onPressed: () {
-        GameAudio.instance.click();
-        onPressed();
-      },
-      icon: Icon(icon, size: 20),
-      label: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 14,
+        height: 50,
+        child: OutlinedButton.icon(
+          onPressed: () {
+            GameAudio.instance.click();
+            onPressed();
+          },
+          icon: Icon(icon, size: 20),
+          label: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: outlined ? AppTheme.accent : AppTheme.background,
+            backgroundColor: outlined ? Colors.transparent : AppTheme.accent,
+            side: const BorderSide(color: AppTheme.accent),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+            textStyle: const TextStyle(
+              fontFamily: 'monospace',
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
+            minimumSize: const Size(double.infinity, 50),
+          ),
         ),
-      ),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: outlined ? AppTheme.accent : AppTheme.background,
-        backgroundColor: outlined ? Colors.transparent : AppTheme.accent,
-        side: const BorderSide(color: AppTheme.accent),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
-        textStyle: const TextStyle(
-          fontFamily: 'monospace',
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1.2,
-        ),
-        minimumSize: const Size(double.infinity, 50),
-      ),
-    ),
-  );
+      );
 }

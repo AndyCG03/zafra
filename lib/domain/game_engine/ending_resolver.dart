@@ -5,6 +5,30 @@ import 'game_state.dart';
 /// mostrar. Prioriza un final específico de la era actual; si no existe,
 /// cae en un final genérico para esa estadística.
 class EndingResolver {
+  Ending? resolveStory(
+      {required GameState state, required List<Ending> availableEndings}) {
+    if (state.hasCollapsed) return null;
+    final flags = state.flags;
+    final id = flags.contains('sucesion_perpetua')
+        ? 'ending_gobierno_perpetuo'
+        : flags.contains('puerto_legado_dependiente') &&
+                (flags.contains('puerto_pensiones') ||
+                    flags.contains('puerto_monopolio'))
+            ? 'ending_isla_acreedores'
+            : flags.contains('sucesion_comunidad') &&
+                    flags.contains('agua_legado_comun') &&
+                    flags.contains('agua_local') &&
+                    flags.contains('puerto_abierto') &&
+                    flags.contains('puerto_legado_autonomo') &&
+                    !flags.contains('misterio_encubierto')
+                ? 'ending_comunidad_autonoma'
+                : flags.contains('misterio_encubierto')
+                    ? 'ending_cosecha_silencio'
+                    : 'ending_transicion_pactada';
+    return availableEndings.where((e) => e.id == id).firstOrNull ??
+        resolveSurvival(state: state, availableEndings: availableEndings);
+  }
+
   Ending? resolve({
     required GameState state,
     required List<Ending> availableEndings,
@@ -15,6 +39,8 @@ class EndingResolver {
     final stat = state.statOf(collapsedType);
 
     final specific = availableEndings.where((e) =>
+        !e.isSurvival &&
+        !e.isStoryEnding &&
         e.causedBy == collapsedType &&
         e.wasAtMin == stat.isAtMin &&
         e.eraId == state.currentEra.name);
@@ -22,6 +48,8 @@ class EndingResolver {
 
     final generic = availableEndings.where(
       (e) =>
+          !e.isSurvival &&
+          !e.isStoryEnding &&
           e.causedBy == collapsedType &&
           e.wasAtMin == stat.isAtMin &&
           e.eraId == 'generic',
@@ -31,7 +59,8 @@ class EndingResolver {
     return null;
   }
 
-  Ending? resolveSurvival({required GameState state, required List<Ending> availableEndings}) {
+  Ending? resolveSurvival(
+      {required GameState state, required List<Ending> availableEndings}) {
     if (state.hasCollapsed) return null;
     for (final ending in availableEndings) {
       if (ending.isSurvival) return ending;

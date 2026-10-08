@@ -11,22 +11,22 @@ void main() {
   group('EffectApplier', () {
     test('aplica efectos y clampea entre 0 y 100', () {
       final initialState = GameState.initial(); // todas las stats en 50
-      final card = GameCard(
+      const card = GameCard(
         id: 'test_card',
         characterId: 'el_general',
         eraId: 'fundacional',
         text: 'Carta de prueba',
-        left: const CardOption(
+        left: CardOption(
           text: 'Izquierda',
           effects: {StatType.pueblo: -70},
         ),
-        right: const CardOption(
+        right: CardOption(
           text: 'Derecha',
           effects: {StatType.pueblo: 10},
         ),
       );
 
-      final applier = EffectApplier();
+      const applier = EffectApplier();
       final result = applier.applyChoice(
         state: initialState,
         card: card,
@@ -42,20 +42,20 @@ void main() {
 
     test('respeta la ramificación (nextCardId) de una opción', () {
       final initialState = GameState.initial();
-      final card = GameCard(
+      const card = GameCard(
         id: 'card_with_branch',
         characterId: 'el_general',
         eraId: 'fundacional',
         text: 'Carta con ramificación',
-        left: const CardOption(text: 'Izquierda', effects: {}),
-        right: const CardOption(
+        left: CardOption(text: 'Izquierda', effects: {}),
+        right: CardOption(
           text: 'Derecha',
           effects: {},
           nextCardId: 'card_child',
         ),
       );
 
-      final applier = EffectApplier();
+      const applier = EffectApplier();
       final result = applier.applyChoice(
         state: initialState,
         card: card,

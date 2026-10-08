@@ -3,8 +3,7 @@
 /// (ver docs/DISEÑO_JUEGO.md, sección "Estructura narrativa temporal").
 ///
 /// IMPORTANTE: el orden de este enum define el orden de progresión.
-/// GameController avanza a la siguiente era cuando la actual se queda
-/// sin cartas nuevas por mostrar (ver game_controller.dart).
+/// GameController avanza según unlockAtTurn; la supervivencia llega al turno 96.
 enum Era {
   fundacional,
   consolidacion,
@@ -51,7 +50,7 @@ extension EraAssets on Era {
 
   /// Siguiente era en la progresión, o null si ya es la última.
   Era? get next {
-    final values = Era.values;
+    const values = Era.values;
     final currentIndex = values.indexOf(this);
     if (currentIndex == values.length - 1) return null;
     return values[currentIndex + 1];
@@ -62,12 +61,18 @@ extension EraAssets on Era {
   /// Turno a partir del cual esta etapa entra al mazo.
   int get unlockAtTurn {
     switch (this) {
-      case Era.fundacional: return 0;
-      case Era.consolidacion: return 12;
-      case Era.crisis: return 26;
-      case Era.apertura: return 42;
-      case Era.contemporanea: return 60;
-      case Era.futurista: return 78;
+      case Era.fundacional:
+        return 0;
+      case Era.consolidacion:
+        return 12;
+      case Era.crisis:
+        return 26;
+      case Era.apertura:
+        return 42;
+      case Era.contemporanea:
+        return 60;
+      case Era.futurista:
+        return 78;
     }
   }
 }

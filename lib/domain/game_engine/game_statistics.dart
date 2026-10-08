@@ -59,7 +59,8 @@ class GameStatistics {
     final records = <StatChangeRecord>[];
     for (final item in (raw['timeline'] as List? ?? const [])) {
       if (item is! Map) continue;
-      final beforeRaw = Map<dynamic, dynamic>.from(item['before'] as Map? ?? {});
+      final beforeRaw =
+          Map<dynamic, dynamic>.from(item['before'] as Map? ?? {});
       final afterRaw = Map<dynamic, dynamic>.from(item['after'] as Map? ?? {});
       final eraIndex = (item['era'] as num?)?.toInt() ?? 0;
       final era = eraIndex >= 0 && eraIndex < Era.values.length
@@ -102,8 +103,12 @@ class GameStatistics {
           turn: turn,
           era: era,
           direction: direction,
-          before: {for (final entry in before.entries) entry.key: entry.value.value},
-          after: {for (final entry in after.entries) entry.key: entry.value.value},
+          before: {
+            for (final entry in before.entries) entry.key: entry.value.value
+          },
+          after: {
+            for (final entry in after.entries) entry.key: entry.value.value
+          },
         ),
       ],
     );

@@ -20,26 +20,44 @@ class GameAudio {
   // ✅ Control para evitar reproducción múltiple del drag
   bool _isDragPlaying = false;
 
-  Future<void> stopAmbient() async { await _ambient.stop(); _ambientStarted = false; }
+  Future<void> stopAmbient() async {
+    await _ambient.stop();
+    _ambientStarted = false;
+  }
+
   Future<void> setAmbientLevel(double value) => _ambient.setVolume(value);
   Future<void> setEffectsLevel(double value) async {
     await _effects.setVolume(value);
     await _dragPlayer.setVolume(value);
     await _cardReturnPlayer.setVolume(value * 0.2);
   }
+
   Future<void> pauseAmbient() => _ambient.pause();
   Future<void> resumeAmbient() async {
     if (!soundEnabled) return;
-    try { await _ambient.resume(); } catch (_) { await startAmbient(); }
+    if (!_ambientStarted) {
+      await startAmbient();
+      return;
+    }
+    try {
+      await _ambient.resume();
+    } catch (_) {
+      await startAmbient();
+    }
   }
 
   Future<void> startAmbient() async {
+    if (!soundEnabled) return;
     try {
-      if (_ambientStarted) { await _ambient.setVolume(ambientVolume); return; }
+      if (_ambientStarted) {
+        await _ambient.setVolume(ambientVolume);
+        return;
+      }
       if (!_configured) {
         final context = AudioContext(
           iOS: AudioContextIOS(category: AVAudioSessionCategory.ambient),
-          android: AudioContextAndroid(audioFocus: AndroidAudioFocus.gainTransientMayDuck),
+          android: const AudioContextAndroid(
+              audioFocus: AndroidAudioFocus.gainTransientMayDuck),
         );
         await _ambient.setAudioContext(context);
         await _effects.setAudioContext(context);
@@ -49,7 +67,8 @@ class GameAudio {
       }
       await _ambient.setReleaseMode(ReleaseMode.loop);
       await _ambient.setVolume(ambientVolume);
-      await _ambient.play(AssetSource('music/ambient music.mp3'), volume: ambientVolume);
+      await _ambient.play(AssetSource('music/ambient music.mp3'),
+          volume: ambientVolume);
       _ambientStarted = true;
     } catch (_) {}
   }
@@ -58,7 +77,8 @@ class GameAudio {
   Future<void> dealCards() async {
     if (!soundEnabled) return;
     try {
-      await _effects.play(AssetSource('music/repartir cartas.mp3'), volume: effectsVolume);
+      await _effects.play(AssetSource('music/repartir cartas.mp3'),
+          volume: effectsVolume);
     } catch (_) {}
   }
 
@@ -69,7 +89,8 @@ class GameAudio {
     try {
       _isDragPlaying = true;
       await _dragPlayer.setReleaseMode(ReleaseMode.release);
-      await _dragPlayer.play(AssetSource('music/al arrastrar.mp3'), volume: effectsVolume);
+      await _dragPlayer.play(AssetSource('music/al arrastrar.mp3'),
+          volume: effectsVolume);
     } catch (_) {
       _isDragPlaying = false;
     }
@@ -99,7 +120,8 @@ class GameAudio {
   Future<void> cardFlip() async {
     if (!soundEnabled) return;
     try {
-      await _effects.play(AssetSource('music/card_flip.mp3'), volume: effectsVolume);
+      await _effects.play(AssetSource('music/card_flip.mp3'),
+          volume: effectsVolume);
     } catch (_) {}
   }
 

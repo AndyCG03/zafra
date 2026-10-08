@@ -21,17 +21,22 @@ Cada carta presenta un dilema. Las decisiones modifican las estadísticas del go
 
 <table>
   <tr>
-    <td align="center"><strong>31</strong><br>personajes</td>
-    <td align="center"><strong>142</strong><br>cartas de era</td>
-    <td align="center"><strong>6</strong><br>eventos</td>
-    <td align="center"><strong>10</strong><br>finales narrativos</td>
+    <td align="center"><strong>37</strong><br>personajes</td>
+    <td align="center"><strong>181</strong><br>cartas de era</td>
+    <td align="center"><strong>8</strong><br>eventos</td>
+    <td align="center"><strong>16</strong><br>finales narrativos</td>
   </tr>
 </table>
 
-- **31 personajes** con nombre, rol, biografía e ilustración asociada.
-- **142 cartas de era** distribuidas entre cinco etapas históricas.
-- **6 cartas de eventos** para situaciones especiales.
-- **10 finales narrativos**, incluido 1 final de supervivencia.
+- **37 personajes** con nombre, rol, biografía e ilustración asociada.
+- **181 cartas de era** distribuidas entre seis etapas históricas.
+- **222 cartas** en el catálogo principal: 181 de era, 16 capítulos de agua y puerto, una advertencia y 24 escenas de investigación, alianzas, vida cotidiana, historias personales y sucesión.
+- **8 eventos**, con 15 decisiones disponibles por evento; cada aparición usa cuatro en orden narrativo.
+- **16 finales narrativos**, incluidos cinco desenlaces políticos especiales. El antiguo final de supervivencia se conserva para guardados anteriores.
+- **Campaña:** seis actos y 40 escenas en orden, con decisiones que cambian pruebas, relaciones y desenlace.
+- **Ilimitado:** sin final automático en el turno 96; crisis y asuntos cotidianos continúan mientras sobrevivas, con retirada voluntaria al cerrar la historia.
+- Tres promesas de gobierno, confianza y rivalidades, agenda y crónica de las últimas 60 decisiones. Cada modo conserva su propia partida.
+- Mapa interactivo que refleja tus obras y políticas, seis interludios personales y un epílogo de cinco años después para los barrios, la Líder, el General y la Cantinera. Cinco ilustraciones vectoriales originales distinguen los finales políticos.
 - Recursos gráficos y música incluidos en `assets/`.
 - Guardado local del progreso, finales descubiertos y estadísticas globales.
 
@@ -39,11 +44,12 @@ Cada carta presenta un dilema. Las decisiones modifican las estadísticas del go
 
 | Era | Cartas | Personajes que se incorporan |
 | :--- | ---: | ---: |
-| Fundacional | 26 | 12 |
-| Consolidación | 27 | 7 |
-| Crisis | 28 | 5 |
-| Apertura | 25 | 3 |
-| Contemporánea | 36 | 3 |
+| Fundacional | 32 | 12 |
+| Consolidación | 30 | 7 |
+| Crisis | 33 | 5 |
+| Apertura | 29 | 3 |
+| Contemporánea | 39 | 3 |
+| Futurista | 18 | 6 |
 
 El Creador funciona como personaje especial y puede aparecer en cualquier era.
 
@@ -54,7 +60,11 @@ El Creador funciona como personaje especial y puede aparecer en cualquier era.
 3. Observa cómo cambia el equilibrio de las cuatro estadísticas: **Pueblo**, **Economía**, **Relaciones Exteriores** y **Aparato del Estado**.
 4. Continúa gobernando, desbloquea nuevas eras y procura que ninguna estadística colapse.
 
-Las cartas pueden tener condiciones, pesos de aparición, ramificaciones y efectos distintos según la opción elegida. Si una estadística llega a 0 o 100, el motor resuelve el final correspondiente. Si se atraviesan todas las eras sin colapso, se obtiene **La isla resiste**.
+Las cartas pueden tener condiciones, pesos de aparición, ramificaciones y efectos distintos según la opción elegida. Si una estadística llega a 0 o 100, el motor resuelve el final correspondiente. Si se alcanza el turno 96 sin colapso, después de jugar la era futurista, se obtiene **La isla resiste**.
+
+El agua y el puerto atraviesan la partida con memoria de tus decisiones, compromisos visibles en la agenda y un epílogo propio. La agenda también muestra a qué personajes has respaldado. Las partidas anteriores conservan sus datos e incorporan la apertura narrativa al siguiente momento disponible.
+
+El contenido usa `setFlags`/`clearFlags`, `favorsCharacter`, `memoryVariants` y `scheduleCards` (destino, título y plazo mínimo en decisiones). Los capítulos programados llevan `drawFromDeck: false`; respetan su era y dejan al menos dos decisiones cotidianas entre audiencias. La agenda se elimina al responder, por lo que reabrir el juego conserva los asuntos pendientes. [Cambios y validación de esta versión](docs/MEJORAS_NARRATIVAS_IMPLEMENTADAS.md).
 
 ## Requisitos
 
@@ -116,11 +126,16 @@ El contenido narrativo es dato, no código: las cartas, personajes y finales se 
 - `assets/cards/era_*.json`: cartas de cada era.
 - `assets/cards/events.json`: eventos especiales.
 - `assets/cards/el_creador.json`: mensajes del Creador.
+- `assets/cards/campana.json`: actos de la campaña y nuevas escenas compartidas con el modo ilimitado.
+- `assets/cards/arcos_narrativos.json`: agua, puerto y consecuencias cruzadas.
+- `assets/cards/finales_historia.json`: cinco desenlaces políticos.
 
 Las rutas de estos recursos están declaradas en `pubspec.yaml`. Las imágenes y los sonidos deben conservar sus rutas para que Flutter pueda empaquetarlos correctamente.
 
 ## Documentación adicional
 
+- [docs/REVISION_Y_PROPUESTA_JUEGO.md](docs/REVISION_Y_PROPUESTA_JUEGO.md): auditoría, correcciones y propuesta narrativa priorizada.
+- [docs/PROPUESTA_CARTAS_AGUA.json](docs/PROPUESTA_CARTAS_AGUA.json): muestra de tres cartas para revisar; no forma parte del mazo publicado.
 - [ORGANIZACION.md](ORGANIZACION.md): arquitectura, flujo de datos y guía para escribir cartas.
 - [docs/MEJORAS_PENDIENTES.md](docs/MEJORAS_PENDIENTES.md): tareas técnicas y de contenido conocidas.
 - [docs/FINALES_IMAGENES.md](docs/FINALES_IMAGENES.md): especificaciones visuales de los finales.

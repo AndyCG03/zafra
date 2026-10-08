@@ -1,0 +1,47 @@
+# Flutter and Dart generated state
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+coverage/
+**/build/
+**/.gradle/
+**/.kotlin/
+**/.cxx/
+
+# Generated platform integration files
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+macos/Flutter/ephemeral/
+linux/flutter/ephemeral/
+windows/flutter/ephemeral/
+
+# IDE and local machine state
+.idea/
+.vscode/
+*.iml
+*.log
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local configuration and signing credentials
+android/local.properties
+android/key.properties
+**/*.keystore
+**/*.jks
+.env
+.env.*
+!.env.example
+
+# Generated Dart source
+*.g.dart
+*.freezed.dart
+
+# Narrative authoring cache
+__pycache__/
+*.pyc

@@ -1,0 +1,1149 @@
+[
+  {
+    "id": "historia_agua_01",
+    "era": "fundacional",
+    "character": "la_lider_vecinal",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 1/8 · La primera promesa",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "El ciclón dejó rota la acequia. Queda agua para los barrios o para el ingenio que paga la próxima cosecha. Todos esperan tu primera promesa.",
+    "left": {
+      "text": "Primero los barrios",
+      "effects": {
+        "pueblo": 6,
+        "economia": -4
+      },
+      "setFlags": [
+        "agua_barrios"
+      ],
+      "favorsCharacter": "la_lider_vecinal",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_02",
+          "afterTurns": 3,
+          "title": "Agua: revisar la primera promesa"
+        },
+        {
+          "cardId": "historia_puerto_01",
+          "afterTurns": 1,
+          "title": "Puerto: financiar la reconstrucción"
+        },
+        {
+          "cardId": "humor_radio",
+          "title": "Cantina: la primera versión de tu promesa",
+          "afterTurns": 2
+        }
+      ],
+      "trustChanges": {
+        "la_lider_vecinal": 1,
+        "el_general": -1
+      }
+    },
+    "right": {
+      "text": "Primero la cosecha",
+      "effects": {
+        "pueblo": -4,
+        "economia": 6
+      },
+      "setFlags": [
+        "agua_ingenio"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_02",
+          "afterTurns": 3,
+          "title": "Agua: revisar la primera promesa"
+        },
+        {
+          "cardId": "historia_puerto_01",
+          "afterTurns": 1,
+          "title": "Puerto: financiar la reconstrucción"
+        },
+        {
+          "cardId": "humor_radio",
+          "title": "Cantina: la primera versión de tu promesa",
+          "afterTurns": 2
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "memoryVariants": []
+  },
+  {
+    "id": "historia_agua_02",
+    "era": "fundacional",
+    "character": "la_economista",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 2/8 · La factura",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Las cisternas de emergencia cuestan más cada día. Podemos reparar la acequia ahora o comprar tiempo con otro reparto.",
+    "left": {
+      "text": "Reparar la acequia",
+      "effects": {
+        "economia": -5,
+        "aparatoDelEstado": 4
+      },
+      "setFlags": [
+        "agua_obra"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_03",
+          "afterTurns": 3,
+          "title": "Agua: inspeccionar las obras"
+        },
+        {
+          "cardId": "personal_lider_01",
+          "title": "Barrio: la marca en la escuela",
+          "afterTurns": 4
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "right": {
+      "text": "Mantener las cisternas",
+      "effects": {
+        "pueblo": 5,
+        "economia": -3
+      },
+      "setFlags": [
+        "agua_cisternas"
+      ],
+      "favorsCharacter": "la_lider_vecinal",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_03",
+          "afterTurns": 3,
+          "title": "Agua: inspeccionar las obras"
+        },
+        {
+          "cardId": "personal_lider_01",
+          "title": "Barrio: la marca en la escuela",
+          "afterTurns": 4
+        }
+      ],
+      "trustChanges": {
+        "la_lider_vecinal": 1,
+        "el_general": -1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "agua_barrios"
+        ],
+        "text": "Los barrios recibieron agua, pero el ingenio perdió producción. La Economista trae la factura: reparar la acequia o sostener las cisternas."
+      },
+      {
+        "requiresFlags": [
+          "agua_ingenio"
+        ],
+        "text": "La cosecha pagó las primeras cuentas. En los barrios siguen esperando tu turno de agua. La Economista pide decidir entre obras y cisternas."
+      }
+    ]
+  },
+  {
+    "id": "historia_agua_03",
+    "era": "fundacional",
+    "character": "el_pescador",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 3/8 · La fuga",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Un pescador encuentra una fuga junto a los depósitos. Los vecinos ofrecen repararla; el General quiere encargarla a su brigada y controlar el canal.",
+    "left": {
+      "text": "Una cuadrilla vecinal",
+      "effects": {
+        "pueblo": 4,
+        "aparatoDelEstado": -3
+      },
+      "setFlags": [
+        "agua_vecinos"
+      ],
+      "favorsCharacter": "la_lider_vecinal",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_04",
+          "afterTurns": 5,
+          "title": "Agua: modernizar el ingenio"
+        }
+      ],
+      "trustChanges": {
+        "la_lider_vecinal": 1,
+        "el_general": -1
+      }
+    },
+    "right": {
+      "text": "La brigada del Estado",
+      "effects": {
+        "aparatoDelEstado": 5,
+        "economia": -3
+      },
+      "setFlags": [
+        "agua_brigada"
+      ],
+      "favorsCharacter": "el_general",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_04",
+          "afterTurns": 5,
+          "title": "Agua: modernizar el ingenio"
+        }
+      ],
+      "trustChanges": {
+        "el_general": 1,
+        "la_lider_vecinal": -1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "agua_obra"
+        ],
+        "text": "La acequia que aprobaste ya funciona, pero una fuga sigue vaciando los depósitos. El pescador propone que los vecinos vigilen las reparaciones."
+      },
+      {
+        "requiresFlags": [
+          "agua_cisternas"
+        ],
+        "text": "Mientras pagas cisternas, una fuga desperdicia agua en los depósitos. El pescador pregunta por qué nadie repara lo que ya tenemos."
+      }
+    ]
+  },
+  {
+    "id": "historia_agua_04",
+    "era": "consolidacion",
+    "character": "la_ingeniera",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 4/8 · Cerrar el circuito",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "La Ingeniera puede reutilizar el agua del ingenio. La obra cuesta reservas ahora; un parche más barato permitirá terminar esta cosecha.",
+    "left": {
+      "text": "Instalar recirculación",
+      "effects": {
+        "economia": -5,
+        "pueblo": 4
+      },
+      "setFlags": [
+        "agua_recirculada"
+      ],
+      "favorsCharacter": "la_ingeniera",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_05",
+          "afterTurns": 4,
+          "title": "Agua: repartir la cosecha"
+        }
+      ],
+      "trustChanges": {
+        "la_ingeniera": 1
+      }
+    },
+    "right": {
+      "text": "Reparar lo imprescindible",
+      "effects": {
+        "economia": 4,
+        "aparatoDelEstado": -2
+      },
+      "setFlags": [
+        "agua_parche"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_05",
+          "afterTurns": 4,
+          "title": "Agua: repartir la cosecha"
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "agua_vecinos"
+        ],
+        "text": "La cuadrilla vecinal señala dónde se pierde más agua. La Ingeniera usa sus notas para proponer un circuito de reutilización."
+      },
+      {
+        "requiresFlags": [
+          "agua_brigada"
+        ],
+        "text": "La brigada custodia el canal, pero custodiar no crea agua. La Ingeniera propone reutilizarla dentro del ingenio."
+      }
+    ]
+  },
+  {
+    "id": "historia_agua_05",
+    "era": "consolidacion",
+    "character": "el_sindicalista",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 5/8 · El reparto",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "La cosecha está lista. Exportar todo repondría reservas; reservar una parte para los barrios cumpliría la promesa de compartir la recuperación.",
+    "left": {
+      "text": "Reservar para la isla",
+      "effects": {
+        "pueblo": 5,
+        "economia": -3
+      },
+      "setFlags": [
+        "agua_reparto"
+      ],
+      "favorsCharacter": "el_sindicalista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_06",
+          "afterTurns": 5,
+          "title": "Agua: afrontar la sequía"
+        },
+        {
+          "cardId": "cosecha_01",
+          "title": "Investigación: la cosecha desaparecida",
+          "afterTurns": 3
+        }
+      ],
+      "trustChanges": {
+        "el_sindicalista": 1
+      }
+    },
+    "right": {
+      "text": "Exportar la cosecha",
+      "effects": {
+        "economia": 5,
+        "pueblo": -3
+      },
+      "setFlags": [
+        "agua_exportacion"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_06",
+          "afterTurns": 5,
+          "title": "Agua: afrontar la sequía"
+        },
+        {
+          "cardId": "cosecha_01",
+          "title": "Investigación: la cosecha desaparecida",
+          "afterTurns": 3
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "agua_recirculada"
+        ],
+        "text": "La recirculación ahorró agua y la cosecha salió adelante. El Sindicalista exige que ese esfuerzo también llene las despensas de la isla."
+      },
+      {
+        "requiresFlags": [
+          "agua_parche"
+        ],
+        "text": "El parche aguantó hasta la cosecha. El Sindicalista advierte que venderla toda dejará a los barrios pagando otra vez la recuperación."
+      }
+    ]
+  },
+  {
+    "id": "historia_agua_06",
+    "era": "crisis",
+    "character": "la_campesina",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 6/8 · La sequía",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Las lluvias no llegan. La Campesina propone pactar cuotas con cada comarca. El General ofrece asegurar los pozos y decidir el reparto desde palacio.",
+    "left": {
+      "text": "Pactar cuotas públicas",
+      "effects": {
+        "pueblo": 4,
+        "aparatoDelEstado": -3
+      },
+      "setFlags": [
+        "agua_pacto"
+      ],
+      "favorsCharacter": "la_lider_vecinal",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_07",
+          "afterTurns": 4,
+          "title": "Agua: decidir quién administra"
+        }
+      ],
+      "trustChanges": {
+        "la_lider_vecinal": 1,
+        "el_general": -1
+      }
+    },
+    "right": {
+      "text": "Custodiar los pozos",
+      "effects": {
+        "aparatoDelEstado": 5,
+        "pueblo": -3
+      },
+      "setFlags": [
+        "agua_control"
+      ],
+      "favorsCharacter": "el_general",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_07",
+          "afterTurns": 4,
+          "title": "Agua: decidir quién administra"
+        }
+      ],
+      "trustChanges": {
+        "el_general": 1,
+        "la_lider_vecinal": -1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "agua_reparto"
+        ],
+        "text": "Los barrios recuerdan que compartiste la cosecha y aceptan discutir cuotas para la sequía. La Campesina pide sentarlos a la misma mesa."
+      },
+      {
+        "requiresFlags": [
+          "agua_exportacion"
+        ],
+        "text": "Las reservas que dejó la exportación compran tiempo, pero los barrios desconfían del reparto. La Campesina pide cuotas que cualquiera pueda revisar."
+      }
+    ]
+  },
+  {
+    "id": "historia_agua_07",
+    "era": "apertura",
+    "character": "la_jurista",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 7/8 · La llave",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "La emergencia termina. La Jurista pregunta quién conservará las llaves de los depósitos: consejos locales con cuentas públicas o una autoridad nacional.",
+    "left": {
+      "text": "Consejos con auditoría",
+      "effects": {
+        "pueblo": 5,
+        "aparatoDelEstado": -3
+      },
+      "setFlags": [
+        "agua_local"
+      ],
+      "favorsCharacter": "la_jurista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_08",
+          "afterTurns": 4,
+          "title": "Agua: convertir la promesa en legado"
+        }
+      ],
+      "trustChanges": {
+        "la_jurista": 1
+      }
+    },
+    "right": {
+      "text": "Autoridad nacional",
+      "effects": {
+        "aparatoDelEstado": 4,
+        "economia": -2
+      },
+      "setFlags": [
+        "agua_central"
+      ],
+      "favorsCharacter": "el_general",
+      "scheduleCards": [
+        {
+          "cardId": "historia_agua_08",
+          "afterTurns": 4,
+          "title": "Agua: convertir la promesa en legado"
+        }
+      ],
+      "trustChanges": {
+        "el_general": 1,
+        "la_lider_vecinal": -1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "agua_pacto"
+        ],
+        "text": "El pacto de cuotas evitó que las comarcas se enfrentaran. La Jurista propone convertir esa mesa provisional en consejos que rindan cuentas."
+      },
+      {
+        "requiresFlags": [
+          "agua_control"
+        ],
+        "text": "La vigilancia mantuvo abiertos los pozos. Ahora la Jurista pide una fecha de salida para los soldados y reglas permanentes para el reparto."
+      }
+    ]
+  },
+  {
+    "id": "historia_agua_08",
+    "era": "contemporanea",
+    "character": "el_cientifico",
+    "storyArc": "agua",
+    "chapter": "EL AGUA · 8/8 · Lo que queda",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Una empresa ofrece renovar los depósitos a cambio de cobrar por el suministro. El Científico propone financiar una red común con tarifas solidarias. Tu primera promesa llega a su última decisión.",
+    "left": {
+      "text": "Una red común",
+      "effects": {
+        "pueblo": 6,
+        "economia": -4
+      },
+      "setFlags": [
+        "agua_legado_comun",
+        "agua_resuelta"
+      ],
+      "favorsCharacter": "el_cientifico",
+      "trustChanges": {
+        "el_cientifico": 1
+      }
+    },
+    "right": {
+      "text": "Concesión regulada",
+      "effects": {
+        "economia": 6,
+        "aparatoDelEstado": -3
+      },
+      "setFlags": [
+        "agua_legado_privado",
+        "agua_resuelta"
+      ],
+      "favorsCharacter": "la_economista",
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "agua_local"
+        ],
+        "text": "Los consejos publican sus cuentas y piden renovar los depósitos sin perder su voz. El Científico ofrece una red común; una empresa propone una concesión regulada."
+      },
+      {
+        "requiresFlags": [
+          "agua_central"
+        ],
+        "text": "La autoridad nacional unificó el reparto. Sus depósitos envejecen: renovar con fondos comunes o ceder el suministro a una empresa regulada."
+      }
+    ]
+  },
+  {
+    "id": "historia_puerto_01",
+    "era": "fundacional",
+    "character": "el_diplomatico",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 1/8 · La oferta",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Sin el muelle, la cosecha no saldrá de la isla. Un socio extranjero adelanta dinero; los talleres locales pueden repararlo más despacio sin pedir garantías.",
+    "left": {
+      "text": "Aceptar el adelanto",
+      "effects": {
+        "economia": 5,
+        "relacionesExteriores": 3,
+        "aparatoDelEstado": -3
+      },
+      "setFlags": [
+        "puerto_credito"
+      ],
+      "favorsCharacter": "el_diplomatico",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_02",
+          "afterTurns": 3,
+          "title": "Puerto: revisar las condiciones"
+        }
+      ],
+      "trustChanges": {
+        "el_diplomatico": 1
+      }
+    },
+    "right": {
+      "text": "Contratar talleres locales",
+      "effects": {
+        "economia": -4,
+        "aparatoDelEstado": 4
+      },
+      "setFlags": [
+        "puerto_local"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_02",
+          "afterTurns": 3,
+          "title": "Puerto: revisar las condiciones"
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "memoryVariants": []
+  },
+  {
+    "id": "historia_puerto_02",
+    "era": "fundacional",
+    "character": "la_economista",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 2/8 · La letra pequeña",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "El acuerdo del muelle debe pasar por el consejo. Publicar las cuentas retrasará la obra; firmar hoy acelerará la reparación con menos control público.",
+    "left": {
+      "text": "Publicar las cuentas",
+      "effects": {
+        "pueblo": 4,
+        "economia": -3
+      },
+      "setFlags": [
+        "puerto_transparente"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_03",
+          "afterTurns": 4,
+          "title": "Puerto: elegir al operador"
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "right": {
+      "text": "Firmar por urgencia",
+      "effects": {
+        "economia": 4,
+        "pueblo": -3
+      },
+      "setFlags": [
+        "puerto_opaco"
+      ],
+      "favorsCharacter": "el_diplomatico",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_03",
+          "afterTurns": 4,
+          "title": "Puerto: elegir al operador"
+        }
+      ],
+      "trustChanges": {
+        "el_diplomatico": 1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "puerto_credito"
+        ],
+        "text": "El adelanto exige prioridad para los barcos del prestamista. El Diplomático dice que es habitual. La Economista pide publicar la garantía antes de firmar."
+      },
+      {
+        "requiresFlags": [
+          "puerto_local"
+        ],
+        "text": "Los talleres locales necesitan más tiempo y un nuevo presupuesto. La Economista pide publicar las cuentas antes de ampliar el contrato."
+      }
+    ]
+  },
+  {
+    "id": "historia_puerto_03",
+    "era": "consolidacion",
+    "character": "el_sindicalista",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 3/8 · El operador",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "El muelle vuelve a recibir barcos. Una cooperativa de estibadores quiere administrarlo; el socio extranjero ofrece más tráfico si obtiene una licencia exclusiva.",
+    "left": {
+      "text": "Cooperativa del muelle",
+      "effects": {
+        "pueblo": 5,
+        "economia": -3
+      },
+      "setFlags": [
+        "puerto_cooperativa"
+      ],
+      "favorsCharacter": "el_sindicalista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_04",
+          "afterTurns": 4,
+          "title": "Puerto: escuchar a los estibadores"
+        },
+        {
+          "cardId": "cruce_contrato",
+          "title": "Cosecha: cumplir lo prometido al puerto",
+          "afterTurns": 2
+        },
+        {
+          "cardId": "personal_cantinera_01",
+          "title": "Cantina: el billete de su hija",
+          "afterTurns": 4
+        }
+      ],
+      "trustChanges": {
+        "el_sindicalista": 1
+      }
+    },
+    "right": {
+      "text": "Licencia exclusiva",
+      "effects": {
+        "economia": 5,
+        "relacionesExteriores": 3,
+        "pueblo": -3
+      },
+      "setFlags": [
+        "puerto_exclusiva"
+      ],
+      "favorsCharacter": "el_diplomatico",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_04",
+          "afterTurns": 4,
+          "title": "Puerto: escuchar a los estibadores"
+        },
+        {
+          "cardId": "cruce_contrato",
+          "title": "Cosecha: cumplir lo prometido al puerto",
+          "afterTurns": 2
+        },
+        {
+          "cardId": "personal_cantinera_01",
+          "title": "Cantina: el billete de su hija",
+          "afterTurns": 4
+        }
+      ],
+      "trustChanges": {
+        "el_diplomatico": 1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "puerto_transparente"
+        ],
+        "text": "Las cuentas públicas permitieron comparar ofertas. Los estibadores presentan una cooperativa; el socio extranjero pide exclusividad a cambio de traer más barcos."
+      },
+      {
+        "requiresFlags": [
+          "puerto_opaco"
+        ],
+        "text": "La firma urgente dejó dudas en el muelle. Los estibadores piden participar en su gestión; el socio extranjero quiere convertir el acuerdo provisional en exclusividad."
+      }
+    ]
+  },
+  {
+    "id": "historia_puerto_04",
+    "era": "consolidacion",
+    "character": "el_sindicalista",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 4/8 · La huelga",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Los estibadores paran por turnos agotadores. Negociar cuesta días de carga; el General ofrece reabrir el muelle bajo custodia militar.",
+    "left": {
+      "text": "Pactar nuevos turnos",
+      "effects": {
+        "pueblo": 5,
+        "economia": -4
+      },
+      "setFlags": [
+        "puerto_acuerdo_laboral"
+      ],
+      "favorsCharacter": "el_sindicalista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_05",
+          "afterTurns": 5,
+          "title": "Puerto: repartir el coste de la crisis"
+        }
+      ],
+      "trustChanges": {
+        "el_sindicalista": 1
+      },
+      "conditionalOutcomes": [
+        {
+          "effects": {
+            "pueblo": 2
+          },
+          "setFlags": [],
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "feedback": "La Líder Vecinal respalda el acuerdo: los barrios se suman a la negociación.",
+          "minTrust": {
+            "la_lider_vecinal": 3
+          },
+          "maxTrust": {}
+        }
+      ]
+    },
+    "right": {
+      "text": "Custodia militar",
+      "effects": {
+        "aparatoDelEstado": 5,
+        "pueblo": -4
+      },
+      "setFlags": [
+        "puerto_militar"
+      ],
+      "favorsCharacter": "el_general",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_05",
+          "afterTurns": 5,
+          "title": "Puerto: repartir el coste de la crisis"
+        }
+      ],
+      "trustChanges": {
+        "el_general": 1,
+        "la_lider_vecinal": -1
+      },
+      "conditionalOutcomes": [
+        {
+          "effects": {
+            "aparatoDelEstado": -3
+          },
+          "setFlags": [
+            "general_retiro_apoyo"
+          ],
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "feedback": "El General desconfía de ti y retira parte de la escolta del muelle.",
+          "minTrust": {},
+          "maxTrust": {
+            "el_general": -3
+          }
+        }
+      ]
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "puerto_cooperativa"
+        ],
+        "text": "La cooperativa que autorizaste también discute sus propios turnos. Sus estibadores paran y exigen que la participación alcance las condiciones de trabajo."
+      },
+      {
+        "requiresFlags": [
+          "puerto_exclusiva"
+        ],
+        "text": "El operador exclusivo aumentó la carga sin ampliar descansos. Los estibadores paran. El General ofrece reabrir el muelle por la fuerza."
+      }
+    ]
+  },
+  {
+    "id": "historia_puerto_05",
+    "era": "crisis",
+    "character": "la_periodista",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 5/8 · El almacén vacío",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Una mala temporada deja el almacén vacío y vencen las obligaciones del puerto. Renegociar molestará a los socios; usar el fondo de pensiones aplazará la factura.",
+    "left": {
+      "text": "Renegociar a la vista de todos",
+      "effects": {
+        "relacionesExteriores": -4,
+        "pueblo": 4
+      },
+      "setFlags": [
+        "puerto_deuda_negociada"
+      ],
+      "favorsCharacter": "la_periodista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_06",
+          "afterTurns": 4,
+          "title": "Puerto: revisar el contrato"
+        }
+      ],
+      "trustChanges": {
+        "la_periodista": 1
+      }
+    },
+    "right": {
+      "text": "Usar el fondo de pensiones",
+      "effects": {
+        "economia": 5,
+        "pueblo": -4
+      },
+      "setFlags": [
+        "puerto_pensiones"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_06",
+          "afterTurns": 4,
+          "title": "Puerto: revisar el contrato"
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "puerto_acuerdo_laboral"
+        ],
+        "text": "El pacto mantuvo trabajando al muelle, pero la mala temporada vació el almacén. Los estibadores piden que sus pensiones no paguen las obligaciones del puerto."
+      },
+      {
+        "requiresFlags": [
+          "puerto_militar"
+        ],
+        "text": "La custodia abrió el muelle, pero no trajo compradores. La Periodista encuentra obligaciones vencidas y pregunta quién asumirá la factura."
+      }
+    ]
+  },
+  {
+    "id": "historia_puerto_06",
+    "era": "apertura",
+    "character": "la_jurista",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 6/8 · El voto",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "La Jurista propone revisar el contrato del puerto en consulta pública. Un decreto daría una respuesta rápida, pero dejaría fuera a quienes viven del muelle.",
+    "left": {
+      "text": "Consulta con las cuentas abiertas",
+      "effects": {
+        "pueblo": 5,
+        "aparatoDelEstado": -3
+      },
+      "setFlags": [
+        "puerto_consulta"
+      ],
+      "favorsCharacter": "la_jurista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_07",
+          "afterTurns": 5,
+          "title": "Puerto: decidir la próxima licencia"
+        }
+      ],
+      "trustChanges": {
+        "la_jurista": 1
+      }
+    },
+    "right": {
+      "text": "Resolver por decreto",
+      "effects": {
+        "aparatoDelEstado": 5,
+        "pueblo": -3
+      },
+      "setFlags": [
+        "puerto_decreto"
+      ],
+      "favorsCharacter": "el_general",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_07",
+          "afterTurns": 5,
+          "title": "Puerto: decidir la próxima licencia"
+        }
+      ],
+      "trustChanges": {
+        "el_general": 1,
+        "la_lider_vecinal": -1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "puerto_deuda_negociada"
+        ],
+        "text": "La renegociación reveló cuánto cuesta el puerto. La Jurista quiere que la isla vote el siguiente contrato con esas cuentas sobre la mesa."
+      },
+      {
+        "requiresFlags": [
+          "puerto_pensiones"
+        ],
+        "text": "Los pensionistas reclaman lo que prestaron al puerto. La Jurista exige que cualquier nuevo contrato explique cómo devolverlo antes de votarlo."
+      }
+    ]
+  },
+  {
+    "id": "historia_puerto_07",
+    "era": "contemporanea",
+    "character": "el_emprendedor",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 7/8 · Treinta años",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "Vence la licencia del muelle. Los emprendedores locales proponen acceso compartido; un consorcio ofrece una inversión mayor a cambio de treinta años de exclusividad.",
+    "left": {
+      "text": "Acceso compartido",
+      "effects": {
+        "pueblo": 4,
+        "economia": -3
+      },
+      "setFlags": [
+        "puerto_abierto"
+      ],
+      "favorsCharacter": "el_emprendedor",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_08",
+          "afterTurns": 3,
+          "title": "Puerto: quién guarda las claves"
+        }
+      ],
+      "trustChanges": {
+        "el_emprendedor": 1
+      }
+    },
+    "right": {
+      "text": "Exclusividad con inversión",
+      "effects": {
+        "economia": 6,
+        "aparatoDelEstado": -4
+      },
+      "setFlags": [
+        "puerto_monopolio"
+      ],
+      "favorsCharacter": "la_economista",
+      "scheduleCards": [
+        {
+          "cardId": "historia_puerto_08",
+          "afterTurns": 3,
+          "title": "Puerto: quién guarda las claves"
+        }
+      ],
+      "trustChanges": {
+        "la_economista": 1
+      }
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "puerto_consulta"
+        ],
+        "text": "La consulta pidió que varios operadores pudieran usar el muelle. Un consorcio ofrece más inversión si renuncias a ese mandato por treinta años."
+      },
+      {
+        "requiresFlags": [
+          "puerto_decreto"
+        ],
+        "text": "El decreto estabilizó el contrato, pero ahora debes renovarlo. Los emprendedores locales piden acceso; un consorcio compra treinta años de exclusividad."
+      }
+    ]
+  },
+  {
+    "id": "historia_puerto_08",
+    "era": "futurista",
+    "character": "la_activista_digital",
+    "storyArc": "puerto",
+    "chapter": "EL PUERTO · 8/8 · Las claves",
+    "drawFromDeck": false,
+    "weight": 1,
+    "text": "El puerto funciona con un sistema automático. El proveedor ofrece abaratarlo si conserva las claves y los datos. La Activista Digital pide una auditoría y control público.",
+    "left": {
+      "text": "Auditar y conservar las claves",
+      "effects": {
+        "economia": -4,
+        "aparatoDelEstado": 5
+      },
+      "setFlags": [
+        "puerto_legado_autonomo",
+        "puerto_resuelto"
+      ],
+      "favorsCharacter": "la_activista_digital",
+      "trustChanges": {
+        "la_activista_digital": 1
+      },
+      "scheduleCards": [
+        {
+          "cardId": "camp_transicion",
+          "title": "Gobierno: decidir la sucesión",
+          "afterTurns": 5
+        }
+      ]
+    },
+    "right": {
+      "text": "El proveedor lo administra",
+      "effects": {
+        "economia": 6,
+        "aparatoDelEstado": -4
+      },
+      "setFlags": [
+        "puerto_legado_dependiente",
+        "puerto_resuelto"
+      ],
+      "favorsCharacter": "el_magnate_tech",
+      "trustChanges": {
+        "el_magnate_tech": 1
+      },
+      "scheduleCards": [
+        {
+          "cardId": "camp_transicion",
+          "title": "Gobierno: decidir la sucesión",
+          "afterTurns": 5
+        }
+      ]
+    },
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "puerto_abierto"
+        ],
+        "text": "El muelle compartido ya conecta a varios operadores. La Activista Digital advierte que un único proveedor puede cerrarlo con una contraseña."
+      },
+      {
+        "requiresFlags": [
+          "puerto_monopolio"
+        ],
+        "text": "El consorcio modernizó el muelle y controla sus accesos. La Activista Digital pregunta si la isla conservará al menos las claves del sistema."
+      }
+    ]
+  },
+  {
+    "id": "seguridad_alerta",
+    "era": "fundacional",
+    "character": "el_guardaeaspalda",
+    "drawFromDeck": false,
+    "storyArc": "seguridad",
+    "chapter": "SEGURIDAD · Una última oportunidad",
+    "weight": 1,
+    "text": "Has debilitado tu protección dos veces. Hay un plan de atentado: si no cambias nada, quedan cuatro decisiones antes de que actúen. El Guardaespaldas pide presupuesto para renovar la escolta.",
+    "left": {
+      "text": "Renovar la escolta",
+      "effects": {
+        "economia": -5,
+        "aparatoDelEstado": 3
+      },
+      "restoresSecurity": true
+    },
+    "right": {
+      "text": "Asumir el riesgo",
+      "effects": {
+        "pueblo": 3
+      }
+    }
+  }
+]

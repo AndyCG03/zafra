@@ -1,0 +1,1876 @@
+{
+  "title": "La isla después de ti",
+  "acts": [
+    {
+      "title": "La promesa y la marea",
+      "cards": [
+        "historia_agua_01",
+        "historia_puerto_01",
+        "historia_agua_02",
+        "personal_lider_01",
+        "historia_puerto_02",
+        "historia_agua_03",
+        "humor_radio"
+      ]
+    },
+    {
+      "title": "La cosecha que no llegó",
+      "cards": [
+        "historia_agua_04",
+        "historia_puerto_03",
+        "personal_cantinera_01",
+        "cruce_contrato",
+        "cosecha_01",
+        "historia_puerto_04",
+        "humor_sello",
+        "personal_general_01"
+      ]
+    },
+    {
+      "title": "El precio de la confianza",
+      "cards": [
+        "historia_agua_05",
+        "cosecha_02",
+        "general_disputa",
+        "historia_puerto_05",
+        "historia_agua_06",
+        "cosecha_03"
+      ]
+    },
+    {
+      "title": "Quién puede preguntar",
+      "cards": [
+        "cosecha_04",
+        "historia_agua_07",
+        "historia_puerto_06",
+        "cosecha_05",
+        "lider_pacto",
+        "personal_lider_02",
+        "humor_colas"
+      ]
+    },
+    {
+      "title": "Lo que puede probarse",
+      "cards": [
+        "historia_puerto_07",
+        "historia_agua_08",
+        "cosecha_06",
+        "cosecha_07",
+        "personal_general_02",
+        "audiencia_pueblo",
+        "humor_estatua"
+      ]
+    },
+    {
+      "title": "La isla después de ti",
+      "cards": [
+        "historia_puerto_08",
+        "cosecha_08",
+        "personal_cantinera_02",
+        "camp_reparaciones",
+        "camp_transicion"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "cruce_contrato",
+      "era": "consolidacion",
+      "character": "el_diplomatico",
+      "storyArc": "politica",
+      "chapter": "EL AGUA Y EL PUERTO · La misma factura",
+      "text": "El socio del puerto recuerda que sus barcos esperan una cosecha. Hay que cumplir el acuerdo o renegociarlo antes de que lleguen.",
+      "left": {
+        "text": "Compensar y cumplir",
+        "effects": {
+          "economia": -2,
+          "relacionesExteriores": 3
+        },
+        "setFlags": [
+          "contrato_pagado"
+        ],
+        "trustChanges": {
+          "el_diplomatico": 2,
+          "la_economista": -1
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {
+              "economia": -2
+            },
+            "setFlags": [],
+            "requiresFlags": [
+              "agua_barrios"
+            ],
+            "excludesFlags": [],
+            "feedback": "Dar prioridad al agua de los barrios redujo la cosecha: la compensación cuesta más.",
+            "minTrust": {},
+            "maxTrust": {}
+          },
+          {
+            "effects": {
+              "economia": 1
+            },
+            "setFlags": [],
+            "requiresFlags": [
+              "aprendices_puerto"
+            ],
+            "excludesFlags": [],
+            "feedback": "Los aprendices reparan parte de la carga y reducen la compensación.",
+            "minTrust": {},
+            "maxTrust": {}
+          }
+        ]
+      },
+      "right": {
+        "text": "Renegociar la carga",
+        "effects": {
+          "relacionesExteriores": -3,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "contrato_renegociado"
+        ],
+        "trustChanges": {
+          "el_diplomatico": -2,
+          "la_economista": 1
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {
+              "economia": 2
+            },
+            "setFlags": [],
+            "requiresFlags": [
+              "agua_ingenio"
+            ],
+            "excludesFlags": [],
+            "feedback": "El ingenio conservó producción; usas esa cosecha como garantía de la renegociación.",
+            "minTrust": {},
+            "maxTrust": {}
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "El agua que reservaste para los barrios redujo la cosecha. El socio del puerto exige la carga prometida o una compensación.",
+          "requiresFlags": [
+            "agua_barrios"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El ingenio que priorizaste tiene carga, pero el socio exige la fecha pactada. Puedes cumplir o aprovechar la cosecha para renegociar.",
+          "requiresFlags": [
+            "agua_ingenio"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_01",
+      "era": "consolidacion",
+      "character": "el_archivero",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 1/8 · Los sacos",
+      "text": "Faltan veinte sacos en el almacén, pero el libro registra una entrega completa. El Archivero pide conservar los documentos antes de que alguien los corrija.",
+      "left": {
+        "text": "Abrir una investigación",
+        "effects": {
+          "economia": -2,
+          "aparatoDelEstado": 2
+        },
+        "setFlags": [
+          "misterio_investiga"
+        ],
+        "trustChanges": {
+          "la_periodista": 1,
+          "el_general": -1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_02",
+            "title": "Investigación: capítulo 2 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "right": {
+        "text": "Negociar antes de acusar",
+        "effects": {
+          "relacionesExteriores": 2,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "misterio_negocia"
+        ],
+        "trustChanges": {
+          "el_diplomatico": 1,
+          "la_economista": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_02",
+            "title": "Investigación: capítulo 2 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "La cooperativa del puerto registra una entrega completa, pero faltan veinte sacos. Una orden de la escolta permitió sacar carga del almacén.",
+          "requiresFlags": [
+            "puerto_cooperativa"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El operador exclusivo declara entregada la cosecha. Faltan veinte sacos y aparece una compensación en el contrato. El Archivero conserva dos versiones.",
+          "requiresFlags": [
+            "puerto_exclusiva"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_02",
+      "era": "crisis",
+      "character": "el_archivero",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 2/8 · Dos libros",
+      "text": "El Archivero guarda el libro del almacén y el manifiesto del barco. Copiarlos preservará una pista; entregar los originales al operador facilitará un acuerdo privado.",
+      "left": {
+        "text": "Guardar copias públicas",
+        "effects": {
+          "aparatoDelEstado": -2,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "archivo_copiado"
+        ],
+        "trustChanges": {
+          "la_periodista": 1
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {},
+            "setFlags": [
+              "pista_escolta"
+            ],
+            "requiresFlags": [
+              "puerto_cooperativa"
+            ],
+            "excludesFlags": [],
+            "feedback": "La copia conserva una autorización de la escolta.",
+            "minTrust": {},
+            "maxTrust": {}
+          },
+          {
+            "effects": {},
+            "setFlags": [
+              "pista_contrato"
+            ],
+            "requiresFlags": [
+              "puerto_exclusiva"
+            ],
+            "excludesFlags": [],
+            "feedback": "La copia conserva una cláusula de compensación del operador.",
+            "minTrust": {},
+            "maxTrust": {}
+          }
+        ],
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_03",
+            "title": "Investigación: capítulo 3 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "right": {
+        "text": "Negociar con los originales",
+        "effects": {
+          "economia": 3,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "archivo_privado"
+        ],
+        "trustChanges": {
+          "el_diplomatico": 2,
+          "la_periodista": -2
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_03",
+            "title": "Investigación: capítulo 3 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "La orden que sacó carga de la cooperativa lleva un sello de la escolta. El Archivero ofrece copiarla antes de entregar el expediente.",
+          "requiresFlags": [
+            "puerto_cooperativa"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "La compensación del operador exclusivo figura en un manifiesto, pero no en el otro. El Archivero puede copiar ambos.",
+          "requiresFlags": [
+            "puerto_exclusiva"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_03",
+      "era": "crisis",
+      "character": "la_periodista",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 3/8 · El testigo",
+      "text": "Un estibador vio un barco salir de noche. La Periodista quiere protegerlo fuera del puerto. El General pide llevarlo a un recinto militar.",
+      "left": {
+        "text": "Proteger su identidad",
+        "effects": {
+          "economia": -2,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "testigo_protegido"
+        ],
+        "trustChanges": {
+          "la_periodista": 2,
+          "el_general": -1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_04",
+            "title": "Investigación: capítulo 4 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "right": {
+        "text": "Custodia del General",
+        "effects": {
+          "aparatoDelEstado": 3,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "testigo_custodiado"
+        ],
+        "trustChanges": {
+          "el_general": 2,
+          "la_periodista": -2
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {
+              "pueblo": -2
+            },
+            "setFlags": [
+              "testigo_silenciado"
+            ],
+            "requiresFlags": [],
+            "excludesFlags": [],
+            "feedback": "El General, convertido en rival, impide que el testigo vuelva a hablar con la prensa.",
+            "minTrust": {},
+            "maxTrust": {
+              "el_general": -3
+            }
+          }
+        ],
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_04",
+            "title": "Investigación: capítulo 4 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "El testigo solo acepta declarar porque confía en la Periodista, a quien has respaldado. Pide protección fuera del puerto.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {
+            "la_periodista": 3
+          },
+          "maxTrust": {}
+        },
+        {
+          "text": "La Periodista recuerda tus acuerdos a puerta cerrada. El testigo teme que sus palabras terminen en manos de quienes investiga.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {
+            "la_periodista": -3
+          }
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_04",
+      "era": "apertura",
+      "character": "la_jurista",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 4/8 · Una puerta legal",
+      "text": "La Jurista puede pedir una orden para revisar los depósitos. El operador ofrece abrir sus libros si la inspección se mantiene privada.",
+      "left": {
+        "text": "Solicitar una orden judicial",
+        "effects": {
+          "aparatoDelEstado": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "sello_judicial"
+        ],
+        "trustChanges": {
+          "la_jurista": 2,
+          "el_general": -1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_05",
+            "title": "Investigación: capítulo 5 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "right": {
+        "text": "Revisar los libros en privado",
+        "effects": {
+          "relacionesExteriores": 2,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "misterio_trato"
+        ],
+        "trustChanges": {
+          "el_diplomatico": 1,
+          "la_jurista": -1
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {},
+            "setFlags": [
+              "pista_contrato"
+            ],
+            "requiresFlags": [
+              "puerto_exclusiva"
+            ],
+            "excludesFlags": [],
+            "feedback": "El operador entrega su copia del contrato como parte del trato.",
+            "minTrust": {},
+            "maxTrust": {}
+          },
+          {
+            "effects": {},
+            "setFlags": [
+              "pista_escolta"
+            ],
+            "requiresFlags": [
+              "puerto_cooperativa"
+            ],
+            "excludesFlags": [],
+            "feedback": "Los libros privados conservan el sello de la escolta.",
+            "minTrust": {},
+            "maxTrust": {}
+          }
+        ],
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_05",
+            "title": "Investigación: capítulo 5 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "memoryVariants": [],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_05",
+      "era": "apertura",
+      "character": "la_cantinera",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 5/8 · Lo que se oye",
+      "text": "La Cantinera asegura que los sacos no desaparecieron: aprendieron a nadar. Bajo la broma hay un nombre de barco. Puedes escucharlo o cerrar el rumor.",
+      "left": {
+        "text": "Escuchar sin revelar la fuente",
+        "effects": {
+          "economia": -1,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "pista_barco"
+        ],
+        "trustChanges": {
+          "la_cantinera": 2,
+          "la_periodista": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_06",
+            "title": "Investigación: capítulo 6 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "right": {
+        "text": "Ordenar que cese el rumor",
+        "effects": {
+          "aparatoDelEstado": 2,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "rumor_cerrado"
+        ],
+        "trustChanges": {
+          "la_cantinera": -2,
+          "el_general": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_06",
+            "title": "Investigación: capítulo 6 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "«La cooperativa puso los sacos; la escolta puso las ruedas», dice la Cantinera. Entre chistes ofrece un nombre de barco.",
+          "requiresFlags": [
+            "puerto_cooperativa"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "«El contrato incluía entrega a domicilio. Nadie dijo a qué domicilio», bromea la Cantinera. Tiene un nombre de barco.",
+          "requiresFlags": [
+            "puerto_exclusiva"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_06",
+      "era": "contemporanea",
+      "character": "el_cientifico",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 6/8 · Seguir el rastro",
+      "text": "El Científico puede comparar el azúcar de un depósito con las muestras de la cosecha. Sin documentos y una ruta, la coincidencia no basta para acusar a nadie.",
+      "left": {
+        "text": "Cruzar muestras y documentos",
+        "effects": {
+          "economia": -3,
+          "aparatoDelEstado": 2
+        },
+        "setFlags": [
+          "muestras_comparadas"
+        ],
+        "trustChanges": {
+          "el_cientifico": 2
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {},
+            "setFlags": [
+              "prueba_desvio_escolta"
+            ],
+            "requiresFlags": [
+              "pista_escolta",
+              "pista_barco"
+            ],
+            "excludesFlags": [],
+            "feedback": "La muestra y la autorización vinculan los sacos con un depósito usado por la escolta.",
+            "minTrust": {},
+            "maxTrust": {}
+          },
+          {
+            "effects": {},
+            "setFlags": [
+              "prueba_desvio_contrato"
+            ],
+            "requiresFlags": [
+              "pista_contrato",
+              "pista_barco"
+            ],
+            "excludesFlags": [],
+            "feedback": "La muestra y el contrato vinculan los sacos con la compensación del operador.",
+            "minTrust": {},
+            "maxTrust": {}
+          }
+        ],
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_07",
+            "title": "Investigación: capítulo 7 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "right": {
+        "text": "Publicar el informe provisional",
+        "effects": {
+          "pueblo": 2,
+          "relacionesExteriores": -2
+        },
+        "setFlags": [
+          "informe_provisional"
+        ],
+        "trustChanges": {
+          "la_periodista": 1,
+          "el_cientifico": -1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_07",
+            "title": "Investigación: capítulo 7 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "El nombre del barco permite localizar un depósito. El Científico puede contrastar sus sacos con los documentos que conservaste.",
+          "requiresFlags": [
+            "pista_barco"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El testigo dejó de hablar bajo custodia. El Científico advierte que un parecido entre muestras no reemplaza la ruta que falta.",
+          "requiresFlags": [
+            "testigo_silenciado"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_07",
+      "era": "contemporanea",
+      "character": "la_periodista",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 7/8 · Publicar o guardar",
+      "text": "La Periodista quiere publicar el expediente. Aún puedes hacerlo público o reservarlo para negociar una restitución sin señalar culpables.",
+      "left": {
+        "text": "Publicar el expediente",
+        "effects": {
+          "relacionesExteriores": -2,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "revelacion_pedida"
+        ],
+        "trustChanges": {
+          "la_periodista": 2,
+          "el_general": -1
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {},
+            "setFlags": [
+              "misterio_revelado"
+            ],
+            "requiresFlags": [
+              "prueba_desvio_escolta"
+            ],
+            "excludesFlags": [],
+            "feedback": "Se publica la cadena de pruebas del depósito de la escolta.",
+            "minTrust": {},
+            "maxTrust": {}
+          },
+          {
+            "effects": {},
+            "setFlags": [
+              "misterio_revelado"
+            ],
+            "requiresFlags": [
+              "prueba_desvio_contrato"
+            ],
+            "excludesFlags": [],
+            "feedback": "Se publica la cadena de pruebas de la compensación del operador.",
+            "minTrust": {},
+            "maxTrust": {}
+          },
+          {
+            "effects": {
+              "relacionesExteriores": -2
+            },
+            "setFlags": [
+              "misterio_incierto"
+            ],
+            "requiresFlags": [],
+            "excludesFlags": [
+              "prueba_desvio_escolta",
+              "prueba_desvio_contrato"
+            ],
+            "feedback": "El expediente publicado contiene sospechas, pero no una cadena de pruebas completa.",
+            "minTrust": {},
+            "maxTrust": {}
+          }
+        ],
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_08",
+            "title": "Investigación: capítulo 8 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "right": {
+        "text": "Restituir en silencio",
+        "effects": {
+          "economia": 3,
+          "pueblo": -3
+        },
+        "setFlags": [
+          "misterio_encubierto"
+        ],
+        "trustChanges": {
+          "la_economista": 1,
+          "la_periodista": -3
+        },
+        "scheduleCards": [
+          {
+            "cardId": "cosecha_08",
+            "title": "Investigación: capítulo 8 de la cosecha",
+            "afterTurns": 3
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "Los documentos y las muestras sitúan la cosecha en un depósito usado por la escolta. La Periodista pide publicar la cadena completa.",
+          "requiresFlags": [
+            "prueba_desvio_escolta"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El operador descontó sacos como compensación sin declararlo al almacén. La Periodista pide publicar el contrato y las muestras.",
+          "requiresFlags": [
+            "prueba_desvio_contrato"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "cosecha_08",
+      "era": "futurista",
+      "character": "la_cientifica",
+      "storyArc": "cosecha",
+      "chapter": "LA COSECHA DESAPARECIDA · 8/8 · El archivo que queda",
+      "text": "La digitalización recupera el expediente. La Científica pide distinguir lo probado de lo sospechado y compensar a quienes cargaron con las pérdidas.",
+      "left": {
+        "text": "Abrir el archivo y reparar",
+        "effects": {
+          "economia": -3,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "misterio_cerrado",
+          "misterio_reparado"
+        ],
+        "trustChanges": {
+          "la_cientifica": 2,
+          "la_periodista": 1
+        },
+        "clearFlags": [
+          "misterio_encubierto"
+        ],
+        "scheduleCards": [
+          {
+            "cardId": "camp_reparaciones",
+            "title": "Gobierno: publicar las obligaciones",
+            "afterTurns": 3
+          },
+          {
+            "cardId": "camp_transicion",
+            "title": "Gobierno: decidir la sucesión",
+            "afterTurns": 5
+          }
+        ]
+      },
+      "right": {
+        "text": "Sellar el expediente",
+        "effects": {
+          "aparatoDelEstado": 3,
+          "pueblo": -3
+        },
+        "setFlags": [
+          "misterio_cerrado",
+          "misterio_encubierto"
+        ],
+        "trustChanges": {
+          "el_general": 1,
+          "la_periodista": -2
+        },
+        "scheduleCards": [
+          {
+            "cardId": "camp_reparaciones",
+            "title": "Gobierno: publicar las obligaciones",
+            "afterTurns": 3
+          },
+          {
+            "cardId": "camp_transicion",
+            "title": "Gobierno: decidir la sucesión",
+            "afterTurns": 5
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "La cadena publicada prueba el desvío por la escolta. La Científica propone conservarla, limitar esas autorizaciones y reparar las pérdidas.",
+          "requiresFlags": [
+            "prueba_desvio_escolta",
+            "misterio_revelado"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "La cadena publicada prueba la compensación oculta del operador. La Científica propone corregir el contrato y reparar las pérdidas.",
+          "requiresFlags": [
+            "prueba_desvio_contrato",
+            "misterio_revelado"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El expediente que reservaste sigue en el archivo digital. Puedes reconocer lo que ocultaste y reparar, o cerrar también esta copia.",
+          "requiresFlags": [
+            "misterio_encubierto"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "No reuniste una cadena completa de pruebas. La Científica propone admitir los límites del expediente y reparar sin inventar un culpable.",
+          "requiresFlags": [
+            "misterio_incierto"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "general_disputa",
+      "era": "crisis",
+      "character": "el_general",
+      "storyArc": "politica",
+      "chapter": "ALIANZAS · El precio del respaldo",
+      "text": "El General ofrece sostener al gobierno durante las protestas si su brigada queda fuera de las auditorías. Puedes aceptar ese precio o exigir las mismas reglas para todos.",
+      "left": {
+        "text": "Una brigada sin excepciones",
+        "effects": {
+          "aparatoDelEstado": -3,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "general_auditado"
+        ],
+        "trustChanges": {
+          "el_general": -2,
+          "la_jurista": 2
+        }
+      },
+      "right": {
+        "text": "Conceder la excepción",
+        "effects": {
+          "aparatoDelEstado": 3,
+          "pueblo": -3
+        },
+        "setFlags": [
+          "general_privilegios"
+        ],
+        "trustChanges": {
+          "el_general": 2,
+          "la_lider_vecinal": -2
+        }
+      },
+      "memoryVariants": [
+        {
+          "text": "El General recuerda las propuestas que has respaldado. Ofrece sostener al gobierno, pero pide que su brigada quede fuera de las auditorías.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {
+            "el_general": 3
+          },
+          "maxTrust": {}
+        },
+        {
+          "text": "El General ya no confía en ti. Retira su apoyo público y condiciona cualquier regreso a una excepción para su brigada.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {
+            "el_general": -3
+          }
+        }
+      ],
+      "drawFromDeck": true,
+      "weight": 2,
+      "conditions": {
+        "minTrust": {
+          "el_general": 3
+        }
+      }
+    },
+    {
+      "id": "lider_pacto",
+      "era": "apertura",
+      "character": "la_lider_vecinal",
+      "storyArc": "politica",
+      "chapter": "ALIANZAS · Una mesa para todos",
+      "text": "La Líder Vecinal puede llevar a los barrios a una mesa de negociación. Quiere reuniones públicas y presupuesto para los acuerdos, no una foto de apoyo.",
+      "left": {
+        "text": "Mesa pública con presupuesto",
+        "effects": {
+          "economia": -3,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "lider_pacto"
+        ],
+        "trustChanges": {
+          "la_lider_vecinal": 2,
+          "el_general": -1
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {
+              "aparatoDelEstado": 2
+            },
+            "setFlags": [],
+            "requiresFlags": [],
+            "excludesFlags": [],
+            "feedback": "La confianza de la Líder Vecinal permite que los barrios acepten sentarse a negociar.",
+            "minTrust": {
+              "la_lider_vecinal": 3
+            },
+            "maxTrust": {}
+          }
+        ]
+      },
+      "right": {
+        "text": "Una reunión solo en palacio",
+        "effects": {
+          "aparatoDelEstado": 2,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "lider_foto"
+        ],
+        "trustChanges": {
+          "la_lider_vecinal": -2,
+          "el_general": 1
+        }
+      },
+      "memoryVariants": [
+        {
+          "text": "La Líder Vecinal confía en ti y puede reunir a los barrios durante la protesta. Su apoyo exige presupuesto y cuentas públicas.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {
+            "la_lider_vecinal": 3
+          },
+          "maxTrust": {}
+        },
+        {
+          "text": "La Líder Vecinal recuerda tus promesas incumplidas. Solo participará en una mesa con acuerdos públicos que los barrios puedan vigilar.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {
+            "la_lider_vecinal": -3
+          }
+        }
+      ],
+      "drawFromDeck": true,
+      "weight": 2,
+      "conditions": {
+        "minTrust": {
+          "la_lider_vecinal": 3
+        }
+      }
+    },
+    {
+      "id": "audiencia_pueblo",
+      "era": "contemporanea",
+      "character": "la_lider_vecinal",
+      "storyArc": "politica",
+      "chapter": "ALIANZAS · La protesta vuelve",
+      "text": "Vuelven las protestas. Los barrios quieren saber quién decidió el último reparto. Puedes abrir una audiencia o limitar el acceso a palacio.",
+      "left": {
+        "text": "Responder en audiencia pública",
+        "effects": {
+          "economia": -2,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "audiencia_abierta"
+        ],
+        "trustChanges": {
+          "la_lider_vecinal": 1
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {
+              "aparatoDelEstado": 2
+            },
+            "setFlags": [],
+            "requiresFlags": [],
+            "excludesFlags": [],
+            "feedback": "La Líder Vecinal te respalda y convence a los barrios de esperar la audiencia.",
+            "minTrust": {
+              "la_lider_vecinal": 3
+            },
+            "maxTrust": {}
+          },
+          {
+            "effects": {
+              "pueblo": -2
+            },
+            "setFlags": [],
+            "requiresFlags": [],
+            "excludesFlags": [],
+            "feedback": "La Líder Vecinal desconfía: los barrios exigen garantías antes de aceptar tu palabra.",
+            "minTrust": {},
+            "maxTrust": {
+              "la_lider_vecinal": -3
+            }
+          },
+          {
+            "effects": {
+              "aparatoDelEstado": 1
+            },
+            "setFlags": [],
+            "requiresFlags": [
+              "mediacion_puente"
+            ],
+            "excludesFlags": [],
+            "feedback": "La mediación dejó un acta común: vecinos y escoltas acuerdan cómo proteger la audiencia.",
+            "minTrust": {},
+            "maxTrust": {}
+          }
+        ]
+      },
+      "right": {
+        "text": "Limitar el acceso a palacio",
+        "effects": {
+          "aparatoDelEstado": 3,
+          "pueblo": -3
+        },
+        "setFlags": [
+          "palacio_cerrado"
+        ],
+        "trustChanges": {
+          "el_general": 1,
+          "la_lider_vecinal": -2
+        },
+        "conditionalOutcomes": [
+          {
+            "effects": {
+              "aparatoDelEstado": -3
+            },
+            "setFlags": [
+              "general_retiro_apoyo"
+            ],
+            "requiresFlags": [],
+            "excludesFlags": [],
+            "feedback": "El General retira su respaldo: las órdenes de cerrar palacio llegan sin la escolta prometida.",
+            "minTrust": {},
+            "maxTrust": {
+              "el_general": -3
+            }
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "Los barrios vuelven a protestar, pero la Líder Vecinal pone su nombre junto al tuyo: ofrece una audiencia y exige que respondas en público.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {
+            "la_lider_vecinal": 3
+          },
+          "maxTrust": {}
+        },
+        {
+          "text": "Los barrios vuelven a protestar. La Líder Vecinal, ahora rival, exige garantías y se niega a defender al gobierno sin ellas.",
+          "requiresFlags": [],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {
+            "la_lider_vecinal": -3
+          }
+        }
+      ],
+      "drawFromDeck": true,
+      "weight": 2,
+      "conditions": {
+        "requiresFlags": [
+          "agua_resuelta"
+        ]
+      }
+    },
+    {
+      "id": "humor_radio",
+      "era": "fundacional",
+      "character": "la_cantinera",
+      "storyArc": "vida_cotidiana",
+      "chapter": "VIDA DE LA ISLA · La radio de la cantina",
+      "text": "La Cantinera anuncia que el gobierno ha descubierto una fuente inagotable de agua: sus discursos. Propone emitir el próximo parte con preguntas del barrio.",
+      "left": {
+        "text": "Aceptar las preguntas",
+        "effects": {
+          "pueblo": 2,
+          "economia": -1
+        },
+        "setFlags": [
+          "radio_abierta"
+        ],
+        "trustChanges": {
+          "la_cantinera": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "humor_sello",
+            "title": "Barrio: un sello para existir",
+            "afterTurns": 5
+          }
+        ]
+      },
+      "right": {
+        "text": "Preparar un parte oficial",
+        "effects": {
+          "aparatoDelEstado": 2,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "radio_oficial"
+        ],
+        "trustChanges": {
+          "la_cantinera": -1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "humor_sello",
+            "title": "Barrio: un sello para existir",
+            "afterTurns": 5
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "«Primero los barrios», repite la Cantinera. Ya venden vasos con tu promesa impresa, aunque todavía están vacíos. Propone preguntas en la radio.",
+          "requiresFlags": [
+            "agua_barrios"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "La Cantinera dice que el ingenio tiene tanta prioridad que pronto podrá votar. Propone que los barrios pregunten por su turno de agua en la radio.",
+          "requiresFlags": [
+            "agua_ingenio"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "humor_sello",
+      "era": "consolidacion",
+      "character": "el_vagabundo",
+      "storyArc": "vida_cotidiana",
+      "chapter": "VIDA DE LA ISLA · Un sello para existir",
+      "text": "El Vagabundo necesita un domicilio para solicitar casa y una casa para registrar domicilio. Pide una ventanilla que acepte personas sin dirección, aunque no tengan sello.",
+      "left": {
+        "text": "Abrir una ventanilla sin domicilio",
+        "effects": {
+          "pueblo": 3,
+          "economia": -2
+        },
+        "setFlags": [
+          "ventanilla_abierta"
+        ],
+        "trustChanges": {
+          "el_vagabundo": 1,
+          "la_lider_vecinal": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "humor_colas",
+            "title": "Barrio: revisar los trámites",
+            "afterTurns": 5
+          },
+          {
+            "cardId": "personal_general_01",
+            "title": "General: una llave en el bolsillo",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "right": {
+        "text": "Crear un registro provisional",
+        "effects": {
+          "aparatoDelEstado": 2,
+          "economia": -1
+        },
+        "setFlags": [
+          "registro_provisional"
+        ],
+        "trustChanges": {
+          "el_vagabundo": -1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "humor_colas",
+            "title": "Barrio: revisar los trámites",
+            "afterTurns": 5
+          },
+          {
+            "cardId": "personal_general_01",
+            "title": "General: una llave en el bolsillo",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "memoryVariants": [],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "humor_colas",
+      "era": "apertura",
+      "character": "el_vagabundo",
+      "storyArc": "vida_cotidiana",
+      "chapter": "VIDA DE LA ISLA · La cola de la cola",
+      "text": "La nueva oficina tiene dos colas: una para recibir turno y otra para demostrar que se recibió. El Vagabundo dice que al menos ahora sabe dónde pasar la tarde.",
+      "left": {
+        "text": "Unificar trámites",
+        "effects": {
+          "pueblo": 3,
+          "aparatoDelEstado": -2
+        },
+        "setFlags": [
+          "tramites_unificados"
+        ],
+        "trustChanges": {
+          "el_vagabundo": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "humor_estatua",
+            "title": "Cantina: tu mejor perfil",
+            "afterTurns": 5
+          }
+        ]
+      },
+      "right": {
+        "text": "Abrir un turno de tarde",
+        "effects": {
+          "economia": -2,
+          "aparatoDelEstado": 2
+        },
+        "setFlags": [
+          "turno_tarde"
+        ],
+        "trustChanges": {
+          "el_vagabundo": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "humor_estatua",
+            "title": "Cantina: tu mejor perfil",
+            "afterTurns": 5
+          }
+        ]
+      },
+      "memoryVariants": [
+        {
+          "text": "La ventanilla que abriste acepta gente sin domicilio. Ahora pide un papel para certificar que no pidió papeles. El Vagabundo trae ambos formularios.",
+          "requiresFlags": [
+            "ventanilla_abierta"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El registro provisional tiene una cola definitiva. El Vagabundo pregunta si su nuevo domicilio puede ser la propia fila.",
+          "requiresFlags": [
+            "registro_provisional"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "humor_estatua",
+      "era": "contemporanea",
+      "character": "la_cantinera",
+      "storyArc": "vida_cotidiana",
+      "chapter": "VIDA DE LA ISLA · Tu mejor perfil",
+      "text": "Un comité propone una estatua tuya. La Cantinera celebra que, por fin, un gobernante podrá escuchar sin interrumpir. El mismo presupuesto alcanza para una biblioteca.",
+      "left": {
+        "text": "Construir la biblioteca",
+        "effects": {
+          "economia": -2,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "biblioteca_publica"
+        ],
+        "trustChanges": {
+          "la_cantinera": 1,
+          "la_bibliotecaria": 1
+        }
+      },
+      "right": {
+        "text": "Una estatua hecha por artistas locales",
+        "effects": {
+          "economia": -2,
+          "aparatoDelEstado": 2
+        },
+        "setFlags": [
+          "estatua_local"
+        ],
+        "trustChanges": {
+          "la_artista": 1
+        }
+      },
+      "memoryVariants": [],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "camp_reparaciones",
+      "era": "futurista",
+      "character": "la_jurista",
+      "storyArc": "politica",
+      "chapter": "EL ÚLTIMO ACTO · Las cuentas de la isla",
+      "text": "La Jurista reúne las cuentas del agua, del puerto y del almacén. Antes de discutir quién seguirá gobernando, pide decidir qué obligaciones dejarás resueltas.",
+      "left": {
+        "text": "Publicar obligaciones y reparar",
+        "effects": {
+          "economia": -3,
+          "pueblo": 3
+        },
+        "setFlags": [
+          "cuentas_publicas"
+        ],
+        "trustChanges": {
+          "la_jurista": 2
+        }
+      },
+      "right": {
+        "text": "Reservar fondos para palacio",
+        "effects": {
+          "economia": 2,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "reserva_palacio"
+        ],
+        "trustChanges": {
+          "el_general": 1,
+          "la_jurista": -2
+        }
+      },
+      "memoryVariants": [
+        {
+          "text": "Tu promesa de agua terminó en una red común. La Jurista pide publicar cómo se sostendrá, junto con las obligaciones pendientes del puerto y del almacén.",
+          "requiresFlags": [
+            "agua_legado_comun"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El proveedor conserva las claves del puerto. La Jurista pide publicar cuánto costará recuperar el control antes de discutir la sucesión.",
+          "requiresFlags": [
+            "puerto_legado_dependiente"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "camp_transicion",
+      "era": "futurista",
+      "character": "la_maestra",
+      "storyArc": "politica",
+      "chapter": "EL ÚLTIMO ACTO · Después de ti",
+      "text": "La Maestra pregunta qué ocurrirá cuando dejes palacio. Los consejos ofrecen asumir la transición. Puedes entregar el gobierno con sus cuentas o prolongar tu mandato.",
+      "left": {
+        "text": "Entregar el gobierno y las cuentas",
+        "effects": {
+          "aparatoDelEstado": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "sucesion_comunidad"
+        ],
+        "trustChanges": {
+          "la_maestra": 1
+        },
+        "endsStory": true
+      },
+      "right": {
+        "text": "Seguir gobernando",
+        "effects": {
+          "aparatoDelEstado": 2,
+          "pueblo": -2
+        },
+        "setFlags": [
+          "sucesion_perpetua"
+        ],
+        "trustChanges": {
+          "el_general": 1
+        }
+      },
+      "memoryVariants": [
+        {
+          "text": "Los consejos administran el agua y comparten el puerto sin depender de un proveedor. La Maestra cree que la isla ya puede gobernarse sin ti.",
+          "requiresFlags": [
+            "agua_legado_comun",
+            "agua_local",
+            "puerto_abierto",
+            "puerto_legado_autonomo"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "La isla tiene nuevas obras, pero el proveedor conserva las claves del puerto y los acreedores reclaman su parte. La Maestra pide una sucesión con cuentas claras.",
+          "requiresFlags": [
+            "puerto_legado_dependiente"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El expediente del almacén sigue sellado. La Maestra pregunta si tu sucesor heredará también los silencios del gobierno.",
+          "requiresFlags": [
+            "misterio_encubierto"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2,
+      "conditions": {
+        "requiresFlags": [
+          "agua_resuelta",
+          "puerto_resuelto",
+          "misterio_cerrado"
+        ]
+      }
+    },
+    {
+      "id": "personal_lider_01",
+      "era": "fundacional",
+      "character": "la_lider_vecinal",
+      "storyArc": "politica",
+      "chapter": "VIDAS · La marca en la pared",
+      "text": "La Líder Vecinal te enseña una marca de agua en la escuela: hasta allí llegó la inundación en que perdió a su hermano. El General cerró entonces el puente para salvar los depósitos. Ella quiere refugios; él sigue llamándolo una decisión necesaria.",
+      "left": {
+        "text": "Abrir refugios con los barrios",
+        "effects": {
+          "economia": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "refugios_vecinales"
+        ],
+        "trustChanges": {
+          "la_lider_vecinal": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "personal_lider_02",
+            "title": "Barrio: la memoria del puente",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "right": {
+        "text": "Exigir un plan común de evacuación",
+        "effects": {
+          "aparatoDelEstado": 2,
+          "economia": -1
+        },
+        "setFlags": [
+          "evacuacion_coordinada"
+        ],
+        "trustChanges": {
+          "el_general": 1,
+          "la_lider_vecinal": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "personal_lider_02",
+            "title": "Barrio: la memoria del puente",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "memoryVariants": [],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "personal_general_01",
+      "era": "consolidacion",
+      "character": "el_general",
+      "storyArc": "politica",
+      "chapter": "VIDAS · Una llave en el bolsillo",
+      "text": "El General lleva la llave de la casa de su madre, que el ciclón dejó vacía. Sus soldados reparan techos sin uniforme; teme que pedir ayuda parezca debilidad. Puedes pagar una brigada abierta a civiles o reconocer oficialmente a la que ya trabaja.",
+      "left": {
+        "text": "Una brigada civil y militar",
+        "effects": {
+          "economia": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "brigada_compartida"
+        ],
+        "trustChanges": {
+          "el_general": 1,
+          "la_lider_vecinal": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "personal_general_02",
+            "title": "General: devolver las herramientas",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "right": {
+        "text": "Reconocer la brigada existente",
+        "effects": {
+          "aparatoDelEstado": 2,
+          "pueblo": -1
+        },
+        "setFlags": [
+          "brigada_reconocida"
+        ],
+        "trustChanges": {
+          "el_general": 2
+        },
+        "scheduleCards": [
+          {
+            "cardId": "personal_general_02",
+            "title": "General: devolver las herramientas",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "memoryVariants": [],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "personal_cantinera_01",
+      "era": "consolidacion",
+      "character": "la_cantinera",
+      "storyArc": "politica",
+      "chapter": "VIDAS · El billete bajo la caja",
+      "text": "La hija de la Cantinera compró un pasaje de salida: aquí no encuentra trabajo. Su madre cuenta chistes sobre el puerto, pero guarda el billete bajo la caja. Pide aprendices en los talleres; la hija pide que nadie le retire el derecho a marcharse.",
+      "left": {
+        "text": "Financiar aprendices sin retenerla",
+        "effects": {
+          "economia": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "aprendices_puerto"
+        ],
+        "trustChanges": {
+          "la_cantinera": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "personal_cantinera_02",
+            "title": "Cantina: una mesa reservada",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "right": {
+        "text": "Acordar una beca fuera de la isla",
+        "effects": {
+          "economia": -1,
+          "relacionesExteriores": 2
+        },
+        "setFlags": [
+          "beca_hija"
+        ],
+        "trustChanges": {
+          "la_cantinera": 1,
+          "el_diplomatico": 1
+        },
+        "scheduleCards": [
+          {
+            "cardId": "personal_cantinera_02",
+            "title": "Cantina: una mesa reservada",
+            "afterTurns": 4
+          }
+        ]
+      },
+      "memoryVariants": [],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "personal_lider_02",
+      "era": "apertura",
+      "character": "la_lider_vecinal",
+      "storyArc": "politica",
+      "chapter": "VIDAS · Sentarse en el mismo banco",
+      "text": "La Líder quiere escuchar al General sobre el puente cerrado. No te pide un culpable elegido de antemano: pide testimonios y reglas para que nadie vuelva a quedarse atrás. Puedes abrir una memoria pública o comenzar una mediación sin cámaras.",
+      "left": {
+        "text": "Testimonios y protocolo público",
+        "effects": {
+          "aparatoDelEstado": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "memoria_puente"
+        ],
+        "trustChanges": {
+          "la_lider_vecinal": 1,
+          "el_general": -1
+        }
+      },
+      "right": {
+        "text": "Mediación con acta acordada",
+        "effects": {
+          "economia": -1,
+          "aparatoDelEstado": 2
+        },
+        "setFlags": [
+          "mediacion_puente"
+        ],
+        "trustChanges": {
+          "la_lider_vecinal": 1,
+          "el_general": 1
+        }
+      },
+      "memoryVariants": [
+        {
+          "text": "Los refugios que abriste ya tienen llaves vecinales. La Líder propone que sus responsables escuchen al General sobre el puente, antes de escribir el siguiente protocolo.",
+          "requiresFlags": [
+            "refugios_vecinales"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "El plan común reunió por primera vez a vecinos y escoltas. La Líder quiere explicar qué ocurrió en el puente y discutir las reglas con el General.",
+          "requiresFlags": [
+            "evacuacion_coordinada"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "personal_general_02",
+      "era": "contemporanea",
+      "character": "el_general",
+      "storyArc": "politica",
+      "chapter": "VIDAS · Devolver la llave",
+      "text": "La casa de su madre vuelve a tener techo. El General pregunta qué hacer con la brigada de emergencia: devolver sus tareas a los vecinos o mantenerla como servicio mixto. Por primera vez te habla de retirarse él también, algún día.",
+      "left": {
+        "text": "Devolver herramientas a los vecinos",
+        "effects": {
+          "aparatoDelEstado": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "general_relevo_civil"
+        ],
+        "trustChanges": {
+          "la_lider_vecinal": 1
+        }
+      },
+      "right": {
+        "text": "Servicio mixto con cuentas públicas",
+        "effects": {
+          "economia": -1,
+          "aparatoDelEstado": 2
+        },
+        "setFlags": [
+          "general_servicio_mixto"
+        ],
+        "trustChanges": {
+          "el_general": 1
+        }
+      },
+      "memoryVariants": [
+        {
+          "text": "Los civiles y soldados de la brigada compartida ya se conocen por sus nombres. El General quiere decidir qué servicio quedará cuando termine la emergencia.",
+          "requiresFlags": [
+            "brigada_compartida"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "La brigada que reconociste reparó la casa de su madre. El General propone dejar sus tareas por escrito para que el uniforme no sea la única garantía.",
+          "requiresFlags": [
+            "brigada_reconocida"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    },
+    {
+      "id": "personal_cantinera_02",
+      "era": "futurista",
+      "character": "la_cantinera",
+      "storyArc": "politica",
+      "chapter": "VIDAS · Una mesa reservada",
+      "text": "Llega una carta de la hija de la Cantinera. Le va bien, pero pregunta si podría abrir un taller al regresar. Su madre ya apartó una mesa, aunque asegura que es «para quien pague primero». Puedes ofrecer herramientas a los retornados o un intercambio sin exigir el regreso.",
+      "left": {
+        "text": "Talleres abiertos para volver",
+        "effects": {
+          "economia": -2,
+          "pueblo": 2
+        },
+        "setFlags": [
+          "taller_retorno"
+        ],
+        "trustChanges": {
+          "la_cantinera": 1
+        }
+      },
+      "right": {
+        "text": "Intercambio desde ambos puertos",
+        "effects": {
+          "economia": -1,
+          "relacionesExteriores": 2
+        },
+        "setFlags": [
+          "intercambio_hija"
+        ],
+        "trustChanges": {
+          "la_cantinera": 1,
+          "el_diplomatico": 1
+        }
+      },
+      "memoryVariants": [
+        {
+          "text": "Los aprendices que financiaste sostienen el taller del muelle. La hija de la Cantinera pregunta por carta si puede volver y trabajar con ellos, sin desplazar a nadie.",
+          "requiresFlags": [
+            "aprendices_puerto"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        },
+        {
+          "text": "La beca permitió que su hija aprendiera a reparar motores. La Cantinera trae una carta: quiere compartir ese oficio con la isla, desde aquí o desde el otro puerto.",
+          "requiresFlags": [
+            "beca_hija"
+          ],
+          "excludesFlags": [],
+          "minTrust": {},
+          "maxTrust": {}
+        }
+      ],
+      "drawFromDeck": false,
+      "weight": 2
+    }
+  ]
+}

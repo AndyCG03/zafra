@@ -114,7 +114,7 @@ class _DealingIntroState extends State<DealingIntro>
                   color: _cardColor,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: _accent.withOpacity(0.4),
+                    color: _accent.withValues(alpha: 0.4),
                     width: 1.5,
                   ),
                 ),

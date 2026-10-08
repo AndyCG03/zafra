@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ending_transicion_pactada",
+    "title": "La transición pactada",
+    "description": "Entregas el gobierno con sus cuentas y sus desacuerdos a la vista. La isla sigue teniendo problemas, pero ya no necesita que todas sus decisiones pasen por ti.",
+    "imageAsset": "assets/images/finals/orden_total.png",
+    "causedBy": "aparatoDelEstado",
+    "wasAtMin": false,
+    "era": "historia",
+    "isStoryEnding": true
+  },
+  {
+    "id": "ending_comunidad_autonoma",
+    "title": "La isla sin su gobernante",
+    "description": "Los consejos sostienen la red común y el puerto compartido conserva sus claves. Dejaste instituciones y conocimientos que funcionan sin esperar una orden de palacio.",
+    "imageAsset": "assets/images/finals/orden_total.png",
+    "causedBy": "aparatoDelEstado",
+    "wasAtMin": false,
+    "era": "historia",
+    "isStoryEnding": true
+  },
+  {
+    "id": "ending_isla_acreedores",
+    "title": "La isla de los acreedores",
+    "description": "Las obras siguen en pie, pero los contratos y las claves del puerto pertenecen a quienes las financiaron. El siguiente gobierno recibe una isla que trabaja para pagar sus condiciones.",
+    "imageAsset": "assets/images/finals/orden_total.png",
+    "causedBy": "aparatoDelEstado",
+    "wasAtMin": false,
+    "era": "historia",
+    "isStoryEnding": true
+  },
+  {
+    "id": "ending_cosecha_silencio",
+    "title": "Los sacos bajo la alfombra",
+    "description": "El gobierno cambia de manos con el expediente del almacén sellado. Se devolvieron algunas cuentas; la isla heredó también las preguntas que decidiste callar.",
+    "imageAsset": "assets/images/finals/orden_total.png",
+    "causedBy": "aparatoDelEstado",
+    "wasAtMin": false,
+    "era": "historia",
+    "isStoryEnding": true
+  },
+  {
+    "id": "ending_gobierno_perpetuo",
+    "title": "Otro mandato, la misma silla",
+    "description": "La campaña cierra con tu decisión de permanecer en palacio. Los acuerdos que construiste siguen dependiendo de ti, y la Maestra empieza a escribir el siguiente capítulo.",
+    "imageAsset": "assets/images/finals/orden_total.png",
+    "causedBy": "aparatoDelEstado",
+    "wasAtMin": false,
+    "era": "historia",
+    "isStoryEnding": true
+  }
+]

@@ -66,44 +66,44 @@ class _CardsScreenState extends ConsumerState<CardsScreen> {
       body: _loading
           ? const Center(child: CircularProgressIndicator(color: _accent))
           : Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${_unlockedIds.length} / ${characters.length} DESCUBIERTOS',
-              style: const TextStyle(
-                fontFamily: 'monospace',
-                color: _ink,
-                fontSize: 12,
-                letterSpacing: 1,
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${_unlockedIds.length} / ${characters.length} DESCUBIERTOS',
+                    style: const TextStyle(
+                      fontFamily: 'monospace',
+                      color: _ink,
+                      fontSize: 12,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Expanded(
+                    child: GridView.builder(
+                      itemCount: characters.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 14,
+                        crossAxisSpacing: 14,
+                        childAspectRatio: 0.68,
+                      ),
+                      itemBuilder: (context, index) {
+                        final character = characters[index];
+                        final unlocked = _unlockedIds.contains(character.id);
+                        return _FlipCharacterCard(
+                          character: character,
+                          unlocked: unlocked,
+                          repository: repository,
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 12),
-            Expanded(
-              child: GridView.builder(
-                itemCount: characters.length,
-                gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 14,
-                  crossAxisSpacing: 14,
-                  childAspectRatio: 0.68,
-                ),
-                itemBuilder: (context, index) {
-                  final character = characters[index];
-                  final unlocked = _unlockedIds.contains(character.id);
-                  return _FlipCharacterCard(
-                    character: character,
-                    unlocked: unlocked,
-                    repository: repository,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -126,10 +126,6 @@ class _FlipCharacterCard extends StatefulWidget {
 
 class _FlipCharacterCardState extends State<_FlipCharacterCard>
     with SingleTickerProviderStateMixin {
-  static const _panelDark = Color(0xFF1F2E26);
-  static const _accent = Color(0xFFC79A3E);
-  static const _cream = Color(0xFFFFF8E7);
-
   late final AnimationController _controller;
   bool _showingBack = false;
   bool _flipSoundPlayed = false;
@@ -148,7 +144,9 @@ class _FlipCharacterCardState extends State<_FlipCharacterCard>
     // print('🔄 Flip progress: ${_controller.value}');
 
     // ✅ Reproducir sonido en el rango 0.3 - 0.7 (más amplio)
-    if (_controller.value >= 0.3 && _controller.value <= 0.7 && !_flipSoundPlayed) {
+    if (_controller.value >= 0.3 &&
+        _controller.value <= 0.7 &&
+        !_flipSoundPlayed) {
       _flipSoundPlayed = true;
       debugPrint('🎵 Reproduciendo cardFlip() en value: ${_controller.value}');
       GameAudio.instance.cardFlip();
@@ -205,14 +203,14 @@ class _FlipCharacterCardState extends State<_FlipCharacterCard>
               ..rotateY(angle),
             child: showFront
                 ? _CardFront(
-              character: widget.character,
-              repository: widget.repository,
-            )
+                    character: widget.character,
+                    repository: widget.repository,
+                  )
                 : Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()..rotateY(math.pi),
-              child: _CardBack(character: widget.character),
-            ),
+                    alignment: Alignment.center,
+                    transform: Matrix4.identity()..rotateY(math.pi),
+                    child: _CardBack(character: widget.character),
+                  ),
           );
         },
       ),
@@ -309,7 +307,7 @@ class _CardBack extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.badge_rounded,
               color: _accent,
               size: 28,
@@ -344,7 +342,7 @@ class _CardBack extends StatelessWidget {
             Container(
               width: 30,
               height: 1,
-              color: _accent.withOpacity(0.4),
+              color: _accent.withValues(alpha: 0.4),
             ),
             const SizedBox(height: 8),
             Expanded(
@@ -384,7 +382,7 @@ class _CardShell extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: _accent.withOpacity(0.6), width: 1.4),
+        border: Border.all(color: _accent.withValues(alpha: 0.6), width: 1.4),
         boxShadow: const [
           BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
         ],
@@ -418,7 +416,7 @@ class _LockedCard extends StatelessWidget {
             height: 48,
             fit: BoxFit.contain,
             errorBuilder: (_, __, ___) =>
-            const Icon(Icons.eco_rounded, color: _accent, size: 40),
+                const Icon(Icons.eco_rounded, color: _accent, size: 40),
           ),
         ),
       ),

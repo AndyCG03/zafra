@@ -25,16 +25,16 @@ class GameRecord {
   Era get era => Era.values[eraIndex.clamp(0, Era.values.length - 1)];
 
   Map<String, dynamic> toJson() => {
-    'turns': turns,
-    'days': days,
-    'era': eraIndex,
-    'endingId': endingId,
-    'endingTitle': endingTitle,
-    'stats': {
-      for (final e in finalStats.entries) e.key.index.toString(): e.value,
-    },
-    'date': date.toIso8601String(),
-  };
+        'turns': turns,
+        'days': days,
+        'era': eraIndex,
+        'endingId': endingId,
+        'endingTitle': endingTitle,
+        'stats': {
+          for (final e in finalStats.entries) e.key.index.toString(): e.value,
+        },
+        'date': date.toIso8601String(),
+      };
 
   factory GameRecord.fromJson(Map<dynamic, dynamic> json) {
     final rawStats = Map<String, dynamic>.from(json['stats'] as Map? ?? {});
@@ -46,7 +46,8 @@ class GameRecord {
       endingTitle: json['endingTitle'] as String?,
       finalStats: {
         for (final type in StatType.values)
-          type: (rawStats[type.index.toString()] as num?)?.toInt() ?? Stat.initial,
+          type: (rawStats[type.index.toString()] as num?)?.toInt() ??
+              Stat.initial,
       },
       date: DateTime.tryParse(json['date'] as String? ?? '') ?? DateTime.now(),
     );

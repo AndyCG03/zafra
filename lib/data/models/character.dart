@@ -7,7 +7,7 @@ class Character {
   final String imageAsset;
   final String unlockEraId;
 
-  /// Biografía/descripción del personaje (opcional)
+  /// Biografía/descripción
   final String? bio;
 
   const Character({
@@ -31,11 +31,11 @@ class Character {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'role': role,
-    'imageAsset': imageAsset,
-    'unlockEra': unlockEraId,
-    if (bio != null) 'bio': bio,
-  };
+        'id': id,
+        'name': name,
+        'role': role,
+        'imageAsset': imageAsset,
+        'unlockEra': unlockEraId,
+        if (bio != null) 'bio': bio,
+      };
 }

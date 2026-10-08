@@ -1,13 +1,27 @@
 import '../../data/models/era.dart';
 import '../../data/models/stat.dart';
+import '../../data/models/game_card.dart';
+import '../../data/models/game_mode.dart';
+import '../../data/models/decision_record.dart';
 
 class GameState {
+  final GameMode mode;
+  final GovernmentPromise? promise;
+  final int campaignIndex;
+  final Map<String, int> characterTrust;
+  final List<DecisionRecord> history;
+  PromiseStatus? get promiseStatus => promise?.status(flags);
+  final List<PendingConsequence> pendingConsequences;
+  final int lastNarrativeTurn;
+  final int lastEventEndedTurn;
   final Map<StatType, Stat> stats;
   final Era currentEra;
   final int turn;
   final int daysInPower;
   final Set<String> seenCardIds;
   final Set<String> flags;
+  final Map<String, int> flagSetAtTurn;
+  final Map<String, int> characterFavorCount;
   final Set<String> unlockedCharacterIds;
   final Set<StatType> availableRescuePowers;
   final Set<StatType> usedRescuePowers;
@@ -19,12 +33,22 @@ class GameState {
   final int? assassinationCountdown;
 
   GameState({
+    this.mode = GameMode.endless,
+    this.promise,
+    this.campaignIndex = 0,
+    this.characterTrust = const {},
+    this.history = const [],
+    this.pendingConsequences = const [],
+    this.lastNarrativeTurn = -3,
+    this.lastEventEndedTurn = -4,
     required this.stats,
     required this.currentEra,
     required this.turn,
     required this.daysInPower,
     required this.seenCardIds,
     required this.flags,
+    this.flagSetAtTurn = const {},
+    this.characterFavorCount = const {},
     required this.unlockedCharacterIds,
     this.availableRescuePowers = const {},
     required this.usedRescuePowers,
@@ -36,8 +60,14 @@ class GameState {
     this.assassinationCountdown,
   });
 
-  factory GameState.initial() => GameState(
-        stats: {for (final type in StatType.values) type: Stat(type, Stat.initial)},
+  factory GameState.initial(
+          {GameMode mode = GameMode.endless, GovernmentPromise? promise}) =>
+      GameState(
+        mode: mode,
+        promise: promise,
+        stats: {
+          for (final type in StatType.values) type: Stat(type, Stat.initial)
+        },
         currentEra: Era.fundacional,
         turn: 0,
         daysInPower: 1,
@@ -57,12 +87,22 @@ class GameState {
   }
 
   GameState copyWith({
+    GameMode? mode,
+    GovernmentPromise? promise,
+    int? campaignIndex,
+    Map<String, int>? characterTrust,
+    List<DecisionRecord>? history,
+    List<PendingConsequence>? pendingConsequences,
+    int? lastNarrativeTurn,
+    int? lastEventEndedTurn,
     Map<StatType, Stat>? stats,
     Era? currentEra,
     int? turn,
     int? daysInPower,
     Set<String>? seenCardIds,
     Set<String>? flags,
+    Map<String, int>? flagSetAtTurn,
+    Map<String, int>? characterFavorCount,
     Set<String>? unlockedCharacterIds,
     Set<StatType>? availableRescuePowers,
     Set<StatType>? usedRescuePowers,
@@ -75,21 +115,41 @@ class GameState {
     int? securityCompromises,
     int? assassinationCountdown,
     bool clearAssassinationCountdown = false,
-  }) => GameState(
+  }) =>
+      GameState(
+        mode: mode ?? this.mode,
+        promise: promise ?? this.promise,
+        campaignIndex: campaignIndex ?? this.campaignIndex,
+        characterTrust: characterTrust ?? this.characterTrust,
+        history: history ?? this.history,
+        pendingConsequences: pendingConsequences ?? this.pendingConsequences,
+        lastNarrativeTurn: lastNarrativeTurn ?? this.lastNarrativeTurn,
+        lastEventEndedTurn: lastEventEndedTurn ?? this.lastEventEndedTurn,
         stats: stats ?? this.stats,
         currentEra: currentEra ?? this.currentEra,
         turn: turn ?? this.turn,
         daysInPower: daysInPower ?? this.daysInPower,
         seenCardIds: seenCardIds ?? this.seenCardIds,
         flags: flags ?? this.flags,
+        flagSetAtTurn: flagSetAtTurn ?? this.flagSetAtTurn,
+        characterFavorCount: characterFavorCount ?? this.characterFavorCount,
         unlockedCharacterIds: unlockedCharacterIds ?? this.unlockedCharacterIds,
-        availableRescuePowers: availableRescuePowers ?? this.availableRescuePowers,
+        availableRescuePowers:
+            availableRescuePowers ?? this.availableRescuePowers,
         usedRescuePowers: usedRescuePowers ?? this.usedRescuePowers,
-        pendingNextCardId: clearPendingNextCardId ? null : (pendingNextCardId ?? this.pendingNextCardId),
-        activeEventId: clearActiveEvent ? null : (activeEventId ?? this.activeEventId),
-        eventCardsPlayed: clearActiveEvent ? 0 : (eventCardsPlayed ?? this.eventCardsPlayed),
-        activeEventCardIds: clearActiveEvent ? const [] : (activeEventCardIds ?? this.activeEventCardIds),
+        pendingNextCardId: clearPendingNextCardId
+            ? null
+            : (pendingNextCardId ?? this.pendingNextCardId),
+        activeEventId:
+            clearActiveEvent ? null : (activeEventId ?? this.activeEventId),
+        eventCardsPlayed:
+            clearActiveEvent ? 0 : (eventCardsPlayed ?? this.eventCardsPlayed),
+        activeEventCardIds: clearActiveEvent
+            ? const []
+            : (activeEventCardIds ?? this.activeEventCardIds),
         securityCompromises: securityCompromises ?? this.securityCompromises,
-        assassinationCountdown: clearAssassinationCountdown ? null : (assassinationCountdown ?? this.assassinationCountdown),
+        assassinationCountdown: clearAssassinationCountdown
+            ? null
+            : (assassinationCountdown ?? this.assassinationCountdown),
       );
 }

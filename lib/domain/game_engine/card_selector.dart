@@ -10,6 +10,23 @@ import 'game_state.dart';
 /// 3. Que no se repita una carta ya vista en la partida actual.
 /// 4. Peso relativo (weight) para variar probabilidades.
 class CardSelector {
+  GameCard? selectConsequence(
+      GameState state, GameCard? Function(String) findById) {
+    if (state.turn - state.lastNarrativeTurn < 2) return null;
+    final pending = [...state.pendingConsequences]
+      ..sort((a, b) => a.dueTurn.compareTo(b.dueTurn));
+    for (final entry in pending) {
+      final card = findById(entry.cardId);
+      if (entry.dueTurn <= state.turn &&
+          card != null &&
+          !state.seenCardIds.contains(card.id) &&
+          _matchesConditions(card, state)) {
+        return card;
+      }
+    }
+    return null;
+  }
+
   final Random _random;
 
   CardSelector({Random? random}) : _random = random ?? Random();
@@ -24,11 +41,17 @@ class CardSelector {
       final forced = findById(state.pendingNextCardId!);
       // Las ramificaciones mantienen prioridad, pero tampoco pueden saltarse
       // la progresión temporal si pertenecen a una era futura bloqueada.
-      if (forced != null && _isEraAvailable(forced, state)) return forced;
+      if (forced != null &&
+          forced.weight > 0 &&
+          !state.seenCardIds.contains(forced.id) &&
+          _matchesConditions(forced, state)) {
+        return forced;
+      }
     }
 
     // 2 y 3. Filtrar por condiciones y por no-repetición.
     final eligible = availableCards.where((card) {
+      if (card.weight <= 0 || !card.drawFromDeck) return false;
       if (state.seenCardIds.contains(card.id)) return false;
       return _matchesConditions(card, state);
     }).toList();
@@ -39,11 +62,13 @@ class CardSelector {
     // Una carta marcada como rara conserva un peso explícito bajo (1 por
     // convención). Así puede salvar una estadística en peligro sin dominar
     // el mazo normal.
-    final totalWeight = eligible.fold<int>(0, (sum, c) => sum + c.weight);
+    int weight(GameCard card) =>
+        card.weight * (card.eraId == state.currentEra.name ? 3 : 1);
+    final totalWeight = eligible.fold<int>(0, (sum, c) => sum + weight(c));
     var roll = _random.nextInt(totalWeight);
     for (final card in eligible) {
-      if (roll < card.weight) return card;
-      roll -= card.weight;
+      if (roll < weight(card)) return card;
+      roll -= weight(card);
     }
     return eligible.last; // fallback defensivo
   }
@@ -51,6 +76,13 @@ class CardSelector {
   bool _matchesConditions(GameCard card, GameState state) {
     if (!_isEraAvailable(card, state)) return false;
     final condition = card.condition;
+    if (!narrativeMatches(
+        flags: state.flags,
+        trust: state.characterTrust,
+        minTrust: condition.minTrust,
+        maxTrust: condition.maxTrust)) {
+      return false;
+    }
 
     for (final entry in condition.minValues.entries) {
       if (state.statOf(entry.key).value < entry.value) return false;
@@ -64,13 +96,25 @@ class CardSelector {
     for (final flag in condition.excludesFlags) {
       if (state.flags.contains(flag)) return false;
     }
+    for (final entry in condition.minTurnsAfterFlag.entries) {
+      final setAt = state.flagSetAtTurn[entry.key];
+      if (!state.flags.contains(entry.key) ||
+          setAt == null ||
+          state.turn - setAt < entry.value) {
+        return false;
+      }
+    }
+    for (final entry in condition.minFavorCount.entries) {
+      if ((state.characterFavorCount[entry.key] ?? 0) < entry.value) {
+        return false;
+      }
+    }
     return true;
   }
 
   bool _isEraAvailable(GameCard card, GameState state) {
     final cardEraIndex = Era.values.indexWhere((era) => era.name == card.eraId);
     if (cardEraIndex < 0) return false;
-    if (cardEraIndex <= state.currentEra.index) return true;
-    return state.unlockedCharacterIds.contains(card.characterId);
+    return cardEraIndex <= state.currentEra.index;
   }
 }

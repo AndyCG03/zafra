@@ -116,7 +116,7 @@
         }
       },
       {
-        "text": "Una replica destruye un puente.",
+        "text": "Otra ráfaga derriba un puente.",
         "left": {
           "text": "CONSTRUIR UN PUENTE PROVISIONAL",
           "effects": { "economia": -6, "pueblo": 3 }

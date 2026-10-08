@@ -3,6 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/ending.dart';
 import '../../domain/game_engine/game_controller.dart';
+import '../../domain/game_engine/legacy_summary.dart';
+import 'modes_screen.dart';
+import 'journal_screen.dart';
+import 'epilogue_screen.dart';
+import '../widgets/ending_art.dart';
 
 /// Pantalla de fin de partida, con la misma identidad visual del resto
 /// de la app: bloques verde oscuro arriba/abajo, cuerpo en tono piedra,
@@ -21,7 +26,6 @@ class _EndingScreenState extends ConsumerState<EndingScreen>
   static const _ink = Color(0xFF16211B);
   static const _body = Color(0xFFEAE1D3);
   static const _accent = Color(0xFFC79A3E);
-  static const _cream = Color(0xFFFFF8E7);
 
   late final AnimationController _controller = AnimationController(
     vsync: this,
@@ -47,6 +51,8 @@ class _EndingScreenState extends ConsumerState<EndingScreen>
   @override
   Widget build(BuildContext context) {
     final ending = widget.ending;
+    final legacy =
+        LegacySummary.paragraphs(ref.watch(gameControllerProvider).gameState);
 
     return Scaffold(
       backgroundColor: _body,
@@ -59,9 +65,9 @@ class _EndingScreenState extends ConsumerState<EndingScreen>
               width: double.infinity,
               color: _ink,
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(Icons.flag_circle_rounded, color: _accent, size: 40),
                   SizedBox(height: 10),
                   Text(
@@ -103,24 +109,11 @@ class _EndingScreenState extends ConsumerState<EndingScreen>
                             margin: const EdgeInsets.only(bottom: 20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: _ink.withOpacity(0.08),
+                              color: _ink.withValues(alpha: 0.08),
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12),
-                              child: Image.asset(
-                                ending.imageAsset,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: 200,
-                                errorBuilder: (_, __, ___) => Container(
-                                  color: _ink.withOpacity(0.15),
-                                  child: const Icon(
-                                    Icons.broken_image_rounded,
-                                    color: _accent,
-                                    size: 48,
-                                  ),
-                                ),
-                              ),
+                              child: EndingArt(ending: ending),
                             ),
                           ),
                           // ✅ Título
@@ -156,6 +149,32 @@ class _EndingScreenState extends ConsumerState<EndingScreen>
                             ),
                           ),
                           const SizedBox(height: 8),
+                          const Divider(),
+                          FilledButton.icon(
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => EpilogueScreen(
+                                          government: ref
+                                              .read(gameControllerProvider)
+                                              .gameState,
+                                          ending: ending))),
+                              icon: const Icon(Icons.auto_stories),
+                              label: const Text('CINCO AÑOS DESPUÉS')),
+                          const SizedBox(height: 16),
+                          const Text('LO QUE DEJAS EN LA ISLA',
+                              style: TextStyle(
+                                  color: _ink,
+                                  fontFamily: 'monospace',
+                                  fontWeight: FontWeight.bold)),
+                          for (final paragraph in legacy)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Text(paragraph,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: _ink, height: 1.5)),
+                            ),
                         ],
                       ),
                     ),
@@ -173,10 +192,32 @@ class _EndingScreenState extends ConsumerState<EndingScreen>
               color: _ink,
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Center(
-                child: _RestartButton(
-                  onPressed: () =>
-                      ref.read(gameControllerProvider.notifier).restart(),
-                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _RestartButton(
+                        onPressed: () =>
+                            ref.read(gameControllerProvider.notifier).restart(),
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const ModesScreen())),
+                                child: const Text('ELEGIR MODO',
+                                    style: TextStyle(color: _accent))),
+                            TextButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const JournalScreen())),
+                                child: const Text('CRÓNICA',
+                                    style: TextStyle(color: _accent))),
+                          ]),
+                    ]),
               ),
             ),
           ),

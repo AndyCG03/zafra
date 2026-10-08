@@ -1,0 +1,140 @@
+[
+  {
+    "id": "propuesta_agua_01",
+    "character": "la_economista",
+    "era": "fundacional",
+    "text": "El ingenio puede arrancar esta semana, pero necesita el agua de dos barrios. Si espera, perderemos el barco de exportación.",
+    "left": {
+      "text": "Prioriza el ingenio",
+      "effects": {
+        "economia": 6,
+        "pueblo": -4
+      },
+      "setFlags": [
+        "agua_para_ingenio"
+      ],
+      "clearFlags": [
+        "agua_para_barrios"
+      ]
+    },
+    "right": {
+      "text": "Reserva el agua para los barrios",
+      "effects": {
+        "pueblo": 5,
+        "economia": -4
+      },
+      "setFlags": [
+        "agua_para_barrios"
+      ],
+      "clearFlags": [
+        "agua_para_ingenio"
+      ]
+    },
+    "conditions": {
+      "excludesFlags": [
+        "agua_para_ingenio",
+        "agua_para_barrios"
+      ]
+    },
+    "weight": 3
+  },
+  {
+    "id": "propuesta_agua_02",
+    "character": "la_lider_vecinal",
+    "era": "fundacional",
+    "text": "El barco zarpó lleno. En mi calle llevamos tres días sin agua. ¿Hasta cuándo va a durar nuestra parte del sacrificio?",
+    "conditions": {
+      "requiresFlags": [
+        "agua_para_ingenio"
+      ],
+      "minTurnsAfterFlag": {
+        "agua_para_ingenio": 3
+      },
+      "excludesFlags": [
+        "obra_agua_aprobada",
+        "cisternas_prometidas"
+      ]
+    },
+    "left": {
+      "text": "Financia la reparación de la red",
+      "effects": {
+        "economia": -5,
+        "pueblo": 6
+      },
+      "setFlags": [
+        "obra_agua_aprobada"
+      ],
+      "favorsCharacter": "la_lider_vecinal"
+    },
+    "right": {
+      "text": "Envía cisternas mientras termina la zafra",
+      "effects": {
+        "economia": -2,
+        "pueblo": 3
+      },
+      "setFlags": [
+        "cisternas_prometidas"
+      ]
+    },
+    "weight": 5
+  },
+  {
+    "id": "propuesta_agua_03",
+    "character": "la_ingeniera",
+    "era": "consolidacion",
+    "text": "Podemos recircular el agua del ingenio y dejar de competir con los barrios. La instalación cuesta, pero serviría durante años.",
+    "memoryVariants": [
+      {
+        "requiresFlags": [
+          "obra_agua_aprobada"
+        ],
+        "text": "La red que reparaste ya lleva agua al barrio. Si el ingenio recircula la suya, la próxima cosecha no volverá a enfrentarnos."
+      },
+      {
+        "requiresFlags": [
+          "cisternas_prometidas"
+        ],
+        "text": "Las cisternas siguen haciendo fila. Prometiste una solución temporal: recircular el agua del ingenio puede convertirla en una solución duradera."
+      },
+      {
+        "requiresFlags": [
+          "agua_para_barrios"
+        ],
+        "text": "Protegiste el agua de los barrios y perdimos aquel barco. Podemos recircular el agua del ingenio para que la próxima cosecha no nos obligue a elegir."
+      }
+    ],
+    "conditions": {
+      "excludesFlags": [
+        "agua_recirculada",
+        "agua_estudio_pendiente"
+      ]
+    },
+    "left": {
+      "text": "Construye el sistema",
+      "effects": {
+        "economia": -6,
+        "pueblo": 5,
+        "relacionesExteriores": 2
+      },
+      "setFlags": [
+        "agua_recirculada"
+      ],
+      "clearFlags": [
+        "cisternas_prometidas"
+      ],
+      "favorsCharacter": "la_ingeniera"
+    },
+    "right": {
+      "text": "Pide un estudio y consulta a los barrios",
+      "effects": {
+        "aparatoDelEstado": -2,
+        "pueblo": 2
+      },
+      "setFlags": [
+        "agua_estudio_pendiente"
+      ],
+      "favorsCharacter": "la_lider_vecinal"
+    },
+    "weight": 4
+  }
+]

@@ -7,15 +7,20 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppTheme.background,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
-            Text('ZAFRA', style: TextStyle(fontSize: 34, letterSpacing: 8, color: Colors.white)),
+          children: [
+            Text('ZAFRA',
+                style: TextStyle(
+                    fontSize: 34, letterSpacing: 8, color: Colors.white)),
             SizedBox(height: 28),
-            SizedBox(width: 150, child: LinearProgressIndicator(color: AppTheme.accent, backgroundColor: Colors.white12)),
+            SizedBox(
+                width: 150,
+                child: LinearProgressIndicator(
+                    color: AppTheme.accent, backgroundColor: Colors.white12)),
           ],
         ),
       ),

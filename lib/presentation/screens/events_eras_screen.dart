@@ -21,7 +21,6 @@ class _EventsErasScreenState extends State<EventsErasScreen> {
   static const panel = Color(0xFF1F2E26);
   static const accent = Color(0xFFC79A3E);
   static const body = Color(0xFFEAE1D3);
-  static const cream = Color(0xFFFFF8E7);
   final ProgressService _progress = ProgressService();
   Set<String> _discoveredEventIds = {};
   int _maxEraIndex = 0;
@@ -55,21 +54,26 @@ class _EventsErasScreenState extends State<EventsErasScreen> {
       appBar: AppBar(
         backgroundColor: ink,
         foregroundColor: accent,
-        title: const Text('EVENTOS Y ERAS', style: TextStyle(fontFamily: 'monospace', fontSize: 15, letterSpacing: 1.5)),
+        title: const Text('EVENTOS Y ERAS',
+            style: TextStyle(
+                fontFamily: 'monospace', fontSize: 15, letterSpacing: 1.5)),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 18, 16, 28),
         children: [
           _sectionTitle('ERAS'),
           const SizedBox(height: 10),
-          for (final era in Era.values) _EraRow(era: era, unlocked: era.index <= _maxEraIndex),
+          for (final era in Era.values)
+            _EraRow(era: era, unlocked: era.index <= _maxEraIndex),
           const SizedBox(height: 26),
           _sectionTitle('EVENTOS'),
           const SizedBox(height: 10),
           if (allEvents.isEmpty)
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 24),
-              child: Text('No hay eventos disponibles.', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'monospace', color: ink)),
+              child: Text('No hay eventos disponibles.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontFamily: 'monospace', color: ink)),
             )
           else
             GridView.builder(
@@ -96,7 +100,13 @@ class _EventsErasScreenState extends State<EventsErasScreen> {
     );
   }
 
-  Widget _sectionTitle(String text) => Text(text, style: const TextStyle(fontFamily: 'monospace', color: ink, fontWeight: FontWeight.bold, letterSpacing: 1.5, fontSize: 12));
+  Widget _sectionTitle(String text) => Text(text,
+      style: const TextStyle(
+          fontFamily: 'monospace',
+          color: ink,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.5,
+          fontSize: 12));
 }
 
 class _EraRow extends StatelessWidget {
@@ -106,21 +116,32 @@ class _EraRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.only(bottom: 8),
-    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-    decoration: BoxDecoration(
-      color: unlocked ? _EventsErasScreenState.panel : _EventsErasScreenState.panel.withOpacity(.55),
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: unlocked ? _EventsErasScreenState.accent.withOpacity(.7) : Colors.black12),
-    ),
-    child: Row(children: [
-      if (!unlocked) ...[
-        const Icon(Icons.lock_rounded, color: Colors.black38, size: 20),
-        const SizedBox(width: 12),
-      ],
-      Expanded(child: Text(unlocked ? era.label.toUpperCase() : 'ERA BLOQUEADA', style: TextStyle(fontFamily: 'monospace', color: unlocked ? Colors.white : Colors.white54, fontSize: 12, fontWeight: FontWeight.bold))),
-    ]),
-  );
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+        decoration: BoxDecoration(
+          color: unlocked
+              ? _EventsErasScreenState.panel
+              : _EventsErasScreenState.panel.withValues(alpha: .55),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+              color: unlocked
+                  ? _EventsErasScreenState.accent.withValues(alpha: .7)
+                  : Colors.black12),
+        ),
+        child: Row(children: [
+          if (!unlocked) ...[
+            const Icon(Icons.lock_rounded, color: Colors.black38, size: 20),
+            const SizedBox(width: 12),
+          ],
+          Expanded(
+              child: Text(unlocked ? era.label.toUpperCase() : 'ERA BLOQUEADA',
+                  style: TextStyle(
+                      fontFamily: 'monospace',
+                      color: unlocked ? Colors.white : Colors.white54,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold))),
+        ]),
+      );
 }
 
 class _EventCard extends StatefulWidget {
@@ -132,11 +153,8 @@ class _EventCard extends StatefulWidget {
   State<_EventCard> createState() => _EventCardState();
 }
 
-class _EventCardState extends State<_EventCard> with SingleTickerProviderStateMixin {
-  static const _panelDark = Color(0xFF1F2E26);
-  static const _accent = Color(0xFFC79A3E);
-  static const _cream = Color(0xFFFFF8E7);
-
+class _EventCardState extends State<_EventCard>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   bool _showingBack = false;
   bool _flipSoundPlayed = false; // ✅ Control de sonido
@@ -152,7 +170,9 @@ class _EventCardState extends State<_EventCard> with SingleTickerProviderStateMi
 
   void _onFlipProgress() {
     // ✅ Reproducir sonido en el rango 0.2 - 0.8
-    if (_controller.value >= 0.2 && _controller.value <= 0.8 && !_flipSoundPlayed) {
+    if (_controller.value >= 0.2 &&
+        _controller.value <= 0.8 &&
+        !_flipSoundPlayed) {
       _flipSoundPlayed = true;
       GameAudio.instance.cardFlip();
     }
@@ -203,10 +223,10 @@ class _EventCardState extends State<_EventCard> with SingleTickerProviderStateMi
             child: showFront
                 ? _CardFront(event: widget.event)
                 : Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()..rotateY(math.pi),
-              child: _CardBack(event: widget.event),
-            ),
+                    alignment: Alignment.center,
+                    transform: Matrix4.identity()..rotateY(math.pi),
+                    child: _CardBack(event: widget.event),
+                  ),
           );
         },
       ),
@@ -298,7 +318,7 @@ class _CardBack extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.warning_amber_rounded,
               color: _accent,
               size: 28,
@@ -331,7 +351,7 @@ class _CardBack extends StatelessWidget {
             Container(
               width: 30,
               height: 1,
-              color: _accent.withOpacity(0.4),
+              color: _accent.withValues(alpha: 0.4),
             ),
             const SizedBox(height: 8),
             Expanded(
@@ -371,7 +391,7 @@ class _CardShell extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: _accent.withOpacity(0.6), width: 1.4),
+        border: Border.all(color: _accent.withValues(alpha: 0.6), width: 1.4),
         boxShadow: const [
           BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
         ],
@@ -405,7 +425,7 @@ class _LockedEventCard extends StatelessWidget {
             height: 48,
             fit: BoxFit.contain,
             errorBuilder: (_, __, ___) =>
-            const Icon(Icons.eco_rounded, color: _accent, size: 40),
+                const Icon(Icons.eco_rounded, color: _accent, size: 40),
           ),
         ),
       ),

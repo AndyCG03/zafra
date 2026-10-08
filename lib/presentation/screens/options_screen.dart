@@ -5,7 +5,8 @@ import '../../services/persistence/progress_service.dart';
 
 class OptionsScreen extends StatefulWidget {
   const OptionsScreen({super.key});
-  @override State<OptionsScreen> createState() => _OptionsScreenState();
+  @override
+  State<OptionsScreen> createState() => _OptionsScreenState();
 }
 
 class _OptionsScreenState extends State<OptionsScreen> {
@@ -35,71 +36,81 @@ class _OptionsScreenState extends State<OptionsScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: AppTheme.container,
-    appBar: AppBar(
-      title: const Text('OPCIONES', style: TextStyle(fontFamily: 'monospace', letterSpacing: 2, fontWeight: FontWeight.bold)),
-      backgroundColor: AppTheme.background,
-      foregroundColor: AppTheme.accent,
-      elevation: 0,
-      centerTitle: true,
-    ),
-    body: ListView(
-      padding: const EdgeInsets.all(24),
-      children: [
-        const Text('PREFERENCIAS DEL GOBIERNO', style: TextStyle(fontFamily: 'monospace', color: AppTheme.background, letterSpacing: 1.2, fontWeight: FontWeight.bold, fontSize: 13)),
-        const SizedBox(height: 18),
-        _VolumeRow(
-          label: 'VOLUMEN MÚSICA',
-          value: _music,
-          onChanged: (value) {
-            setState(() => _music = value);
-            GameAudio.instance.ambientVolume = value;
-            GameAudio.instance.setAmbientLevel(value);
-            _progress.setAmbientVolume(value);
-          },
-          onChangeEnd: (value) {
-            GameAudio.instance.click(); // ✅ Suena SOLO al soltar
-          },
+        backgroundColor: AppTheme.container,
+        appBar: AppBar(
+          title: const Text('OPCIONES',
+              style: TextStyle(
+                  fontFamily: 'monospace',
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.bold)),
+          backgroundColor: AppTheme.background,
+          foregroundColor: AppTheme.accent,
+          elevation: 0,
+          centerTitle: true,
         ),
-        const SizedBox(height: 8),
-        _VolumeRow(
-          label: 'VOLUMEN EFECTOS',
-          value: _effects,
-          onChanged: (value) {
-            setState(() => _effects = value);
-            GameAudio.instance.effectsVolume = value;
-            GameAudio.instance.setEffectsLevel(value);
-            _progress.setEffectsVolume(value);
-          },
-          onChangeEnd: (value) {
-            GameAudio.instance.click(); // ✅ Suena SOLO al soltar
-          },
+        body: ListView(
+          padding: const EdgeInsets.all(24),
+          children: [
+            const Text('PREFERENCIAS DEL GOBIERNO',
+                style: TextStyle(
+                    fontFamily: 'monospace',
+                    color: AppTheme.background,
+                    letterSpacing: 1.2,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13)),
+            const SizedBox(height: 18),
+            _VolumeRow(
+              label: 'VOLUMEN MÚSICA',
+              value: _music,
+              onChanged: (value) {
+                setState(() => _music = value);
+                GameAudio.instance.ambientVolume = value;
+                GameAudio.instance.setAmbientLevel(value);
+                _progress.setAmbientVolume(value);
+              },
+              onChangeEnd: (value) {
+                GameAudio.instance.click(); // ✅ Suena SOLO al soltar
+              },
+            ),
+            const SizedBox(height: 8),
+            _VolumeRow(
+              label: 'VOLUMEN EFECTOS',
+              value: _effects,
+              onChanged: (value) {
+                setState(() => _effects = value);
+                GameAudio.instance.effectsVolume = value;
+                GameAudio.instance.setEffectsLevel(value);
+                _progress.setEffectsVolume(value);
+              },
+              onChangeEnd: (value) {
+                GameAudio.instance.click(); // ✅ Suena SOLO al soltar
+              },
+            ),
+            const SizedBox(height: 8),
+            _SwitchRow(
+              title: 'VIBRACIÓN',
+              value: _haptics,
+              onChanged: (value) {
+                GameAudio.instance.click();
+                setState(() => _haptics = value);
+                GameAudio.instance.hapticsEnabled = value;
+                _progress.setHapticsEnabled(value);
+              },
+            ),
+            _SwitchRow(
+              title: 'AVISOS DE NUEVOS PERSONAJES',
+              value: _notifications,
+              onChanged: (value) {
+                GameAudio.instance.click();
+                setState(() => _notifications = value);
+                _progress.setCharacterNotificationsEnabled(value);
+              },
+            ),
+            const SizedBox(height: 20),
+            const _HelpTile(),
+          ],
         ),
-        const SizedBox(height: 8),
-        _SwitchRow(
-          title: 'VIBRACIÓN',
-          value: _haptics,
-          onChanged: (value) {
-            GameAudio.instance.click();
-            setState(() => _haptics = value);
-            GameAudio.instance.hapticsEnabled = value;
-            _progress.setHapticsEnabled(value);
-          },
-        ),
-        _SwitchRow(
-          title: 'AVISOS DE NUEVOS PERSONAJES',
-          value: _notifications,
-          onChanged: (value) {
-            GameAudio.instance.click();
-            setState(() => _notifications = value);
-            _progress.setCharacterNotificationsEnabled(value);
-          },
-        ),
-        const SizedBox(height: 20),
-        _HelpTile(),
-      ],
-    ),
-  );
+      );
 }
 
 class _VolumeRow extends StatelessWidget {
@@ -115,52 +126,67 @@ class _VolumeRow extends StatelessWidget {
   final ValueChanged<double> onChanged;
   final ValueChanged<double>? onChangeEnd;
 
-  @override Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    decoration: BoxDecoration(
-      color: Colors.white54,
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: AppTheme.background.withOpacity(.1)),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: const TextStyle(fontFamily: 'monospace', color: AppTheme.background, fontSize: 12, fontWeight: FontWeight.bold)),
-        Slider(
-          value: value,
-          min: 0,
-          max: 1,
-          onChanged: onChanged,
-          onChangeEnd: onChangeEnd, // ✅ Solo suena al soltar el slider
-          activeColor: AppTheme.accent,
-          inactiveColor: AppTheme.background.withOpacity(.2),
+  @override
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.white54,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppTheme.background.withValues(alpha: .1)),
         ),
-      ],
-    ),
-  );
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(label,
+                style: const TextStyle(
+                    fontFamily: 'monospace',
+                    color: AppTheme.background,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold)),
+            Slider(
+              value: value,
+              min: 0,
+              max: 1,
+              onChanged: onChanged,
+              onChangeEnd: onChangeEnd, // ✅ Solo suena al soltar el slider
+              activeColor: AppTheme.accent,
+              inactiveColor: AppTheme.background.withValues(alpha: .2),
+            ),
+          ],
+        ),
+      );
 }
 
 class _SwitchRow extends StatelessWidget {
-  const _SwitchRow({required this.title, required this.value, required this.onChanged});
-  final String title; final bool value; final ValueChanged<bool> onChanged;
+  const _SwitchRow(
+      {required this.title, required this.value, required this.onChanged});
+  final String title;
+  final bool value;
+  final ValueChanged<bool> onChanged;
 
-  @override Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.only(bottom: 8),
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-    decoration: BoxDecoration(
-      color: Colors.white54,
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: AppTheme.background.withOpacity(.1)),
-    ),
-    child: SwitchListTile(
-      contentPadding: EdgeInsets.zero,
-      title: Text(title, style: const TextStyle(fontFamily: 'monospace', color: AppTheme.background, fontSize: 13, fontWeight: FontWeight.w600)),
-      value: value,
-      activeColor: AppTheme.accent,
-      activeTrackColor: AppTheme.accent.withOpacity(.3),
-      onChanged: onChanged,
-    ),
-  );
+  @override
+  Widget build(BuildContext context) => Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.white54,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppTheme.background.withValues(alpha: .1)),
+        ),
+        child: SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(title,
+              style: const TextStyle(
+                  fontFamily: 'monospace',
+                  color: AppTheme.background,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600)),
+          value: value,
+          activeThumbColor: AppTheme.accent,
+          activeTrackColor: AppTheme.accent.withValues(alpha: .3),
+          onChanged: onChanged,
+        ),
+      );
 }
 
 /// ✅ NUEVO: Widget de Ayuda / Acerca de con estilo consistente
@@ -173,7 +199,7 @@ class _HelpTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white54,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppTheme.background.withOpacity(.1)),
+        border: Border.all(color: AppTheme.background.withValues(alpha: .1)),
       ),
       child: ListTile(
         leading: const Icon(
@@ -209,7 +235,8 @@ class _HelpTile extends StatelessWidget {
         backgroundColor: AppTheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: AppTheme.accent.withOpacity(0.4), width: 1.5),
+          side: BorderSide(
+              color: AppTheme.accent.withValues(alpha: 0.4), width: 1.5),
         ),
         title: Column(
           children: [
@@ -253,8 +280,8 @@ class _HelpTile extends StatelessWidget {
             const SizedBox(height: 16),
             const Text(
               'Toma el gobierno de una isla que acaba de salir de una crisis. '
-                  'Las instituciones están frágiles, las reservas son escasas y '
-                  'cada decisión tendrá un precio.',
+              'Las instituciones están frágiles, las reservas son escasas y '
+              'cada decisión tendrá un precio.',
               style: TextStyle(
                 fontFamily: 'monospace',
                 color: AppTheme.container,
@@ -265,8 +292,8 @@ class _HelpTile extends StatelessWidget {
             const SizedBox(height: 12),
             const Text(
               'Equilibra al pueblo, la economía, las relaciones exteriores y el '
-                  'aparato del Estado para mantenerte en el poder. Cada carta que '
-                  'deslices cambiará el rumbo de la isla.',
+              'aparato del Estado para mantenerte en el poder. Cada carta que '
+              'deslices cambiará el rumbo de la isla.',
               style: TextStyle(
                 fontFamily: 'monospace',
                 color: AppTheme.container,
@@ -278,10 +305,10 @@ class _HelpTile extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: AppTheme.accent.withOpacity(0.08),
+                color: AppTheme.accent.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
-                  color: AppTheme.accent.withOpacity(0.15),
+                  color: AppTheme.accent.withValues(alpha: 0.15),
                   width: 0.8,
                 ),
               ),

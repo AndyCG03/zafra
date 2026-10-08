@@ -33,6 +33,9 @@ Future<void> main() async {
   final progress = ProgressService();
   await progress.init();
   GameAudio.instance.ambientVolume = progress.ambientVolume;
+  GameAudio.instance.effectsVolume = progress.effectsVolume;
+  GameAudio.instance.soundEnabled = progress.soundEnabled;
+  GameAudio.instance.hapticsEnabled = progress.hapticsEnabled;
   GameAudio.instance.startAmbient();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -76,9 +79,9 @@ class _ZafraAppState extends State<ZafraApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    title: 'Zafra',
-    debugShowCheckedModeBanner: false,
-    theme: AppTheme.theme,
-    home: const StartScreen(),
-  );
+        title: 'Zafra',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.theme,
+        home: const StartScreen(),
+      );
 }

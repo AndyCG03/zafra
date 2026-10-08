@@ -67,7 +67,7 @@ class CardStackBackdrop extends StatelessWidget {
             width: 90,
             height: 90,
             fit: BoxFit.contain,
-            errorBuilder: (_, __, ___) => Icon(
+            errorBuilder: (_, __, ___) => const Icon(
               Icons.style_rounded,
               color: _iconColor,
               size: 42,

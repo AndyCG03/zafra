@@ -63,87 +63,97 @@ class _StatIndicatorState extends State<StatIndicator>
   Widget build(BuildContext context) {
     // Determinar el color base del icono
     Color baseColor;
-    baseColor = widget.isHighlighted ? _accent : _cream;
+    baseColor =
+        widget.isHighlighted ? _accent : (widget.isInDanger ? _danger : _cream);
 
     final double fillFraction = (widget.value / 100).clamp(0.0, 1.0);
 
-    return SizedBox(
-      width: widget.size + 28,
-      height: widget.showValue ? widget.size + 48 : widget.size + 26,
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topCenter,
-        children: [
-          SizedBox(
-            width: widget.size,
-            height: widget.size,
-            child: Stack(
-              children: [
-                Icon(widget.icon, color: _dim, size: widget.size),
-                ClipRect(
-                  clipper: _BottomFillClipper(fillFraction),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeOutCubic,
-                    child: Icon(widget.icon, color: baseColor, size: widget.size),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (widget.showValue)
-            Positioned(
-              top: widget.size + 2,
-              child: Text(widget.label.toUpperCase(), style: TextStyle(
-                fontFamily: 'monospace', fontSize: 7,
-                color: widget.isHighlighted ? _accent : _cream,
-              )),
-            ),
-          if (widget.showValue)
-            Positioned(
-              top: widget.size + 14,
-              child: Text(
-                '${widget.value}',
-                style: TextStyle(
-                  fontFamily: 'monospace',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  color: widget.isHighlighted ? _accent : _cream,
+    return Semantics(
+        container: true,
+        excludeSemantics: true,
+        label: widget.label,
+        value:
+            '${widget.value} de 100${widget.isInDanger ? ', en peligro' : ''}',
+        child: SizedBox(
+          width: widget.size + 28,
+          height: widget.showValue ? widget.size + 48 : widget.size + 26,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.topCenter,
+            children: [
+              SizedBox(
+                width: widget.size,
+                height: widget.size,
+                child: Stack(
+                  children: [
+                    Icon(widget.icon, color: _dim, size: widget.size),
+                    ClipRect(
+                      clipper: _BottomFillClipper(fillFraction),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeOutCubic,
+                        child: Icon(widget.icon,
+                            color: baseColor, size: widget.size),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          AnimatedBuilder(
-            animation: _popController,
-            builder: (BuildContext context, Widget? child) {
-              if (_delta == null || _popController.isDismissed) {
-                return const SizedBox.shrink();
-              }
-              final double fade = 1 - _popController.value;
-              final double riseOffset = -14.0 * _popController.value;
-              final bool positive = _delta! > 0;
-              final double deltaTop = widget.showValue
-                  ? widget.size + 28 + riseOffset
-                  : widget.size + 2 + riseOffset;
-              return Positioned(
-                top: deltaTop,
-                child: Opacity(
-                  opacity: fade.clamp(0.0, 1.0),
+              if (widget.showValue)
+                Positioned(
+                  top: widget.size + 2,
+                  child: Text(widget.label.toUpperCase(),
+                      style: TextStyle(
+                        fontFamily: 'monospace',
+                        fontSize: 7,
+                        color: widget.isHighlighted ? _accent : _cream,
+                      )),
+                ),
+              if (widget.showValue)
+                Positioned(
+                  top: widget.size + 14,
                   child: Text(
-                    positive ? '+${_delta!}' : '${_delta!}',
+                    '${widget.value}',
                     style: TextStyle(
                       fontFamily: 'monospace',
                       fontWeight: FontWeight.bold,
-                      fontSize: 11,
-                      color: positive ? _success : _danger,
+                      fontSize: 12,
+                      color: widget.isHighlighted ? _accent : _cream,
                     ),
                   ),
                 ),
-              );
-            },
+              AnimatedBuilder(
+                animation: _popController,
+                builder: (BuildContext context, Widget? child) {
+                  if (_delta == null || _popController.isDismissed) {
+                    return const SizedBox.shrink();
+                  }
+                  final double fade = 1 - _popController.value;
+                  final double riseOffset = -14.0 * _popController.value;
+                  final bool positive = _delta! > 0;
+                  final double deltaTop = widget.showValue
+                      ? widget.size + 28 + riseOffset
+                      : widget.size + 2 + riseOffset;
+                  return Positioned(
+                    top: deltaTop,
+                    child: Opacity(
+                      opacity: fade.clamp(0.0, 1.0),
+                      child: Text(
+                        positive ? '+${_delta!}' : '${_delta!}',
+                        style: TextStyle(
+                          fontFamily: 'monospace',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
+                          color: positive ? _success : _danger,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 

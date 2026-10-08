@@ -45,33 +45,83 @@ class ProgressService {
     await _box?.put(_seenEndingsKey, current.toList());
   }
 
-  Future<void> saveGame(Map<String, dynamic> data) async => _box?.put(_gameKey, data);
+  Future<void> saveGame(Map<String, dynamic> data) async {
+    final slots =
+        Map<String, dynamic>.from(_box?.get('mode_saved_games') as Map? ?? {});
+    slots[data['mode'] as String? ?? 'endless'] = data;
+    await _box?.put('mode_saved_games', slots);
+    await _box?.put(_gameKey, data);
+  }
+
+  Map<String, dynamic>? savedGameForMode(String mode) {
+    final slots = _box?.get('mode_saved_games') as Map?;
+    final slot = slots?[mode];
+    if (slot is Map) return Map<String, dynamic>.from(slot);
+    final legacy = savedGame;
+    if (legacy != null && (legacy['mode'] ?? 'endless') == mode) return legacy;
+    return null;
+  }
+
   Map<String, dynamic>? get savedGame {
     final value = _box?.get(_gameKey);
     return value is Map ? Map<String, dynamic>.from(value) : null;
   }
-  Future<void> clearGame() async => _box?.delete(_gameKey);
-  bool get characterNotificationsEnabled => _box?.get(_characterNotificationsKey, defaultValue: true) as bool? ?? true;
-  Future<void> setCharacterNotificationsEnabled(bool enabled) async => _box?.put(_characterNotificationsKey, enabled);
-  double get ambientVolume => (_box?.get(_ambientVolumeKey, defaultValue: .12) as num).toDouble();
-  double get effectsVolume => (_box?.get(_effectsVolumeKey, defaultValue: .8) as num).toDouble();
-  Future<void> setAmbientVolume(double value) async => _box?.put(_ambientVolumeKey, value);
-  Future<void> setEffectsVolume(double value) async => _box?.put(_effectsVolumeKey, value);
-  bool get soundEnabled => _box?.get(_soundKey, defaultValue: true) as bool? ?? true;
-  bool get hapticsEnabled => _box?.get(_hapticsKey, defaultValue: true) as bool? ?? true;
+
+  Future<void> clearGame() async {
+    final mode = savedGame?['mode'] ?? 'endless';
+    final slots =
+        Map<String, dynamic>.from(_box?.get('mode_saved_games') as Map? ?? {});
+    slots.remove(mode);
+    await _box?.put('mode_saved_games', slots);
+    await _box?.delete(_gameKey);
+  }
+
+  bool get characterNotificationsEnabled =>
+      _box?.get(_characterNotificationsKey, defaultValue: true) as bool? ??
+      true;
+  Future<void> setCharacterNotificationsEnabled(bool enabled) async =>
+      _box?.put(_characterNotificationsKey, enabled);
+  double get ambientVolume =>
+      (_box?.get(_ambientVolumeKey, defaultValue: .12) as num).toDouble();
+  double get effectsVolume =>
+      (_box?.get(_effectsVolumeKey, defaultValue: .8) as num).toDouble();
+  Future<void> setAmbientVolume(double value) async =>
+      _box?.put(_ambientVolumeKey, value);
+  Future<void> setEffectsVolume(double value) async =>
+      _box?.put(_effectsVolumeKey, value);
+  bool get soundEnabled =>
+      _box?.get(_soundKey, defaultValue: true) as bool? ?? true;
+  bool get hapticsEnabled =>
+      _box?.get(_hapticsKey, defaultValue: true) as bool? ?? true;
   Future<void> setSoundEnabled(bool value) async => _box?.put(_soundKey, value);
-  Future<void> setHapticsEnabled(bool value) async => _box?.put(_hapticsKey, value);
-  Set<String> get discoveredCardIds => ((_box?.get(_discoveredCardsKey) as List?)?.cast<String>() ?? []).toSet();
-  Future<Set<String>> unlockedCharacterIds() async => discoveredCardIds;
-  Set<String> get unlockedCharacters => ((_box?.get(_unlockedCharactersKey) as List?)?.cast<String>() ?? []).toSet();
-  Future<void> markCharacterUnlocked(String id) async { final ids = unlockedCharacters..add(id); await _box?.put(_unlockedCharactersKey, ids.toList()); }
-  Future<void> addDiscoveredCard(String id) async { final ids = discoveredCardIds..add(id); await _box?.put(_discoveredCardsKey, ids.toList()); }
-  Set<String> get discoveredEventIds => ((_box?.get(_discoveredEventsKey) as List?)?.cast<String>() ?? const []).toSet();
+  Future<void> setHapticsEnabled(bool value) async =>
+      _box?.put(_hapticsKey, value);
+  Set<String> get discoveredCardIds =>
+      ((_box?.get(_discoveredCardsKey) as List?)?.cast<String>() ?? []).toSet();
+  Future<Set<String>> unlockedCharacterIds() async => unlockedCharacters;
+  Set<String> get unlockedCharacters =>
+      ((_box?.get(_unlockedCharactersKey) as List?)?.cast<String>() ?? [])
+          .toSet();
+  Future<void> markCharacterUnlocked(String id) async {
+    final ids = unlockedCharacters..add(id);
+    await _box?.put(_unlockedCharactersKey, ids.toList());
+  }
+
+  Future<void> addDiscoveredCard(String id) async {
+    final ids = discoveredCardIds..add(id);
+    await _box?.put(_discoveredCardsKey, ids.toList());
+  }
+
+  Set<String> get discoveredEventIds =>
+      ((_box?.get(_discoveredEventsKey) as List?)?.cast<String>() ?? const [])
+          .toSet();
   Future<void> markEventDiscovered(String id) async {
     final ids = discoveredEventIds..add(id);
     await _box?.put(_discoveredEventsKey, ids.toList());
   }
-  int get maxEraReached => (_box?.get(_maxEraKey, defaultValue: 0) as num).toInt();
+
+  int get maxEraReached =>
+      (_box?.get(_maxEraKey, defaultValue: 0) as num).toInt();
   Future<void> markEraReached(int eraIndex) async {
     if (eraIndex > maxEraReached) await _box?.put(_maxEraKey, eraIndex);
   }
@@ -81,6 +131,7 @@ class ProgressService {
     if (raw is Map) return Map<String, dynamic>.from(raw);
     return {'games': 0, 'turns': 0, 'left': 0, 'right': 0};
   }
+
   int get gamesPlayed => (appStatistics['games'] as num? ?? 0).toInt();
   int get totalTurnsPlayed => (appStatistics['turns'] as num? ?? 0).toInt();
   int get totalLeftSwipes => (appStatistics['left'] as num? ?? 0).toInt();
@@ -138,7 +189,9 @@ class ProgressService {
     return list;
   }
 
-  Set<String> get seenCreatorMessageIds => ((_box?.get(_creatorMessagesKey) as List?)?.cast<String>() ?? const []).toSet();
+  Set<String> get seenCreatorMessageIds =>
+      ((_box?.get(_creatorMessagesKey) as List?)?.cast<String>() ?? const [])
+          .toSet();
   Future<void> markCreatorMessageSeen(String id) async {
     final ids = seenCreatorMessageIds..add(id);
     await _box?.put(_creatorMessagesKey, ids.toList());

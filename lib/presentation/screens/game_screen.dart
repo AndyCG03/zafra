@@ -6,6 +6,7 @@ import '../../data/models/character.dart';
 import '../../data/models/era.dart';
 import '../../data/models/game_card.dart';
 import '../../data/models/stat.dart';
+import '../../data/models/game_mode.dart';
 import '../../data/repositories/card_repository.dart';
 import '../../data/repositories/event_repository.dart';
 import '../../domain/game_engine/effect_applier.dart';
@@ -16,6 +17,10 @@ import '../widgets/stat_bar.dart';
 import '../widgets/swipeable_card.dart';
 import '../widgets/game_toast.dart';
 import 'ending_screen.dart';
+import 'agenda_screen.dart';
+import 'modes_screen.dart';
+import 'journal_screen.dart';
+import 'island_screen.dart';
 import 'loading_screen.dart';
 import 'options_screen.dart';
 import 'statistics_screen.dart';
@@ -59,13 +64,22 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final CardRepository repository = ref.watch(cardRepositoryProvider);
 
     ref.listen<GameControllerState>(gameControllerProvider, (previous, next) {
-      if (previous != null && previous.gameState.currentEra != next.gameState.currentEra) {
+      if (previous != null &&
+          next.gameState.turn > previous.gameState.turn &&
+          next.gameState.history.isNotEmpty &&
+          next.gameState.history.last.notes.isNotEmpty) {
+        _showGameToast(next.gameState.history.last.notes.first,
+            icon: Icons.forum_outlined);
+      }
+      if (previous != null &&
+          previous.gameState.currentEra != next.gameState.currentEra) {
         _showGameToast(
           'NUEVA ERA: ${next.gameState.currentEra.label.toUpperCase()}',
           icon: Icons.flag_rounded,
         );
       }
-      if (previous?.gameState.activeEventId != next.gameState.activeEventId && next.gameState.activeEventId != null) {
+      if (previous?.gameState.activeEventId != next.gameState.activeEventId &&
+          next.gameState.activeEventId != null) {
         final event = EventRepository.byId(next.gameState.activeEventId!);
         if (event != null) {
           _showGameToast(
@@ -76,7 +90,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       }
       final rescue = next.rescueOpportunity;
       if (rescue != null && previous?.rescueOpportunity != rescue) {
-        WidgetsBinding.instance.addPostFrameCallback((_) => _showRescueDialog(context, rescue));
+        WidgetsBinding.instance
+            .addPostFrameCallback((_) => _showRescueDialog(context, rescue));
       }
       if (next.openOptionsRequested && previous?.openOptionsRequested != true) {
         WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -91,7 +106,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         });
       }
       final character = next.unlockedCharacter;
-      if (character == null || previous?.unlockedCharacter?.id == character.id) {
+      if (character == null ||
+          previous?.unlockedCharacter?.id == character.id) {
         return;
       }
       WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -103,16 +119,21 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         await _progress.init();
         GameAudio.instance.newCharacter();
         if (!_progress.characterNotificationsEnabled) {
-          ref.read(gameControllerProvider.notifier).acknowledgeCharacterUnlock();
+          ref
+              .read(gameControllerProvider.notifier)
+              .acknowledgeCharacterUnlock();
           return;
         }
+        if (!context.mounted) return;
         await showDialog<void>(
           context: context,
           barrierDismissible: false,
           builder: (_) => _CharacterUnlockDialog(character: character),
         );
         if (mounted) {
-          ref.read(gameControllerProvider.notifier).acknowledgeCharacterUnlock();
+          ref
+              .read(gameControllerProvider.notifier)
+              .acknowledgeCharacterUnlock();
         }
       });
     });
@@ -124,8 +145,26 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       return const LoadingScreen();
     }
 
+    if (state.loadError != null) {
+      return Scaffold(
+          body: Center(
+              child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          const Text('No se pudo cargar la partida. Intenta nuevamente.'),
+          const SizedBox(height: 16),
+          FilledButton(
+              onPressed: ref.read(gameControllerProvider.notifier).retryLoad,
+              child: const Text('REINTENTAR')),
+        ]),
+      )));
+    }
+
     if (state.ending != null) {
-      if (!_endingAudioPlayed) { _endingAudioPlayed = true; GameAudio.instance.newCharacter(); }
+      if (!_endingAudioPlayed) {
+        _endingAudioPlayed = true;
+        GameAudio.instance.newCharacter();
+      }
       _dealingDone = false;
       _highlightedStats = {};
       return EndingScreen(ending: state.ending!);
@@ -162,7 +201,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
     if (!_introShown && state.gameState.turn == 0 && !isTutorialCard) {
       _introShown = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) => _showGameIntro(context, onComplete: _completeWelcome));
+      WidgetsBinding.instance.addPostFrameCallback((_) => _showGameIntro(
+          context,
+          mode: state.gameState.mode,
+          onComplete: _completeWelcome));
     }
 
     return Scaffold(
@@ -170,69 +212,130 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final height = constraints.maxHeight;
+          final headerHeight = (height * .21).clamp(180.0, 230.0);
+          final textHeight = (height * .18).clamp(120.0, 200.0);
+          final footerHeight = (height * .13).clamp(64.0, 130.0);
+          final cardTop = headerHeight + textHeight;
           return Stack(
             clipBehavior: Clip.none,
             children: [
-              Positioned(top: 0, left: 0, right: 0, height: height * .21, child: _Header(
-                state: state,
-                isTutorial: isTutorialCard,
-                highlightedStats: _highlightedStats,
-                canUseRescue: ref.read(gameControllerProvider.notifier).canUseRescuePower,
-                onUseRescue: ref.read(gameControllerProvider.notifier).useRescuePower,
-              )),
-              Positioned(top: height * .21, left: 0, right: 0, height: height * .14, child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26),
-                  child: Text(
-                    card.text,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontFamily: 'monospace',
-                      color: _ink,
-                      fontSize: 17,
-                      height: 1.45,
-                    ),
-                  ),
-                ),
-              )),
-              Positioned(bottom: 0, left: 0, right: 0, height: height * .13, child: _Footer(
-                days: state.gameState.daysInPower,
-                isTutorial: isTutorialCard, // ✅ NUEVO
-                onTap: () {
-                  GameAudio.instance.click();
-                  _showFooterMenu(context, state, () => ref.read(gameControllerProvider.notifier).restart());
-                },
-              )),
-              Positioned(top: height * .35, left: 0, right: 0, height: height * .52, child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 6),
-                child: _CardArea(
-                  card: card,
-                  characterName: characterName ?? 'Desconocido',
-                  imageAsset: repository.imageAssetFor(card),
-                  showIntro: !_dealingDone && !isTutorialCard, // ✅ No mostrar intro en tutorial
-                  onIntroComplete: () {
-                    setState(() => _dealingDone = true);
-                    final pending = _pendingCharacter;
-                    if (pending != null && _welcomeComplete) {
-                      _pendingCharacter = null;
-                      WidgetsBinding.instance.addPostFrameCallback((_) => _presentCharacter(pending));
-                    }
-                  },
-                  onSwiped: (SwipeDirection direction) {
-                    _highlightedStats = {};
-                    ref.read(gameControllerProvider.notifier).choose(direction);
-                  },
-                  onHighlightChange: (Map<StatType, bool> highlights) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      if (mounted) {
-                        setState(() {
-                          _highlightedStats = highlights;
+              Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: headerHeight,
+                  child: _Header(
+                    state: state,
+                    campaignLength: repository.campaignCardIds.length,
+                    isTutorial: isTutorialCard,
+                    highlightedStats: _highlightedStats,
+                    canUseRescue: ref
+                        .read(gameControllerProvider.notifier)
+                        .canUseRescuePower,
+                    onUseRescue: ref
+                        .read(gameControllerProvider.notifier)
+                        .useRescuePower,
+                  )),
+              Positioned(
+                  top: headerHeight,
+                  left: 0,
+                  right: 0,
+                  height: textHeight,
+                  child: Center(
+                    child: Scrollbar(
+                        child: SingleChildScrollView(
+                            key: ValueKey(card.id),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 26),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (card.chapter != null)
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8, bottom: 8),
+                                        child: Text(card.chapter!,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                color: _ink,
+                                                fontFamily: 'monospace',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                    Text(
+                                      card.resolvedText(state.gameState.flags,
+                                          trust:
+                                              state.gameState.characterTrust),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontFamily: 'monospace',
+                                        color: _ink,
+                                        fontSize: 17,
+                                        height: 1.45,
+                                      ),
+                                    ),
+                                  ]),
+                            ))),
+                  )),
+              Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: footerHeight,
+                  child: _Footer(
+                    days: state.gameState.daysInPower,
+                    isTutorial: isTutorialCard, // ✅ NUEVO
+                    onTap: () {
+                      GameAudio.instance.click();
+                      _showFooterMenu(
+                          context,
+                          state,
+                          () => ref
+                              .read(gameControllerProvider.notifier)
+                              .restart());
+                    },
+                  )),
+              Positioned(
+                  top: cardTop,
+                  bottom: footerHeight,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 28, vertical: 6),
+                    child: _CardArea(
+                      card: card,
+                      characterName: characterName ?? 'Desconocido',
+                      imageAsset: repository.imageAssetFor(card),
+                      showIntro: !_dealingDone &&
+                          !isTutorialCard, // ✅ No mostrar intro en tutorial
+                      onIntroComplete: () {
+                        setState(() => _dealingDone = true);
+                        final pending = _pendingCharacter;
+                        if (pending != null && _welcomeComplete) {
+                          _pendingCharacter = null;
+                          WidgetsBinding.instance.addPostFrameCallback(
+                              (_) => _presentCharacter(pending));
+                        }
+                      },
+                      onSwiped: (SwipeDirection direction) {
+                        _highlightedStats = {};
+                        ref
+                            .read(gameControllerProvider.notifier)
+                            .choose(direction);
+                      },
+                      onHighlightChange: (Map<StatType, bool> highlights) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (mounted) {
+                            setState(() {
+                              _highlightedStats = highlights;
+                            });
+                          }
                         });
-                      }
-                    });
-                  },
-                ),
-              )),
+                      },
+                    ),
+                  )),
             ],
           );
         },
@@ -246,7 +349,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final pending = _pendingCharacter;
     if (pending != null && _dealingDone) {
       _pendingCharacter = null;
-      WidgetsBinding.instance.addPostFrameCallback((_) => _presentCharacter(pending));
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => _presentCharacter(pending));
     }
   }
 
@@ -258,8 +362,13 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       return;
     }
     GameAudio.instance.newCharacter();
-    await showDialog<void>(context: context, barrierDismissible: false, builder: (_) => _CharacterUnlockDialog(character: character));
-    if (mounted) ref.read(gameControllerProvider.notifier).acknowledgeCharacterUnlock();
+    await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => _CharacterUnlockDialog(character: character));
+    if (mounted) {
+      ref.read(gameControllerProvider.notifier).acknowledgeCharacterUnlock();
+    }
   }
 
   void _showGameToast(String message, {IconData? icon}) {
@@ -276,7 +385,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 }
 
 void _showRescueDialog(BuildContext context, StatType type) {
-  final controller = ProviderScope.containerOf(context).read(gameControllerProvider.notifier);
+  final controller =
+      ProviderScope.containerOf(context).read(gameControllerProvider.notifier);
   showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -284,7 +394,8 @@ void _showRescueDialog(BuildContext context, StatType type) {
       backgroundColor: const Color(0xFF16211B),
       title: Text(
         '${type.label.toUpperCase()} EN CRISIS',
-        style: const TextStyle(fontFamily: 'monospace', color: Color(0xFFC79A3E)),
+        style:
+            const TextStyle(fontFamily: 'monospace', color: Color(0xFFC79A3E)),
       ),
       content: const Text(
         'Tu comodín puede evitar la derrota y recuperar esta estadística.',
@@ -312,7 +423,8 @@ void _showRescueDialog(BuildContext context, StatType type) {
   );
 }
 
-void _showGameIntro(BuildContext context, {VoidCallback? onComplete}) {
+void _showGameIntro(BuildContext context,
+    {GameMode mode = GameMode.endless, VoidCallback? onComplete}) {
   showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -327,10 +439,12 @@ void _showGameIntro(BuildContext context, {VoidCallback? onComplete}) {
           letterSpacing: 1.5,
         ),
       ),
-      content: const Text(
-        'La isla acaba de salir de una crisis. Las instituciones estan fragiles, las reservas son escasas y cada decision tendra un precio. Equilibra al pueblo, la economia, las relaciones exteriores y el aparato del Estado para mantenerte en el poder.',
+      content: Text(
+        mode == GameMode.campaign
+            ? 'Un ciclón dañó la acequia y el muelle. La cosecha puede salvar la isla, pero alguien oculta parte de la carga. Tus decisiones marcarán seis actos de reconstrucción, investigación y sucesión. Cumple tu promesa, conserva las pruebas y decide en quién confiar. Si un indicador llega a 0 o a 100, tu gobierno cae.'
+            : 'Un ciclón dañó la acequia y el muelle. La cosecha puede salvar la isla, pero cada aliado tiene sus intereses. Cumple tu promesa y consulta los compromisos en la agenda. Este modo no tiene límite de turnos: sigue gobernando mientras ningún indicador llegue a 0 o a 100. Podrás retirarte cuando la historia lo permita.',
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'monospace',
           color: Color(0xFFFFF8E7),
           height: 1.4,
@@ -351,7 +465,8 @@ void _showGameIntro(BuildContext context, {VoidCallback? onComplete}) {
   );
 }
 
-void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallback restart) {
+void _showFooterMenu(
+    BuildContext context, GameControllerState state, VoidCallback restart) {
   showModalBottomSheet<void>(
     context: context,
     backgroundColor: const Color(0xFF1F2E26),
@@ -359,7 +474,8 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (sheet) => SafeArea(
-      child: Column(
+      child: SingleChildScrollView(
+          child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Padding(
@@ -374,7 +490,45 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.refresh, color: Color(0xFFC79A3E)),
+            leading:
+                const Icon(Icons.bookmark_outline, color: Color(0xFFC79A3E)),
+            title: Text(state.gameState.mode == GameMode.campaign
+                ? 'AGENDA DE LA CAMPAÑA'
+                : 'AGENDA (${state.gameState.pendingConsequences.length})'),
+            onTap: () {
+              Navigator.pop(sheet);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const AgendaScreen()));
+            },
+          ),
+          ListTile(
+            title: const Text('LA ISLA QUE CONSTRUYES'),
+            leading: const Icon(Icons.map_outlined),
+            onTap: () {
+              Navigator.pop(sheet);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const IslandScreen()));
+            },
+          ),
+          ListTile(
+            title: const Text('CRÓNICA Y PRUEBAS'),
+            leading: const Icon(Icons.history_edu),
+            onTap: () {
+              Navigator.pop(sheet);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const JournalScreen()));
+            },
+          ),
+          ListTile(
+            title: const Text('ELEGIR MODO'),
+            leading: const Icon(Icons.route),
+            onTap: () {
+              Navigator.pop(sheet);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ModesScreen()));
+            },
+          ),
+          ListTile(
             title: const Text('REINICIAR PARTIDA'),
             onTap: () async {
               GameAudio.instance.click();
@@ -426,13 +580,15 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => StatisticsScreen(statistics: state.statistics),
+                  builder: (_) =>
+                      StatisticsScreen(statistics: state.statistics),
                 ),
               );
             },
           ),
           ListTile(
-            leading: const Icon(Icons.credit_card_rounded, color: Color(0xFFC79A3E)),
+            leading:
+                const Icon(Icons.credit_card_rounded, color: Color(0xFFC79A3E)),
             title: const Text('PERSONAJES'),
             onTap: () {
               GameAudio.instance.click();
@@ -444,7 +600,8 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
             },
           ),
           ListTile(
-            leading: const Icon(Icons.auto_stories_rounded, color: Color(0xFFC79A3E)),
+            leading: const Icon(Icons.auto_stories_rounded,
+                color: Color(0xFFC79A3E)),
             title: const Text('EVENTOS Y ERAS'),
             onTap: () {
               GameAudio.instance.click();
@@ -460,17 +617,21 @@ void _showFooterMenu(BuildContext context, GameControllerState state, VoidCallba
             },
           ),
           ListTile(
-            leading: const Icon(Icons.flag_circle_rounded, color: Color(0xFFC79A3E)),
+            leading:
+                const Icon(Icons.flag_circle_rounded, color: Color(0xFFC79A3E)),
             title: const Text('FINALES'),
             onTap: () {
               GameAudio.instance.click();
               Navigator.pop(sheet);
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const EndingsGalleryScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const EndingsGalleryScreen()));
             },
           ),
           const SizedBox(height: 24),
         ],
-      ),
+      )),
     ),
   );
 }
@@ -481,69 +642,69 @@ class _CharacterUnlockDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    backgroundColor: const Color(0xFF16211B),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-      side: const BorderSide(color: Color(0xFFC79A3E)),
-    ),
-    title: const Text(
-      'NUEVA VOZ EN EL GOBIERNO',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontFamily: 'monospace',
-        color: Color(0xFFC79A3E),
-        fontSize: 14,
-        letterSpacing: 1.2,
-      ),
-    ),
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          character.imageAsset,
-          height: 120,
-          fit: BoxFit.contain,
-          errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+        backgroundColor: const Color(0xFF16211B),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: const BorderSide(color: Color(0xFFC79A3E)),
         ),
-        const SizedBox(height: 14),
-        Text(
-          character.name.toUpperCase(),
+        title: const Text(
+          'NUEVA VOZ EN EL GOBIERNO',
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'monospace',
-            color: Color(0xFFFFF8E7),
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+            color: Color(0xFFC79A3E),
+            fontSize: 14,
+            letterSpacing: 1.2,
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          character.role,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontFamily: 'monospace',
-            color: Color(0xFFEAE1D3),
-            fontSize: 12,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              character.imageAsset,
+              height: 120,
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              character.name.toUpperCase(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'monospace',
+                color: Color(0xFFFFF8E7),
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              character.role,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'monospace',
+                color: Color(0xFFEAE1D3),
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+        actionsAlignment: MainAxisAlignment.center,
+        actions: [
+          FilledButton.icon(
+            onPressed: () {
+              GameAudio.instance.click();
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.volume_up),
+            label: const Text('ESCUCHAR'),
+            style: FilledButton.styleFrom(
+              backgroundColor: const Color(0xFFC79A3E),
+              foregroundColor: const Color(0xFF16211B),
+            ),
           ),
-        ),
-      ],
-    ),
-    actionsAlignment: MainAxisAlignment.center,
-    actions: [
-      FilledButton.icon(
-        onPressed: () {
-          GameAudio.instance.click();
-          Navigator.pop(context);
-        },
-        icon: const Icon(Icons.volume_up),
-        label: const Text('ESCUCHAR'),
-        style: FilledButton.styleFrom(
-          backgroundColor: Color(0xFFC79A3E),
-          foregroundColor: Color(0xFF16211B),
-        ),
-      ),
-    ],
-  );
+        ],
+      );
 }
 
 class _CardArea extends StatelessWidget {
@@ -627,6 +788,7 @@ class _CardArea extends StatelessWidget {
 class _Header extends StatelessWidget {
   const _Header({
     required this.state,
+    required this.campaignLength,
     required this.isTutorial,
     required this.highlightedStats,
     required this.canUseRescue,
@@ -634,6 +796,7 @@ class _Header extends StatelessWidget {
   });
 
   final GameControllerState state;
+  final int campaignLength;
   final bool isTutorial;
   final Map<StatType, bool> highlightedStats;
   final bool Function(StatType) canUseRescue;
@@ -664,9 +827,9 @@ class _Header extends StatelessWidget {
       onTap: isTutorial
           ? null // ✅ En tutorial no se puede volver atrás con el header
           : () {
-        GameAudio.instance.click();
-        Navigator.pop(context);
-      },
+              GameAudio.instance.click();
+              Navigator.pop(context);
+            },
       child: Container(
         color: ink,
         padding: const EdgeInsets.fromLTRB(14, 28, 14, 4),
@@ -674,7 +837,8 @@ class _Header extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(children: [
-              Expanded(child: Row(
+              Expanded(
+                  child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   for (final StatType type in _statOrder)
@@ -718,7 +882,9 @@ class _Header extends StatelessWidget {
             Text(
               isTutorial
                   ? 'TUTORIAL'
-                  : 'TURNO ${state.gameState.turn}  ·  ${state.gameState.currentEra.label.toUpperCase()}',
+                  : state.gameState.mode == GameMode.campaign
+                      ? 'CAMPAÑA · ESCENA ${state.gameState.campaignIndex + 1}/$campaignLength'
+                      : 'ILIMITADO · TURNO ${state.gameState.turn}',
               style: const TextStyle(
                 fontFamily: 'monospace',
                 color: boneWhite,
@@ -727,6 +893,19 @@ class _Header extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 2),
+            if (!isTutorial)
+              Text(
+                state.gameState.assassinationCountdown != null
+                    ? 'SEGURIDAD EN RIESGO · ${state.gameState.assassinationCountdown} DECISIONES'
+                    : state.gameState.mode == GameMode.campaign
+                        ? state.gameState.currentEra.label.toUpperCase()
+                        : 'AGENDA · ${state.gameState.pendingConsequences.length} COMPROMISOS',
+                style: TextStyle(
+                    fontSize: 9,
+                    color: state.gameState.assassinationCountdown != null
+                        ? Colors.orangeAccent
+                        : boneWhite),
+              ),
           ],
         ),
       ),
@@ -764,15 +943,15 @@ class _RescuePower extends StatelessWidget {
 
     return TextButton(
       onPressed: enabled ? onPressed : null,
-      child: Icon(
-        _icons[type],
-        size: 14,
-        color: enabled ? boneWhite : const Color(0x66FFF8E7),
-      ),
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 2),
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      ),
+      child: Icon(
+        _icons[type],
+        size: 14,
+        color: enabled ? boneWhite : const Color(0x66FFF8E7),
       ),
     );
   }
@@ -790,49 +969,49 @@ class _Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    color: const Color(0xFF16211B),
-    padding: const EdgeInsets.symmetric(vertical: 6),
-    child: InkWell(
-      onTap: onTap,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // ✅ Mostrar "TUTORIAL" durante el tutorial
-            Text(
-              isTutorial ? 'TUTORIAL' : 'DIAS EN EL PODER',
-              style: const TextStyle(
-                fontFamily: 'monospace',
-                color: Color(0xFFFFF8E7),
-                fontSize: 22,
-                letterSpacing: 3,
-              ),
-            ),
-            // ✅ Ocultar el contador de días durante el tutorial
-            if (!isTutorial) ...[
-              const SizedBox(height: 2),
-              Text.rich(
-                TextSpan(
-                  children: [
+        color: const Color(0xFF16211B),
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: InkWell(
+          onTap: onTap,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // ✅ Mostrar "TUTORIAL" durante el tutorial
+                Text(
+                  isTutorial ? 'TUTORIAL' : 'DIAS EN EL PODER',
+                  style: const TextStyle(
+                    fontFamily: 'monospace',
+                    color: Color(0xFFFFF8E7),
+                    fontSize: 22,
+                    letterSpacing: 3,
+                  ),
+                ),
+                // ✅ Ocultar el contador de días durante el tutorial
+                if (!isTutorial) ...[
+                  const SizedBox(height: 2),
+                  Text.rich(
                     TextSpan(
-                      text: '$days',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                      children: [
+                        TextSpan(
+                          text: '$days',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                style: const TextStyle(
-                  fontFamily: 'monospace',
-                  color: Color(0xFFFFF8E7),
-                  fontSize: 11,
-                ),
-              ),
-            ],
-          ],
+                    style: const TextStyle(
+                      fontFamily: 'monospace',
+                      color: Color(0xFFFFF8E7),
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
         ),
-      ),
-    ),
-  );
+      );
 }
