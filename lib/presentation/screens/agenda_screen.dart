@@ -5,6 +5,8 @@ import '../../data/models/game_mode.dart';
 import '../../domain/game_engine/game_controller.dart';
 import 'journal_screen.dart';
 import 'island_screen.dart';
+import 'relationships_screen.dart';
+import '../widgets/island_projects.dart';
 
 class AgendaScreen extends ConsumerWidget {
   const AgendaScreen({super.key});
@@ -26,6 +28,13 @@ class AgendaScreen extends ConsumerWidget {
                 MaterialPageRoute(builder: (_) => const IslandScreen())),
             icon: const Icon(Icons.map_outlined),
             label: const Text('VER LA ISLA')),
+        Text('Dificultad: ${state.difficulty.label}'),
+        if (state.mode == GameMode.endless) const IslandProjects(),
+        OutlinedButton.icon(
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const RelationshipsScreen())),
+            icon: const Icon(Icons.people_outline),
+            label: const Text('CONSULTAR RELACIONES')),
         Text(state.mode.label.toUpperCase(),
             style: const TextStyle(fontWeight: FontWeight.bold)),
         if (state.mode == GameMode.campaign) ...[

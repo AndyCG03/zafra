@@ -34,8 +34,10 @@ class EffectApplier {
     final newStats = {...state.stats};
     effects.forEach((type, delta) {
       // La dificultad aumenta: las pérdidas pesan más que las ganancias.
-      final loss = state.mode == GameMode.campaign ? 1.15 : lossMultiplier;
-      final gain = state.mode == GameMode.campaign ? 1.0 : gainMultiplier;
+      final loss = (state.mode == GameMode.campaign ? 1.15 : lossMultiplier) *
+          state.difficulty.loss;
+      final gain = (state.mode == GameMode.campaign ? 1.0 : gainMultiplier) *
+          state.difficulty.gain;
       final adjustedDelta =
           delta < 0 ? (delta * loss).round() : (delta * gain).round();
       newStats[type] = newStats[type]!.copyWithDelta(adjustedDelta);
@@ -96,17 +98,61 @@ class EffectApplier {
           dueTurn: state.turn + 1 + followUp.afterTurns));
     }
 
+    final project = state.project;
+    final projectProgress =
+        state.projectProgress + (project?.advances(effects) == true ? 1 : 0);
+    final completed = project != null && projectProgress >= 4;
+    final expired = project != null &&
+        !completed &&
+        state.turn + 1 >= state.projectDeadline;
+    if (completed) {
+      notes.add(
+          'Proyecto completado: ${project.label}. Los vecinos recuperan margen para organizarse.');
+      // Acercar los indicadores al equilibrio evita que una recompensa provoque un colapso.
+      for (final type in StatType.values) {
+        final value = newStats[type]!.value;
+        if (value > 0 && value < 100) {
+          newStats[type] =
+              newStats[type]!.copyWithDelta((50 - value).clamp(-3, 3));
+        }
+      }
+    }
+    if (expired) {
+      notes.add(
+          'El proyecto no llegó a tiempo. La próxima convocatoria permitirá intentarlo de nuevo.');
+    }
+    final record = DecisionRecord(
+        turn: state.turn + 1,
+        importance: (option.endsStory ? 100 : 0) +
+            option.setFlags.length * 3 +
+            outcomes.expand((o) => o.setFlags).length * 3 +
+            trustChanges.values.fold<int>(0, (sum, v) => sum + v.abs()) +
+            effects.values.fold<int>(0, (sum, v) => sum + v.abs()) +
+            (notes.isNotEmpty ? 10 : 0),
+        cardId: card.id,
+        scene: card.resolvedText(state.flags, trust: state.characterTrust),
+        choice: option.text,
+        notes: List.unmodifiable(notes));
+    final defining = [
+      ...(state.definingDecisions.isEmpty
+          ? state.history
+          : state.definingDecisions),
+      record
+    ]..sort((a, b) {
+        final score = b.importance.compareTo(a.importance);
+        return score == 0 ? a.turn.compareTo(b.turn) : score;
+      });
     return state.copyWith(
+      definingDecisions: defining.take(3).toList(),
+      projectProgress: projectProgress.clamp(0, 4),
+      clearProject: completed || expired,
+      nextProjectTurn: completed || expired ? state.turn + 7 : null,
+      projectsCompleted: state.projectsCompleted + (completed ? 1 : 0),
       characterTrust: Map.unmodifiable(trust),
       history: [
         ...state.history
             .skip(state.history.length > 59 ? state.history.length - 59 : 0),
-        DecisionRecord(
-            turn: state.turn + 1,
-            cardId: card.id,
-            scene: card.resolvedText(state.flags, trust: state.characterTrust),
-            choice: option.text,
-            notes: List.unmodifiable(notes)),
+        record,
       ],
       stats: newStats,
       seenCardIds: newSeen,

@@ -1,4 +1,6 @@
 import '../../data/models/era.dart';
+import '../../data/models/game_difficulty.dart';
+import 'island_chronicle.dart';
 import '../../data/models/stat.dart';
 import '../../data/models/game_card.dart';
 import '../../data/models/game_mode.dart';
@@ -6,10 +8,18 @@ import '../../data/models/decision_record.dart';
 
 class GameState {
   final GameMode mode;
+  final GameDifficulty difficulty;
+  final int newspaperAct;
+  final IslandProject? project;
+  final int projectProgress;
+  final int projectDeadline;
+  final int nextProjectTurn;
+  final int projectsCompleted;
   final GovernmentPromise? promise;
   final int campaignIndex;
   final Map<String, int> characterTrust;
   final List<DecisionRecord> history;
+  final List<DecisionRecord> definingDecisions;
   PromiseStatus? get promiseStatus => promise?.status(flags);
   final List<PendingConsequence> pendingConsequences;
   final int lastNarrativeTurn;
@@ -34,10 +44,18 @@ class GameState {
 
   GameState({
     this.mode = GameMode.endless,
+    this.difficulty = GameDifficulty.normal,
+    this.newspaperAct = 0,
+    this.project,
+    this.projectProgress = 0,
+    this.projectDeadline = 0,
+    this.nextProjectTurn = 12,
+    this.projectsCompleted = 0,
     this.promise,
     this.campaignIndex = 0,
     this.characterTrust = const {},
     this.history = const [],
+    this.definingDecisions = const [],
     this.pendingConsequences = const [],
     this.lastNarrativeTurn = -3,
     this.lastEventEndedTurn = -4,
@@ -61,9 +79,12 @@ class GameState {
   });
 
   factory GameState.initial(
-          {GameMode mode = GameMode.endless, GovernmentPromise? promise}) =>
+          {GameMode mode = GameMode.endless,
+          GovernmentPromise? promise,
+          GameDifficulty difficulty = GameDifficulty.normal}) =>
       GameState(
         mode: mode,
+        difficulty: difficulty,
         promise: promise,
         stats: {
           for (final type in StatType.values) type: Stat(type, Stat.initial)
@@ -88,10 +109,19 @@ class GameState {
 
   GameState copyWith({
     GameMode? mode,
+    GameDifficulty? difficulty,
+    int? newspaperAct,
+    IslandProject? project,
+    bool clearProject = false,
+    int? projectProgress,
+    int? projectDeadline,
+    int? nextProjectTurn,
+    int? projectsCompleted,
     GovernmentPromise? promise,
     int? campaignIndex,
     Map<String, int>? characterTrust,
     List<DecisionRecord>? history,
+    List<DecisionRecord>? definingDecisions,
     List<PendingConsequence>? pendingConsequences,
     int? lastNarrativeTurn,
     int? lastEventEndedTurn,
@@ -118,10 +148,18 @@ class GameState {
   }) =>
       GameState(
         mode: mode ?? this.mode,
+        difficulty: difficulty ?? this.difficulty,
+        newspaperAct: newspaperAct ?? this.newspaperAct,
+        project: clearProject ? null : project ?? this.project,
+        projectProgress: projectProgress ?? this.projectProgress,
+        projectDeadline: projectDeadline ?? this.projectDeadline,
+        nextProjectTurn: nextProjectTurn ?? this.nextProjectTurn,
+        projectsCompleted: projectsCompleted ?? this.projectsCompleted,
         promise: promise ?? this.promise,
         campaignIndex: campaignIndex ?? this.campaignIndex,
         characterTrust: characterTrust ?? this.characterTrust,
         history: history ?? this.history,
+        definingDecisions: definingDecisions ?? this.definingDecisions,
         pendingConsequences: pendingConsequences ?? this.pendingConsequences,
         lastNarrativeTurn: lastNarrativeTurn ?? this.lastNarrativeTurn,
         lastEventEndedTurn: lastEventEndedTurn ?? this.lastEventEndedTurn,

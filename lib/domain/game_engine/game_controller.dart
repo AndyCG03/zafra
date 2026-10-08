@@ -11,6 +11,8 @@ import '../../data/repositories/card_repository.dart';
 import 'card_selector.dart';
 import 'effect_applier.dart';
 import 'ending_resolver.dart';
+import 'island_chronicle.dart';
+import '../../data/models/game_difficulty.dart';
 import 'game_state.dart';
 import 'game_state_codec.dart';
 import 'game_statistics.dart';
@@ -460,7 +462,8 @@ class GameController extends StateNotifier<GameControllerState> {
     final order = _repository.campaignCardIds;
     final index = campaign &&
             newState.campaignIndex < order.length &&
-            order[newState.campaignIndex] == card.id
+            (order[newState.campaignIndex] == card.id ||
+                card.id.startsWith('ruta_'))
         ? newState.campaignIndex + 1
         : newState.campaignIndex;
     final nextScene = campaign && index < order.length
@@ -513,7 +516,12 @@ class GameController extends StateNotifier<GameControllerState> {
     GameCard? selectedCard;
     var recycled = false;
     if (campaign) {
-      selectedCard = nextScene;
+      selectedCard = _repository.campaignCardAt(progressedState);
+      if (_repository.campaignAct(index) >
+          _repository.campaignAct(newState.campaignIndex)) {
+        progressedState = progressedState.copyWith(
+            newspaperAct: _repository.campaignAct(index));
+      }
       if (selectedCard == null) {
         throw StateError('La campaña no tiene una escena para el paso $index.');
       }
@@ -673,7 +681,9 @@ class GameController extends StateNotifier<GameControllerState> {
     await _progress.markTutorialCompleted();
 
     final fresh = GameState.initial(
-        mode: state.gameState.mode, promise: state.gameState.promise);
+        mode: state.gameState.mode,
+        promise: state.gameState.promise,
+        difficulty: state.gameState.difficulty);
     final nextCard = _pickNextCard(fresh);
 
     final character = nextCard == null
@@ -738,8 +748,7 @@ class GameController extends StateNotifier<GameControllerState> {
       if (gameState.campaignIndex >= order.length) {
         return const _PickResult(null, false);
       }
-      return _PickResult(
-          _repository.cardById(order[gameState.campaignIndex]), false);
+      return _PickResult(_repository.campaignCardAt(gameState), false);
     }
 
     if (!gameState.seenCardIds.contains('historia_agua_01') &&
@@ -780,11 +789,43 @@ class GameController extends StateNotifier<GameControllerState> {
       _pendingDirection = null;
       await _progress.clearGame();
       await _startWithStatistics(const GameStatistics(),
-          mode: previous.mode, promise: previous.promise);
+          mode: previous.mode,
+          promise: previous.promise,
+          difficulty: previous.difficulty);
     } catch (error) {
       state = state.copyWith(
           isLoading: false,
           loadError: 'No se pudo reiniciar la partida: $error');
+    } finally {
+      _choosing = false;
+    }
+  }
+
+  Future<void> dismissNewspaper() async {
+    if (_choosing || state.isLoading) return;
+    state =
+        state.copyWith(gameState: state.gameState.copyWith(newspaperAct: 0));
+    await _saveCurrentGame();
+  }
+
+  Future<void> selectProject(IslandProject project) async {
+    final game = state.gameState;
+    if (_choosing ||
+        state.isLoading ||
+        state.ending != null ||
+        game.mode != GameMode.endless ||
+        game.project != null ||
+        game.turn < game.nextProjectTurn) {
+      return;
+    }
+    _choosing = true;
+    try {
+      state = state.copyWith(
+          gameState: game.copyWith(
+              project: project,
+              projectProgress: 0,
+              projectDeadline: game.turn + 10));
+      await _saveCurrentGame();
     } finally {
       _choosing = false;
     }
@@ -811,7 +852,8 @@ class GameController extends StateNotifier<GameControllerState> {
     }
   }
 
-  Future<void> startNewGame(GameMode mode, GovernmentPromise promise) async {
+  Future<void> startNewGame(GameMode mode, GovernmentPromise promise,
+      {GameDifficulty difficulty = GameDifficulty.normal}) async {
     if (_choosing || state.isLoading) return;
     _choosing = true;
     try {
@@ -820,7 +862,7 @@ class GameController extends StateNotifier<GameControllerState> {
       state = GameControllerState.loading();
       _pendingDirection = null;
       await _startWithStatistics(const GameStatistics(),
-          mode: mode, promise: promise);
+          mode: mode, promise: promise, difficulty: difficulty);
     } catch (error) {
       state = state.copyWith(
           isLoading: false, loadError: 'No se pudo iniciar la partida: $error');
@@ -830,12 +872,15 @@ class GameController extends StateNotifier<GameControllerState> {
   }
 
   Future<void> _startWithStatistics(GameStatistics statistics,
-      {GameMode mode = GameMode.endless, GovernmentPromise? promise}) async {
+      {GameMode mode = GameMode.endless,
+      GovernmentPromise? promise,
+      GameDifficulty difficulty = GameDifficulty.normal}) async {
     await EventRepository.loadEvents();
     await _repository.loadAll();
     await _progress.registerGameStarted();
     await _progress.markEraReached(GameState.initial().currentEra.index);
-    final initialState = GameState.initial(mode: mode, promise: promise);
+    final initialState =
+        GameState.initial(mode: mode, promise: promise, difficulty: difficulty);
     final nextCard = _pickOpeningCard(initialState);
     final character = nextCard == null
         ? null

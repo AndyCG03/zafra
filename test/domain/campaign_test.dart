@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:zafra/data/models/game_mode.dart';
+import 'package:zafra/data/models/game_difficulty.dart';
+import 'package:zafra/domain/game_engine/island_chronicle.dart';
 import 'package:zafra/data/models/stat.dart';
 import 'package:zafra/data/repositories/card_repository.dart';
 import 'package:zafra/data/repositories/event_repository.dart';
@@ -55,6 +57,66 @@ void main() {
       applier.applyChoice(
           state: state, card: repository.cardById(id)!, direction: direction);
 
+  test('dificultades completan campaña y conservan periódico al reabrir',
+      () async {
+    for (final difficulty in GameDifficulty.values) {
+      final controller = await open();
+      await controller.startNewGame(GameMode.campaign, GovernmentPromise.water,
+          difficulty: difficulty);
+      var editions = 0;
+      while (controller.state.ending == null &&
+          controller.state.gameState.turn < 45) {
+        final state = controller.state.gameState;
+        final id = controller.state.currentCard!.id;
+        double score(SwipeDirection direction) {
+          final next = answer(state, id, direction);
+          if (next.hasCollapsed) return -100000;
+          return -next.stats.values
+              .fold<double>(0, (sum, stat) => sum + pow(stat.value - 50, 2));
+        }
+
+        await controller.choose(
+            score(SwipeDirection.left) >= score(SwipeDirection.right)
+                ? SwipeDirection.left
+                : SwipeDirection.right);
+        if (controller.state.gameState.newspaperAct > 0) {
+          editions++;
+          expect(GameStateCodec.decode(progress.savedGame!).newspaperAct,
+              controller.state.gameState.newspaperAct);
+          await controller.dismissNewspaper();
+          expect(progress.savedGame!['newspaperAct'], 0);
+        }
+      }
+      expect(controller.state.ending?.isStoryEnding, isTrue,
+          reason: difficulty.label);
+      expect(editions, 5);
+      await controller.restart();
+      expect(controller.state.gameState.difficulty, difficulty);
+    }
+  });
+
+  test(
+      'proyectos se seleccionan solo en ilimitado y conservan plazo al reabrir',
+      () async {
+    final controller = await open();
+    await controller.startNewGame(GameMode.endless, GovernmentPromise.water);
+    await controller.selectProject(IslandProject.trade);
+    expect(controller.state.gameState.project, isNull);
+    final saved = {...progress.savedGame!, 'turn': 12};
+    await progress.saveGame(saved);
+    final eligible = await open();
+    await eligible.selectProject(IslandProject.trade);
+    expect(eligible.state.gameState.projectDeadline, 22);
+    await eligible.selectProject(IslandProject.rebuild);
+    expect(eligible.state.gameState.project, IslandProject.trade);
+    final restored = await open();
+    expect(restored.state.gameState.project, IslandProject.trade);
+    expect(restored.state.gameState.projectDeadline, 22);
+    await restored.startNewGame(GameMode.campaign, GovernmentPromise.water);
+    await restored.selectProject(IslandProject.trade);
+    expect(restored.state.gameState.project, isNull);
+  });
+
   test(
       'abrir el selector no cuenta un gobierno; modos guardan y restauran por separado',
       () async {
@@ -92,7 +154,11 @@ void main() {
       () async {
     final controller = await open();
     await controller.startNewGame(GameMode.campaign, GovernmentPromise.water);
-    for (final id in repository.campaignCardIds) {
+    for (final baseId in repository.campaignCardIds) {
+      final id = repository.campaignCardAt(controller.state.gameState)!.id;
+      expect(
+          repository.campaignCardIds[controller.state.gameState.campaignIndex],
+          baseId);
       expect(controller.state.ending, isNull, reason: 'Cayó antes de $id');
       expect(controller.state.currentCard!.id, id);
       final state = controller.state.gameState;
@@ -265,7 +331,9 @@ void main() {
     };
     for (final route in routes.entries) {
       var state = GameState.initial(mode: GameMode.campaign);
-      for (final id in repository.campaignCardIds) {
+      for (var index = 0; index < repository.campaignCardIds.length; index++) {
+        state = state.copyWith(campaignIndex: index);
+        final id = repository.campaignCardAt(state)!.id;
         double score(SwipeDirection direction) {
           final next = answer(state, id, direction);
           if (next.hasCollapsed) return -100000;

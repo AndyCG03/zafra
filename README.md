@@ -30,12 +30,13 @@ Cada carta presenta un dilema. Las decisiones modifican las estadísticas del go
 
 - **37 personajes** con nombre, rol, biografía e ilustración asociada.
 - **181 cartas de era** distribuidas entre seis etapas históricas.
-- **222 cartas** en el catálogo principal: 181 de era, 16 capítulos de agua y puerto, una advertencia y 24 escenas de investigación, alianzas, vida cotidiana, historias personales y sucesión.
+- **226 cartas** en el catálogo principal: 181 de era, 16 capítulos de agua y puerto, una advertencia, 24 escenas de investigación, alianzas, vida cotidiana, historias personales y sucesión, y cuatro encuentros exclusivos de ruta.
 - **8 eventos**, con 15 decisiones disponibles por evento; cada aparición usa cuatro en orden narrativo.
 - **16 finales narrativos**, incluidos cinco desenlaces políticos especiales. El antiguo final de supervivencia se conserva para guardados anteriores.
 - **Campaña:** seis actos y 40 escenas en orden, con decisiones que cambian pruebas, relaciones y desenlace.
 - **Ilimitado:** sin final automático en el turno 96; crisis y asuntos cotidianos continúan mientras sobrevivas, con retirada voluntaria al cerrar la historia.
 - Tres promesas de gobierno, confianza y rivalidades, agenda y crónica de las últimas 60 decisiones. Cada modo conserva su propia partida.
+- Dificultades Historia, Normal y Desafío; fichas de relaciones; periódico entre actos; proyectos renovables en ilimitado y cierre con tres decisiones destacadas y pistas para otros finales. Consulta [las reglas y los guardados](docs/CAMPANA_Y_MODO_ILIMITADO.md).
 - Mapa interactivo que refleja tus obras y políticas, seis interludios personales y un epílogo de cinco años después para los barrios, la Líder, el General y la Cantinera. Cinco ilustraciones vectoriales originales distinguen los finales políticos.
 - Recursos gráficos y música incluidos en `assets/`.
 - Guardado local del progreso, finales descubiertos y estadísticas globales.

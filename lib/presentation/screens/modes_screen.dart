@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/game_mode.dart';
+import '../../data/models/game_difficulty.dart';
 import '../../domain/game_engine/game_controller.dart';
 import 'game_screen.dart';
 
@@ -14,6 +15,7 @@ class _ModesScreenState extends ConsumerState<ModesScreen> {
   GameMode _mode = GameMode.campaign;
   GovernmentPromise _promise = GovernmentPromise.water;
   bool _busy = false;
+  GameDifficulty _difficulty = GameDifficulty.normal;
   Future<void> _play(bool resume) async {
     final controller = ref.read(gameControllerProvider.notifier);
     if (!resume && controller.savedMode(_mode) != null) {
@@ -38,7 +40,7 @@ class _ModesScreenState extends ConsumerState<ModesScreen> {
     if (resume) {
       await controller.resumeMode(_mode);
     } else {
-      await controller.startNewGame(_mode, _promise);
+      await controller.startNewGame(_mode, _promise, difficulty: _difficulty);
     }
     if (!mounted) return;
     setState(() => _busy = false);
@@ -70,6 +72,22 @@ class _ModesScreenState extends ConsumerState<ModesScreen> {
                       ? Icons.check_circle
                       : Icons.circle_outlined),
                   onTap: _busy ? null : () => setState(() => _mode = mode))),
+        const SizedBox(height: 20),
+        const Text('DIFICULTAD DE LA PARTIDA NUEVA',
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        for (final difficulty in GameDifficulty.values)
+          ListTile(
+              title: Text(difficulty.label),
+              subtitle: Text(difficulty.description),
+              leading: Icon(_difficulty == difficulty
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked),
+              onTap: _busy
+                  ? null
+                  : () => setState(() => _difficulty = difficulty)),
+        if (canResume)
+          Text(
+              'Continuar conserva la dificultad del guardado: ${GameDifficulty.values.where((d) => d.name == saved['difficulty']).firstOrNull?.label ?? 'Normal'}.'),
         const SizedBox(height: 20),
         const Text('TU PROMESA DE GOBIERNO',
             style: TextStyle(fontWeight: FontWeight.bold)),

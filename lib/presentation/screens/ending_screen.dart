@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/ending.dart';
 import '../../domain/game_engine/game_controller.dart';
 import '../../domain/game_engine/legacy_summary.dart';
+import '../../domain/game_engine/island_chronicle.dart';
 import 'modes_screen.dart';
 import 'journal_screen.dart';
 import 'epilogue_screen.dart';
@@ -162,6 +163,29 @@ class _EndingScreenState extends ConsumerState<EndingScreen>
                               icon: const Icon(Icons.auto_stories),
                               label: const Text('CINCO AÑOS DESPUÉS')),
                           const SizedBox(height: 16),
+                          const Text('TRES DECISIONES QUE MARCARON TU GOBIERNO',
+                              style: TextStyle(
+                                  color: _ink, fontWeight: FontWeight.bold)),
+                          for (final record in IslandChronicle.milestones(
+                              ref.watch(gameControllerProvider).gameState))
+                            Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: Text(
+                                    'Decisión ${record.turn}: ${record.choice}\n${record.notes.join(' ')}',
+                                    style: const TextStyle(color: _ink))),
+                          const SizedBox(height: 12),
+                          const Text('CAMINOS POR DESCUBRIR',
+                              style: TextStyle(
+                                  color: _ink, fontWeight: FontWeight.bold)),
+                          for (final hint in IslandChronicle.hints(
+                              ref.watch(gameControllerProvider).gameState))
+                            Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: Text(hint,
+                                    style: const TextStyle(color: _ink))),
+                          const SizedBox(height: 12),
                           const Text('LO QUE DEJAS EN LA ISLA',
                               style: TextStyle(
                                   color: _ink,

@@ -2,6 +2,16 @@
 
 ## Cómo jugar
 
+En las partidas nuevas puedes elegir Historia, Normal o Desafío. Normal conserva el balance anterior. Historia reduce la presión de las pérdidas y de las subidas hacia el máximo; Desafío aumenta las pérdidas y modera las ganancias. La dificultad se guarda con cada partida, se conserva al reiniciar y no cambia al continuar un guardado. Los guardados anteriores usan Normal.
+
+La campaña mantiene 40 decisiones por recorrido. Cuatro encuentros exclusivos sustituyen audiencias cotidianas: apertura del muelle cooperativo o cena del operador exclusivo, declaración de un oficial si el General es rival y protección de un testigo si encontraste pruebas del desvío. Sus respuestas cambian recursos, confianza y los titulares posteriores. Al pasar de acto se abre «El Faro de la Isla», con noticias de tus decisiones, rumores de la Cantinera y vida cotidiana. Leerlo no consume decisiones; una edición pendiente se conserva al cerrar el juego.
+
+«Relaciones», en el menú y en la agenda, permite abrir fichas de los personajes conocidos: confianza, intereses, acuerdos registrados y decisiones recientes. Los compromisos del agua, del gobierno civil y del puerto muestran su cumplimiento o ruptura junto al interlocutor correspondiente.
+
+En ilimitado, desde la decisión 12, la agenda ofrece proyectos de barrios, ingenio o sucesión civil. Elegir uno no consume un turno. Hay diez decisiones para lograr cuatro avances: mejoras al Pueblo, mejoras a la Economía o mejoras al Pueblo sin aumentar el aparato del Estado, respectivamente. Los efectos condicionales también cuentan. Completarlo acerca cada indicador hasta tres puntos al equilibrio; no rescata una barra que ya haya colapsado. Vencer el plazo no elimina el gobierno. Tras terminar, seis decisiones de descanso preceden a una nueva convocatoria. Plazo, progreso y número de proyectos completados se guardan.
+
+El cierre destaca hasta tres decisiones del mandato, según sus consecuencias, cambios de confianza, promesas y desenlace. Se conservan fuera de la crónica de 60 entradas para no perderlas en gobiernos largos. Los guardados antiguos recuperan las que aún estén en su crónica. Las pistas del cierre orientan hacia otras decisiones sin revelar una receta completa para cada final.
+
 En «Elegir modo» puedes iniciar o continuar una campaña o un gobierno ilimitado. Cada modo tiene un guardado independiente. Iniciar otra partida del mismo modo pide confirmar el reemplazo. Las partidas antiguas se recuperan como ilimitadas; mantienen sus decisiones y los finales que ya hubieran alcanzado.
 
 Al empezar eliges una promesa: agua común, soberanía del puerto o gobierno civil. Su cumplimiento aparece en la agenda y en el legado final. La promesa civil exige consejos locales, consulta del puerto y un pacto público con los barrios; militarizar estos servicios o dar privilegios al General la rompe.

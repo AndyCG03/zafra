@@ -4,15 +4,26 @@ import '../../data/models/game_card.dart';
 import '../../data/models/game_mode.dart';
 import '../../data/models/decision_record.dart';
 import 'game_state.dart';
+import 'island_chronicle.dart';
+import '../../data/models/game_difficulty.dart';
 
 /// Formato compatible con partidas anteriores, sin depender de Hive ni de UI.
 class GameStateCodec {
   static Map<String, dynamic> encode(GameState state) => {
         'mode': state.mode.name,
+        'difficulty': state.difficulty.name,
+        'newspaperAct': state.newspaperAct,
+        'project': state.project?.name,
+        'projectProgress': state.projectProgress,
+        'projectDeadline': state.projectDeadline,
+        'nextProjectTurn': state.nextProjectTurn,
+        'projectsCompleted': state.projectsCompleted,
         'promise': state.promise?.name,
         'campaignIndex': state.campaignIndex,
         'characterTrust': state.characterTrust,
         'history': state.history.map((e) => e.toJson()).toList(),
+        'definingDecisions':
+            state.definingDecisions.map((e) => e.toJson()).toList(),
         'stats': {
           for (final e in state.stats.entries)
             e.key.index.toString(): e.value.value
@@ -44,6 +55,18 @@ class GameStateCodec {
     final stats = data['stats'] as Map? ?? const {};
     final eraIndex = _number(data['era'], 0).clamp(0, Era.values.length - 1);
     return GameState(
+      difficulty: GameDifficulty.values
+              .where((d) => d.name == data['difficulty'])
+              .firstOrNull ??
+          GameDifficulty.normal,
+      newspaperAct: _number(data['newspaperAct'], 0),
+      project: IslandProject.values
+          .where((p) => p.name == data['project'])
+          .firstOrNull,
+      projectProgress: _number(data['projectProgress'], 0).clamp(0, 4),
+      projectDeadline: _number(data['projectDeadline'], 0),
+      nextProjectTurn: _number(data['nextProjectTurn'], 12),
+      projectsCompleted: _number(data['projectsCompleted'], 0),
       mode: GameMode.values.where((m) => m.name == data['mode']).firstOrNull ??
           GameMode.endless,
       promise: GovernmentPromise.values
@@ -56,6 +79,11 @@ class GameStateCodec {
       history: (data['history'] as List? ?? const [])
           .map((e) =>
               DecisionRecord.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList(),
+      definingDecisions: (data['definingDecisions'] as List? ?? const [])
+          .map((e) =>
+              DecisionRecord.fromJson(Map<String, dynamic>.from(e as Map)))
+          .take(3)
           .toList(),
       stats: {
         for (final type in StatType.values)

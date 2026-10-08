@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/era.dart';
+import '../../domain/game_engine/island_chronicle.dart';
+import '../../domain/game_engine/game_state.dart';
 import '../models/game_card.dart';
 import '../models/character.dart';
 import '../models/ending.dart';
@@ -22,6 +24,21 @@ class CardRepository {
   List<String> _campaignCardIds = const [];
   List<Map<String, dynamic>> _campaignActs = const [];
   List<String> get campaignCardIds => _campaignCardIds;
+  GameCard? campaignCardAt(GameState state) {
+    if (state.campaignIndex >= _campaignCardIds.length) return null;
+    final base = _campaignCardIds[state.campaignIndex];
+    return cardById(IslandChronicle.routeId(state, base) ?? base);
+  }
+
+  int campaignAct(int index) {
+    var cursor = 0;
+    for (var n = 0; n < _campaignActs.length; n++) {
+      cursor += (_campaignActs[n]['cards'] as List).length;
+      if (index < cursor) return n + 1;
+    }
+    return _campaignActs.length;
+  }
+
   String campaignActTitle(int index) {
     var cursor = 0;
     for (var n = 0; n < _campaignActs.length; n++) {
@@ -65,6 +82,7 @@ class CardRepository {
         _campaignActs.expand((act) => (act['cards'] as List).cast<String>()));
     _allCards = List.unmodifiable([
       ..._cardsByEra.values.expand((cards) => cards),
+      ...IslandChronicle.routes,
       ...stories.map((e) => GameCard.fromJson(e as Map<String, dynamic>)),
       ...(campaign['cards'] as List)
           .map((e) => GameCard.fromJson(e as Map<String, dynamic>)),

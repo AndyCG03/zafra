@@ -18,6 +18,8 @@ import '../widgets/swipeable_card.dart';
 import '../widgets/game_toast.dart';
 import 'ending_screen.dart';
 import 'agenda_screen.dart';
+import 'relationships_screen.dart';
+import 'island_news_screen.dart';
 import 'modes_screen.dart';
 import 'journal_screen.dart';
 import 'island_screen.dart';
@@ -87,6 +89,13 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             icon: Icons.warning_amber_rounded,
           );
         }
+      }
+      if (next.gameState.mode == GameMode.endless &&
+          next.gameState.project == null &&
+          next.gameState.turn == next.gameState.nextProjectTurn) {
+        _showGameToast(
+            'La isla propone un nuevo proyecto. Elígelo en la agenda.',
+            icon: Icons.construction);
       }
       final rescue = next.rescueOpportunity;
       if (rescue != null && previous?.rescueOpportunity != rescue) {
@@ -170,6 +179,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       return EndingScreen(ending: state.ending!);
     }
 
+    if (state.gameState.newspaperAct > 0) return const IslandNewsScreen();
     final GameCard? card = state.currentCard;
     if (card == null) {
       if (state.openOptionsRequested) return const SizedBox.shrink();
@@ -494,7 +504,10 @@ void _showFooterMenu(
                 const Icon(Icons.bookmark_outline, color: Color(0xFFC79A3E)),
             title: Text(state.gameState.mode == GameMode.campaign
                 ? 'AGENDA DE LA CAMPAÑA'
-                : 'AGENDA (${state.gameState.pendingConsequences.length})'),
+                : state.gameState.project == null &&
+                        state.gameState.turn >= state.gameState.nextProjectTurn
+                    ? 'AGENDA · NUEVO PROYECTO'
+                    : 'AGENDA (${state.gameState.pendingConsequences.length})'),
             onTap: () {
               Navigator.pop(sheet);
               Navigator.push(context,
@@ -508,6 +521,17 @@ void _showFooterMenu(
               Navigator.pop(sheet);
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const IslandScreen()));
+            },
+          ),
+          ListTile(
+            title: const Text('RELACIONES'),
+            leading: const Icon(Icons.people_outline),
+            onTap: () {
+              Navigator.pop(sheet);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const RelationshipsScreen()));
             },
           ),
           ListTile(
